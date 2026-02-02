@@ -4,375 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>挪威超市大廚：自炊完全手冊</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --primary: #d63031; --secondary: #0984e3; --accent: #fdcb6e; --bg: #f7f9fa; --card-bg: #ffffff; --text-main: #2d3436; --text-light: #636e72;
-        }
-        * { box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
-        }
-        /* 導航樣式 */
-        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
-        .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
-        @media (min-width: 768px) { .nav-container { justify-content: center; } }
-        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
-        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .nav-icon { margin-right: 6px; }
-        .navbar::-webkit-scrollbar { display: none; }
-
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; margin-bottom: 40px; padding: 40px 0; background: linear-gradient(135deg, #fff, #f1f2f6); border-bottom: 1px solid #e1e1e1; }
-        h1 { font-size: 2.5rem; margin: 0 0 10px 0; color: var(--text-main); }
-        .subtitle { font-size: 1.2rem; color: var(--text-light); }
-        .grid-row { display: grid; gap: 20px; margin-bottom: 40px; }
+        .grid-row { display: grid; gap: 20px; margin-bottom: 30px; }
         .cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         .cols-2 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #eee; height: 100%; }
-        @media (hover: hover) { .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); } }
-        .card-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        .card-icon { font-size: 1.5rem; margin-right: 10px; }
-        .survival-card { border-left: 5px solid var(--primary); }
-        .highlight-box { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .step-list ol { padding-left: 20px; margin: 0; }
-        .step-list li { margin-bottom: 8px; }
+        .card { height: 100%; box-sizing: border-box; }
         .dict-table { width: 100%; border-collapse: collapse; }
         .dict-table td { padding: 10px 5px; border-bottom: 1px dashed #eee; }
         .word-no { color: var(--secondary); font-weight: bold; font-size: 1.1rem; }
-        .word-tw { color: var(--text-light); }
-        details { background-color: #fafafa; border-radius: 8px; overflow: hidden; border: 1px solid #eee; margin-bottom: 0; height: fit-content; }
-        summary { padding: 15px; font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background-color: #fff; transition: background-color 0.2s; }
-        summary:hover { background-color: #f1f8ff; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: #ccc; }
-        details[open] summary::after { content: '-'; color: var(--secondary); }
-        details[open] summary { border-bottom: 1px solid #eee; color: var(--secondary); }
-        .recipe-content { padding: 20px; background-color: #fff; }
-        .tags { margin-bottom: 15px; }
-        .tag { display: inline-block; font-size: 0.85rem; padding: 3px 8px; border-radius: 4px; margin-right: 5px; margin-bottom: 5px; }
-        .t-main { background-color: #e3f2fd; color: #0984e3; border: 1px solid #b3e5fc; }
-        .t-sauce { background-color: #fff3e0; color: #e67e22; border: 1px solid #ffe0b2; }
-        .section-heading { text-align: center; font-size: 1.8rem; margin: 60px 0 30px 0; color: var(--text-main); position: relative; }
-        .section-heading::after { content: ""; display: block; width: 60px; height: 4px; background-color: var(--secondary); margin: 10px auto; border-radius: 2px; }
+        .word-tw { color: #666; }
+        .tags { margin-bottom: 10px; }
+        .tag { display: inline-block; font-size: 0.85rem; padding: 3px 8px; border-radius: 4px; margin-right: 5px; }
+        .t-main { background-color: #e3f2fd; color: #0984e3; }
+        .t-sauce { background-color: #fff3e0; color: #e67e22; }
     </style>
 </head>
 <body>
-
-    <nav class="navbar" id="mainNav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
-            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
-            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
-            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
-            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
-            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
-            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
-        </div>
-    </nav>
-
-    <header>
-        <div class="container">
-            <h1>👨‍🍳 挪威超市大廚</h1>
-            <div class="subtitle">電腦/手機雙用版・自炊全攻略</div>
-        </div>
-    </header>
-
     <div class="container">
+        <h1>👨‍🍳 挪威超市大廚</h1>
+        <div class="subtitle">電腦/手機雙用版・自炊全攻略</div>
 
-        <h2 class="section-heading">🚨 廚房生存 3 大鐵律</h2>
+        <h3 style="border-left: 5px solid var(--secondary); padding-left: 10px;">🚨 廚房生存 3 大鐵律</h3>
         <div class="grid-row cols-3">
-            <div class="card survival-card">
-                <div class="card-title"><span class="card-icon">🔥</span>煙霧偵測器</div>
-                <p><strong>極度敏感！連動消防隊！</strong></p>
-                <ul style="padding-left: 20px;">
-                    <li>務必開啟抽油煙機 (Ventilator) 至最大。</li>
-                    <li>務必微開廚房窗戶。</li>
-                    <li><strong>嚴禁大火爆炒</strong>，請用中小火。</li>
-                </ul>
-            </div>
-
-            <div class="card survival-card">
-                <div class="card-title"><span class="card-icon">🍳</span>電爐解鎖</div>
-                <p><strong>按了沒反應？</strong></p>
-                <ul style="padding-left: 20px;">
-                    <li>找鑰匙圖案 🔑 或鎖頭 🔒。</li>
-                    <li>長按 3-5 秒直到嗶一聲。</li>
-                    <li>注意：必須<strong>放上鍋子</strong>才會開始加熱。</li>
-                </ul>
-            </div>
-
-            <div class="card survival-card">
-                <div class="card-title"><span class="card-icon">🍚</span>煮飯神器</div>
-                <div class="highlight-box">
-                    <strong>完美鍋煮飯 SOP：</strong>
-                    <ol style="padding-left: 20px; margin-top: 5px;">
-                        <li>米水比 <strong>1 : 1.1</strong>。</li>
-                        <li>大火煮滾。</li>
-                        <li><strong>轉最小火</strong> (1或2)，蓋蓋子。</li>
-                        <li>計時 <strong>12 分鐘</strong> (勿開蓋)。</li>
-                        <li>關火，悶 <strong>15 分鐘</strong>。</li>
-                    </ol>
-                </div>
-            </div>
+            <div class="card"><div class="card-header"><span class="icon">🔥</span>煙霧偵測器</div><p>極度敏感！務必開抽油煙機、開窗，嚴禁大火爆炒。</p></div>
+            <div class="card"><div class="card-header"><span class="icon">🍳</span>電爐解鎖</div><p>長按 🔑 或 🔒 3-5 秒。必須放上鍋子才會加熱。</p></div>
+            <div class="card"><div class="card-header"><span class="icon">🍚</span>煮飯神器</div><p>米水比 1:1.1。大火滾後轉最小火蓋蓋子煮 12 分，悶 15 分。</p></div>
         </div>
 
-        <h2 class="section-heading">🛒 超市採買字典</h2>
+        <h3 style="border-left: 5px solid var(--success); padding-left: 10px;">🛒 超市採買字典</h3>
         <div class="grid-row cols-2">
             <div class="card">
-                <div class="card-title"><span class="card-icon">🐟</span>海鮮類 (必買)</div>
+                <div class="card-header"><span class="icon">🐟</span>海鮮 (必買)</div>
                 <table class="dict-table">
-                    <tr>
-                        <td class="word-no">Laks</td>
-                        <td class="word-tw">鮭魚 (選 Laksefilet 去骨)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Torsk</td>
-                        <td class="word-tw">鱈魚 (挪威國寶)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Reker</td>
-                        <td class="word-tw">甜蝦 (冷凍熟食，解凍即食)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Fiskekaker</td>
-                        <td class="word-tw">魚餅 (像甜不辣)</td>
-                    </tr>
+                    <tr><td class="word-no">Laks</td><td class="word-tw">鮭魚 (Laksefilet 去骨)</td></tr>
+                    <tr><td class="word-no">Reker</td><td class="word-tw">甜蝦 (冷凍熟食，解凍即食)</td></tr>
+                    <tr><td class="word-no">Fiskekaker</td><td class="word-tw">魚餅 (像甜不辣)</td></tr>
                 </table>
             </div>
-
             <div class="card">
-                <div class="card-title"><span class="card-icon">🥩</span>肉類與蔬果</div>
+                <div class="card-header"><span class="icon">🥩</span>肉與菜</div>
                 <table class="dict-table">
-                    <tr>
-                        <td class="word-no">Kjøttdeig</td>
-                        <td class="word-tw">牛絞肉 (便宜好用)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Kylling</td>
-                        <td class="word-tw">雞肉 (Kyllinglår 雞腿)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Poteter</td>
-                        <td class="word-tw">馬鈴薯 (主食)</td>
-                    </tr>
-                    <tr>
-                        <td class="word-no">Frosne Grønnsaker</td>
-                        <td class="word-tw">冷凍綜合蔬菜包</td>
-                    </tr>
+                    <tr><td class="word-no">Kjøttdeig</td><td class="word-tw">牛絞肉</td></tr>
+                    <tr><td class="word-no">Kylling</td><td class="word-tw">雞肉 (Kyllinglår 雞腿)</td></tr>
+                    <tr><td class="word-no">Poteter</td><td class="word-tw">馬鈴薯</td></tr>
                 </table>
             </div>
         </div>
 
-        <h2 class="section-heading">🏆 10 道大廚食譜</h2>
-        <p style="text-align: center; margin-bottom: 30px;">點擊菜名展開做法</p>
-
+        <h3 style="border-left: 5px solid var(--accent); padding-left: 10px;">🏆 10 道大廚食譜 (點擊展開)</h3>
         <div class="grid-row cols-2">
-            <details>
-                <summary>1. 香煎鮭魚排 (配飯)</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">Laks 鮭魚</span>
-                        <span class="tag t-sauce">醬油/胡椒鹽</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>熱鍋融化奶油。鮭魚擦乾，撒胡椒鹽。</li>
-                            <li>皮朝下放入，<strong>中火煎 4 分鐘</strong>至皮酥脆。</li>
-                            <li>翻面再煎 2 分鐘（中間粉嫩最好吃）。</li>
-                            <li>淋上一點煎魚的油在白飯上。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>2. 海鮮雜燴粥 (清冰箱)</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">剩飯/甜蝦/魚餅</span>
-                        <span class="tag t-sauce">康寶湯包</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>水滾後加入康寶湯包、切塊魚餅、冷凍蔬菜。</li>
-                            <li>放入剩飯煮 5-8 分鐘直到濃稠。</li>
-                            <li><strong>關火前 30 秒</strong>放入剝殼甜蝦（蝦是熟的，煮久會縮）。</li>
-                            <li>滴入台灣帶來的麻油。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>3. 沙茶肉燥乾麵</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">絞肉/洋蔥</span>
-                        <span class="tag t-sauce">沙茶/醬油</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>炒香洋蔥碎與絞肉。</li>
-                            <li>加入 2 匙沙茶、2 匙醬油、少許糖（或可樂）、半杯水。</li>
-                            <li>小火燉 10 分鐘收汁。</li>
-                            <li>淋在煮好的麵條上，配上一顆荷包蛋。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>4. 馬鈴薯燉肉咖哩</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">雞腿/馬鈴薯</span>
-                        <span class="tag t-sauce">咖哩塊/牛奶</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>雞肉、馬鈴薯、紅蘿蔔切大塊炒香。</li>
-                            <li>加水淹過食材，煮 15 分鐘至馬鈴薯軟爛。</li>
-                            <li>關火，融化咖哩塊。</li>
-                            <li><strong>大廚秘訣：</strong>倒入半杯牛奶，咖哩會變超級濃郁。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>5. 甜蝦開放三明治 (免煮)</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">冷凍甜蝦/吐司</span>
-                        <span class="tag t-sauce">美乃滋/檸檬</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>甜蝦沖水解凍（它是熟的）。</li>
-                            <li>吐司烤過塗奶油。</li>
-                            <li>自己剝蝦殼，鋪滿吐司。</li>
-                            <li>擠上美乃滋和檸檬汁。配白酒完美。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>6. 可樂滷雞腿</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">雞腿/可樂</span>
-                        <span class="tag t-sauce">醬油</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>雞腿煎到表面金黃。</li>
-                            <li>倒入可樂（淹過雞肉一半）+ 3匙醬油。</li>
-                            <li>大火煮滾，轉小火燉 20 分鐘。</li>
-                            <li>最後開大火把醬汁收乾濃稠，像糖醋一樣好吃。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>7. 奶油鮭魚燉飯</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">鮭魚/生米</span>
-                        <span class="tag t-sauce">牛奶/菠菜</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>炒香洋蔥和鮭魚塊（鮭魚表面熟先撈起）。</li>
-                            <li>原鍋放入生米和水燉煮。</li>
-                            <li>水快乾時，倒入半杯牛奶和冷凍菠菜。</li>
-                            <li>放回鮭魚，蓋蓋子悶熟。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>8. 醬燒鱈魚 (配麵)</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">鱈魚/洋蔥</span>
-                        <span class="tag t-sauce">醬油/糖</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>洋蔥切絲鋪底，上面放鱈魚排。</li>
-                            <li>淋醬汁：醬油 2 匙 + 水 2 匙 + 糖 1 匙。</li>
-                            <li>蓋鍋蓋，中小火「蒸煮」8-10 分鐘。</li>
-                            <li>魚肉嫩，洋蔥甜，醬汁拌麵超好吃。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>9. 培根炒高麗菜</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">培根/高麗菜</span>
-                        <span class="tag t-sauce">蠔油</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>熱鍋逼出培根油（不用另外放油）。</li>
-                            <li>放入手剝的高麗菜片快炒。</li>
-                            <li>加一點水悶 2 分鐘（挪威高麗菜較硬）。</li>
-                            <li>起鍋前加一匙蠔油。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>10. 馬鈴薯肉末濃湯</summary>
-                <div class="recipe-content">
-                    <div class="tags">
-                        <span class="tag t-main">馬鈴薯/絞肉</span>
-                        <span class="tag t-sauce">牛奶</span>
-                    </div>
-                    <div class="step-list">
-                        <ol>
-                            <li>洋蔥和絞肉炒香。加入馬鈴薯小丁。</li>
-                            <li>加水煮到馬鈴薯化開（用湯匙壓泥）。</li>
-                            <li>加入牛奶煮滾，撒鹽和黑胡椒。</li>
-                            <li>早餐沾麵包吃非常溫暖。</li>
-                        </ol>
-                    </div>
-                </div>
-            </details>
-        </div>
-
+            <details><summary>1. 香煎鮭魚排</summary><div class="details-content"><div class="tags"><span class="tag t-main">鮭魚</span><span class="tag t-sauce">胡椒鹽</span></div><ol><li>熱鍋融化奶油，皮朝下中火煎 4 分鐘。</li><li>翻面煎 2 分鐘。</li></ol></div></details>
+            <details><summary>2. 海鮮雜燴粥</summary><div class="details-content"><div class="tags"><span class="tag t-main">甜蝦/魚餅/剩飯</span><span class="tag t-sauce">康寶湯包</span></div><ol><li>水滾加湯包、魚餅、冷凍蔬菜、剩飯煮稠。</li><li>關火前加甜蝦。</li></ol></div></details>
+            <details><summary>3. 沙茶肉燥乾麵</summary><div class="details-content"><div class="tags"><span class="tag t-main">絞肉/洋蔥</span><span class="tag t-sauce">沙茶/醬油</span></div><ol><li>炒香洋蔥絞肉。</li><li>加沙茶、醬油、少許水燉 10 分鐘收汁。</li></ol></div></details>
+            <details><summary>4. 馬鈴薯燉肉咖哩</summary><div class="details-content"><div class="tags"><span class="tag t-main">雞腿/馬鈴薯</span><span class="tag t-sauce">咖哩塊/牛奶</span></div><ol><li>食材炒香加水煮 15 分。</li><li>關火融化咖哩塊，加半杯牛奶更濃郁。</li></ol></div></details>
+            <details><summary>5. 甜蝦開放三明治</summary><div class="details-content"><div class="tags"><span class="tag t-main">甜蝦/吐司</span><span class="tag t-sauce">美乃滋</span></div><ol><li>甜蝦解凍剝殼。</li><li>吐司烤過鋪滿蝦，擠美乃滋和檸檬。</li></ol></div></details>
+            </div>
+        <div style="text-align: center; color: #999;">Bon Appétit!</div>
     </div>
-    
-    <div style="text-align: center; padding: 40px; color: #999;">
-        Bon Appétit! 祝您在挪威吃得開心！
-    </div>
-
-    <script>
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const navLinks = document.querySelectorAll('.nav-item');
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
-            else { link.classList.remove('active'); }
-        });
-        let lastScrollY = window.scrollY;
-        const navbar = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
-            else { navbar.classList.remove('nav-hidden'); }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-
+    <script src="navbar.js"></script>
 </body>
 </html>

@@ -3,254 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歐洲自駕保命全攻略 (深色清晰版)</title>
+    <title>歐洲自駕保命全攻略</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --danger: #8a4b4b; --warning: #8c7b50; --info: #4a6572; --hero-bg: #455a64;
-            --bg: #f4f4f4; --card-bg: #ffffff; --text: #222222; --text-light: #555555; --border-color: #dcdcdc;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
-        }
-        /* 導航樣式 (通用) */
-        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
-        .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
-        @media (min-width: 768px) { .nav-container { justify-content: center; } }
-        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
-        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .nav-icon { margin-right: 6px; }
-        .navbar::-webkit-scrollbar { display: none; }
-
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { text-align: center; color: #1a1a1a; font-size: 1.8rem; margin-bottom: 10px; letter-spacing: 1px; font-weight: 800; }
-        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; font-weight: 500; }
-        .hero-card { background: linear-gradient(135deg, #607d8b, var(--hero-bg)); color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); }
-        .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        .hero-text { font-size: 1.2rem; font-weight: 600; }
-        .hero-sub { margin-top: 12px; font-size: 0.95rem; opacity: 0.95; font-weight: 400; }
-        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 6px solid #999; }
-        .border-danger { border-left-color: var(--danger); }
-        .border-warning { border-left-color: var(--warning); }
-        .border-info { border-left-color: var(--info); }
-        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; color: #111; }
-        .icon { font-size: 1.5rem; margin-right: 12px; }
-        details { background-color: #fcfcfc; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
-        summary { padding: 15px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--info); background-color: #f9f9f9; transition: background-color 0.2s; }
-        summary:hover { background-color: #eef2f5; }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: #999; font-weight: bold; }
-        details[open] summary::after { content: '-'; color: var(--info); }
-        .eng-box { padding: 18px; background-color: #fff; border-top: 1px solid #eee; }
-        .eng-phrase { margin-bottom: 18px; border-bottom: 1px dashed #ccc; padding-bottom: 12px; }
-        .eng-phrase:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .en { font-weight: 800; color: #000; display: block; margin-bottom: 5px; font-size: 1.1rem; line-height: 1.4; }
-        .cn { font-size: 1rem; color: #444; font-weight: 500; }
-        .note { font-size: 0.9rem; color: #a94442; font-weight: bold; margin-top: 5px; }
-        ul, ol { padding-left: 20px; margin: 0; }
-        li { margin-bottom: 10px; color: var(--text); font-weight: 500; }
-        strong { color: #000; font-weight: 800; }
-        .highlight-box { background-color: #f0f4c3; border: 2px solid #cddc39; color: #33691e; padding: 18px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; font-weight: bold; }
+        .hero-card { background: linear-gradient(135deg, #607d8b, #455a64); color: #fff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); }
+        .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; }
+        .highlight-box { background-color: #f0f4c3; border: 2px solid #cddc39; color: #33691e; padding: 18px; border-radius: 8px; margin: 15px 0; font-weight: bold; }
+        .eng-box { padding: 15px; background: #fff; border-top: 1px solid #eee; }
+        .eng-phrase { margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
+        .eng-phrase:last-child { border: none; }
+        .en { font-weight: 800; display: block; margin-bottom: 5px; font-size: 1.1rem; }
+        .cn { color: #555; }
+        .note { font-size: 0.9rem; color: #c0392b; font-weight: bold; margin-top: 5px; }
     </style>
 </head>
 <body>
-
-    <nav class="navbar" id="mainNav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
-            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
-            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
-            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
-            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
-            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
-            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
-        </div>
-    </nav>
-
     <div class="container">
         <h1>🚗 歐洲自駕保命全攻略</h1>
         <div class="subtitle">台灣駕照直通・英文話術・潛規則大全</div>
 
         <div class="hero-card">
             <div class="hero-title">✅ 免驚！跟台灣一模一樣</div>
-            <div class="hero-text">
-                🇳🇴 挪威 🇳🇱 荷蘭 🇧🇪 比利時<br>
-                全部都是 <strong>左駕車 (駕駛座在左邊)</strong><br>
-                全部都是 <strong>靠右行駛</strong>
-            </div>
-            <div class="hero-sub">
-                (不需要適應方向盤位置，習慣完全相同)
-            </div>
+            <div>🇳🇴 挪威 🇳🇱 荷蘭 🇧🇪 比利時<br>全部都是 <strong>左駕車 (駕駛座在左邊)</strong><br>全部都是 <strong>靠右行駛</strong></div>
         </div>
 
-        <div class="card border-info">
-            <div class="card-header"><span class="icon" style="color: var(--info);">🗣️</span>租車櫃台英文攻略 (點擊展開)</div>
-            <p style="color: var(--text);">櫃台會講很快，您可以直接把手機拿給他看這些句子。</p>
-            
-            <details>
-                <summary>1. 取車與核對訂單</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">Hi, I have a booking with Trip.com. Here is my voucher, passport, and driving licenses.</span>
-                        <span class="cn">嗨，我有用 Trip.com 訂車。這是我的憑證、護照和駕照。</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>2. 拒絕推銷 (最重要！)</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">No extra insurance, thanks. I have full coverage with my booking already.</span>
-                        <span class="cn">不用額外保險，謝謝。我訂車時已經買全險了。</span>
-                        <div class="note">*櫃台通常會說你的保險不夠好，請堅定拒絕 (除非你想現場加購)。</div>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">I don't need an upgrade. The booked car size is fine for me.</span>
-                        <span class="cn">我不需要升級車款。預訂的大小對我來說夠用了。</span>
-                        <div class="note">*除非他說 "Free upgrade" (免費升級)，否則通常是要加錢的。</div>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>3. 確認燃油與輪胎</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">Is this a petrol (gasoline) or diesel car?</span>
-                        <span class="cn">這是汽油車還是柴油車？</span>
-                        <div class="note">*聽不懂請他寫下來，或看油箱蓋標示。</div>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">Does the car come with winter tires (studded tires)?</span>
-                        <span class="cn">這台車有裝冬季胎（或釘胎）嗎？</span>
-                        <div class="note">*挪威 3 月必備。</div>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">What is the fuel policy? Full-to-full?</span>
-                        <span class="cn">油料規定是怎樣？滿借滿還嗎？</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>4. 檢查車況與回報</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">There is a scratch here on the bumper. Could you mark it on the contract?</span>
-                        <span class="cn">保險桿這裡有刮痕，可以請你註記在合約上嗎？</span>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">Do I need to clean the car before returning?</span>
-                        <span class="cn">還車前我需要洗車嗎？</span>
-                        <div class="note">*通常不用，除非車內太髒。</div>
-                    </div>
-                </div>
-            </details>
+        <div class="card" style="border-left-color: var(--info);">
+            <div class="card-header"><span class="icon">🗣️</span>租車櫃台英文攻略 (點擊展開)</div>
+            <details><summary>1. 取車與核對訂單</summary><div class="eng-box"><div class="eng-phrase"><span class="en">Hi, I have a booking with Trip.com.</span><span class="cn">嗨，我有用 Trip.com 訂車。</span></div></div></details>
+            <details><summary>2. 拒絕推銷 (最重要！)</summary><div class="eng-box"><div class="eng-phrase"><span class="en">No extra insurance, thanks. I have full coverage.</span><span class="cn">不用額外保險，謝謝。我已經有全險了。</span><div class="note">*請堅定拒絕。</div></div><div class="eng-phrase"><span class="en">I don't need an upgrade.</span><span class="cn">我不需要升級車款。</span></div></div></details>
+            <details><summary>3. 確認燃油與輪胎</summary><div class="eng-box"><div class="eng-phrase"><span class="en">Is this Petrol or Diesel?</span><span class="cn">這是汽油還是柴油？</span></div><div class="eng-phrase"><span class="en">Does it have winter tires?</span><span class="cn">有裝冬季胎嗎？(挪威必備)</span></div></div></details>
+            <details><summary>4. 檢查車況</summary><div class="eng-box"><div class="eng-phrase"><span class="en">There is a scratch here. Please mark it.</span><span class="cn">這裡有刮痕，請註記。</span></div></div></details>
         </div>
 
-        <div class="card border-danger">
-            <div class="card-header"><span class="icon" style="color: var(--danger);">❄️</span>挪威雪地・保命規則</div>
-            
-            <div class="highlight-box">
-                💡 24小時開大燈 (很重要！)<br>
-                挪威規定：車子只要發動，無論白天黑夜，都必須開大燈 (Low beam)。<br>
-                建議手動轉到「大燈開啟」的位置，不要只依賴 Auto 模式。
-            </div>
-
+        <div class="card" style="border-left-color: var(--secondary);">
+            <div class="card-header"><span class="icon">❄️</span>挪威雪地・保命規則</div>
+            <div class="highlight-box">💡 24小時開大燈：挪威規定引擎發動就要開大燈 (Low beam)。</div>
             <ul>
-                <li><strong>黑冰 (Black Ice)：</strong> 路面看起來黑黑濕濕的，其實結了一層薄冰。請勿急煞、勿急轉彎。</li>
-                <li><strong>酒測值 (0.02%)：</strong> 挪威是 0.02%，台灣是 0.03%。基本上<strong>喝一杯啤酒就會超標</strong>。開車絕對滴酒不沾。</li>
-                <li><strong>禮讓原則：</strong>
-                    <ul>
-                        <li><strong>圓環內優先：</strong> 進圓環前一定要停。</li>
-                        <li><strong>右方車優先：</strong> 沒有紅綠燈的路口，右手邊來的車最大。</li>
-                    </ul>
-                </li>
-                <li><strong>渡輪 (Ferry)：</strong>
-                    <ul>
-                        <li>跟著前車排隊。</li>
-                        <li>工作人員會來收費（通常 AutoPASS 自動扣，或現場刷卡）。</li>
-                        <li>停好車後，拉手煞車。</li>
-                    </ul>
-                </li>
+                <li><strong>黑冰 (Black Ice)：</strong> 路面看起來濕濕的其實是冰。請勿急煞。</li>
+                <li><strong>酒測值：</strong> 挪威 0.02% 極嚴格，喝一杯啤酒就會超標。</li>
+                <li><strong>渡輪：</strong> 跟著前車排隊，工作人員會來收費或自動扣款。</li>
             </ul>
         </div>
 
-        <div class="card border-warning">
-            <div class="card-header"><span class="icon" style="color: var(--warning);">🚲</span>荷蘭・自行車是老大</div>
+        <div class="card" style="border-left-color: var(--accent);">
+            <div class="card-header"><span class="icon">🚲</span>荷蘭・自行車是老大</div>
             <ul>
-                <li><strong>轉彎死角：</strong> 荷蘭自行車道非常發達。右轉時，務必回頭確認右後方沒有自行車直行。<strong>如果撞到，汽車幾乎全責。</strong></li>
+                <li><strong>轉彎死角：</strong> 右轉時務必回頭看有無自行車直行。撞到汽車全責。</li>
                 <li><strong>電車 (Tram)：</strong> 阿姆斯特丹電車有絕對路權。</li>
-                <li><strong>公車專用道：</strong> 地上寫 "BUS" 或 "LIJNBUS"，千萬別開進去，罰單很貴。</li>
             </ul>
         </div>
 
-        <div class="card border-danger">
-            <div class="card-header"><span class="icon" style="color: var(--danger);">🆘</span>萬一出事了 (Touch Wood)</div>
-            <p style="color: var(--text);">請將這些英文句型截圖，以備不時之需：</p>
-            
-            <details>
-                <summary>車子拋錨/發不動</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">Hello, I rented a car from SIXT. My car broke down.</span>
-                        <span class="cn">你好，我跟 SIXT 租了車，我的車拋錨了。</span>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">The engine won't start. / I have a flat tire.</span>
-                        <span class="cn">引擎發不動。 / 我爆胎了。</span>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">My location is [開 Google Map 報路名].</span>
-                        <span class="cn">我的位置在...</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>發生擦撞事故</summary>
-                <div class="eng-box">
-                    <div class="eng-phrase">
-                        <span class="en">We had a small accident. Nobody is injured.</span>
-                        <span class="cn">我們發生小擦撞，沒人受傷。</span>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">Please call the police. (Tel: 112)</span>
-                        <span class="cn">請幫忙叫警察。</span>
-                    </div>
-                    <div class="eng-phrase">
-                        <span class="en">Let's fill out the accident statement form.</span>
-                        <span class="cn">我們來填寫事故報告單吧。(手套箱裡通常有)</span>
-                    </div>
-                </div>
-            </details>
+        <div class="card" style="border-left-color: var(--secondary);">
+            <div class="card-header"><span class="icon">🆘</span>萬一出事了</div>
+            <details><summary>拋錨/事故英文</summary><div class="eng-box"><div class="eng-phrase"><span class="en">My car broke down. / I have a flat tire.</span><span class="cn">車拋錨了 / 爆胎了。</span></div><div class="eng-phrase"><span class="en">Please call the police (112).</span><span class="cn">請幫忙報警。</span></div></div></details>
         </div>
-
-        <div style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 30px; margin-bottom: 50px;">
-            請放心，只要慢慢開，遵守規則，右駕(靠右走)跟台灣一樣，您一定沒問題的！
-        </div>
-
+        <div style="text-align: center; color: #777; margin-top: 30px;">請放心，慢慢開，遵守規則，您一定沒問題！</div>
     </div>
-
-    <script>
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const navLinks = document.querySelectorAll('.nav-item');
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
-            else { link.classList.remove('active'); }
-        });
-        let lastScrollY = window.scrollY;
-        const navbar = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
-            else { navbar.classList.remove('nav-hidden'); }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-
+    <script src="navbar.js"></script>
 </body>
 </html>

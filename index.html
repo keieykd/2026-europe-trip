@@ -3,440 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 荷比挪自駕：完美合體版</title>
+    <title>2026 荷比挪自駕：行程總表</title>
+    
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        :root {
-            --primary: #2c3e50; --secondary: #e74c3c; --accent: #f39c12; --bg-light: #ecf0f1; --nav-bg: #263238; --text-dark: #2c3e50;
-        }
-        body {
-            font-family: "Microsoft JhengHei", "Heiti TC", sans-serif;
-            line-height: 1.6; color: var(--text-dark); background-color: #f8f9fa; margin: 0; padding: 20px 15px; padding-top: 80px; /* 預留導航空間 */
-        }
-        /* === 導航列樣式 === */
-        .navbar {
-            background-color: var(--nav-bg); padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out;
-        }
-        .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
-        @media (min-width: 768px) { .nav-container { justify-content: center; } }
-        .nav-item {
-            color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center;
-        }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
-        .nav-item.active { background-color: var(--accent); color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .nav-icon { margin-right: 6px; }
-        .navbar::-webkit-scrollbar { display: none; }
+        /* === 首頁專用微調樣式 (只影響這一頁) === */
         
-        /* === 內容樣式 === */
-        .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        h1 { text-align: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 5px; border-bottom: 4px solid var(--accent); padding-bottom: 15px; }
-        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-size: 0.9rem; }
-        
+        /* APP 卡片區 */
         .app-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .app-card { background-color: #f8f9fa; border: 1px solid #e9ecef; border-left: 4px solid #3498db; padding: 15px; border-radius: 8px; transition: transform 0.2s; }
-        .app-card:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .app-name { font-weight: bold; color: #2980b9; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        .app-desc { font-size: 0.9rem; color: #555; }
+        .app-card { background-color: #fff; border: 1px solid #e9ecef; border-left: 4px solid var(--info); padding: 15px; border-radius: 8px; transition: transform 0.2s; }
+        .app-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .app-name { font-weight: bold; color: var(--info); display: block; margin-bottom: 5px; font-size: 1.1rem; }
+        .app-desc { font-size: 0.9rem; color: #666; }
         
+        /* 預算說明條 */
         .budget-info { background-color: #e8f6f3; border: 1px solid #a2d9ce; padding: 15px; border-radius: 8px; margin-bottom: 30px; color: #16a085; font-size: 0.95rem; }
+        
+        /* 行程區塊 */
         .section-header { background-color: var(--primary); color: white; padding: 12px 20px; border-radius: 8px; margin-top: 40px; font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; }
         .section-header::before { content: "📍"; margin-right: 10px; }
-        .day-box { border-left: 5px solid var(--accent); background: #fff; margin-bottom: 30px; padding-left: 20px; margin-top: 25px; }
-        .day-title { font-size: 1.4rem; font-weight: bold; color: var(--primary); margin-bottom: 20px; padding-top: 5px; }
-        .timeline { position: relative; padding-left: 10px; }
-        .timeline-item { position: relative; padding-bottom: 35px; border-left: 2px solid #eee; padding-left: 25px; }
+        
+        /* 每日行程卡 */
+        .day-box { border-left: 5px solid var(--accent); background: #fff; margin-bottom: 30px; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .day-title { font-size: 1.3rem; font-weight: bold; color: var(--primary); margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        
+        /* 時間軸 */
+        .timeline-item { position: relative; padding-bottom: 30px; border-left: 2px solid #eee; padding-left: 20px; margin-left: 10px; }
         .timeline-item:last-child { border-left: none; }
         .timeline-item::before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
         .time { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 5px; }
-        .cost-tag { display: inline-block; background-color: #fff0f0; color: #c0392b; border: 1px solid #ffcccc; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-left: 8px; vertical-align: middle; }
-        .spot-options { background-color: #fcf3cf; border: 1px dashed #f1c40f; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .spot-title { color: #d35400; font-weight: bold; display: block; margin-bottom: 8px; font-size: 1rem; }
+        
+        /* 價格標籤 */
+        .cost-tag { display: inline-block; background-color: #fce4ec; color: #c2185b; border: 1px solid #f8bbd0; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-left: 8px; vertical-align: middle; }
+        
+        /* 景點選項框 */
+        .spot-options { background-color: #fff8e1; border: 1px dashed #ffc107; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .spot-title { color: #d35400; font-weight: bold; display: block; margin-bottom: 8px; }
         .spot-list { margin: 0; padding-left: 20px; list-style-type: disc; }
-        .spot-list li { margin-bottom: 6px; color: #555; }
-        .note { font-size: 0.9rem; padding: 10px; border-radius: 6px; margin-top: 8px; display: block; }
-        .note-tip { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
-        .note-alert { background: #fadbd8; color: #922b21; border: 1px solid #f5b7b1; }
-        .note-tip::before { content: "💡 "; }
-        .note-alert::before { content: "⛔ "; }
+        .spot-list li { margin-bottom: 5px; color: #555; }
     </style>
 </head>
 <body>
 
-<nav class="navbar" id="mainNav">
-    <div class="nav-container">
-        <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
-        <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
-        <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
-        <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
-        <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
-        <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
-        <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
-    </div>
-</nav>
+    <div class="container">
+        <h1>2026 荷比挪自駕總表</h1>
+        <div class="subtitle">APP 工具包 ＋ 多元體驗行程 ＋ 預算估算</div>
 
-<div class="container">
-    <h1>2026 荷比挪自駕總表</h1>
-    <div class="subtitle">APP 工具包 ＋ 多元體驗行程 ＋ 預算估算</div>
+        <h3 style="color: var(--info); border-left: 5px solid var(--info); padding-left: 10px; margin-bottom: 20px;">📱 出發前必備 APP</h3>
+        <div class="app-section">
+            <div class="app-card"><span class="app-name">🗺️ Google Maps (離線地圖)</span><span class="app-desc">羅浮敦山區訊號差，務必先下載離線地圖。</span></div>
+            <div class="app-card" style="border-left-color: #e91e63;"><span class="app-name">🅿️ EasyPark</span><span class="app-desc">歐洲停車神器，綁信用卡自動扣款，免找零錢。</span></div>
+            <div class="app-card" style="border-left-color: #009688;"><span class="app-name">🌌 Aurora Forecast</span><span class="app-desc">追極光必備，看 KP 值與雲層覆蓋率。</span></div>
+            <div class="app-card" style="border-left-color: #ff9800;"><span class="app-name">🌥️ YR.no</span><span class="app-desc">挪威官方氣象，比 Google 準，決定纜車行程用。</span></div>
+            <div class="app-card" style="border-left-color: #673ab7;"><span class="app-name">🚆 NS International</span><span class="app-desc">荷蘭火車時刻與購票，可直接秀 QR Code 進站。</span></div>
+            <div class="app-card" style="border-left-color: #795548;"><span class="app-name">📷 Google Translate</span><span class="app-desc">下載離線包，相機對準菜單即時翻譯。</span></div>
+        </div>
 
-    <h3 style="color: #2980b9; border-left: 5px solid #2980b9; padding-left: 10px; margin-bottom: 20px;">📱 出發前必備 APP (在台灣先裝好)</h3>
-    <div class="app-section">
-        <div class="app-card">
-            <span class="app-name">🗺️ Google Maps (離線地圖)</span>
-            <span class="app-desc"><strong>一定要載：</strong>羅浮敦山區訊號差。<br><strong>操作：</strong>點頭像 -> 離線地圖 -> 選取區域 (挪威/荷蘭) -> 下載。</span>
-        </div>
-        <div class="app-card" style="border-left-color: #e91e63;">
-            <span class="app-name">🅿️ EasyPark</span>
-            <span class="app-desc"><strong>停車神器：</strong>歐洲停車機很難用，這個 APP 按一下就好。<br><strong>省錢秘訣：</strong>提早回來記得按 Stop，以分計費不浪費。</span>
-        </div>
-        <div class="app-card" style="border-left-color: #009688;">
-            <span class="app-name">🌌 Aurora (My Aurora Forecast)</span>
-            <span class="app-desc"><strong>極光獵人：</strong>不用傻傻等。<br><strong>重點：</strong>看 KP 值 (越高越好) 和 雲層覆蓋率 (越低越好)。</span>
-        </div>
-        <div class="app-card" style="border-left-color: #ff9800;">
-            <span class="app-name">🌥️ YR.no</span>
-            <span class="app-desc"><strong>挪威氣象：</strong>比 Google 準。<br><strong>用途：</strong>決定今天要不要去搭纜車 (風大會停駛)。</span>
-        </div>
-        <div class="app-card" style="border-left-color: #673ab7;">
-            <span class="app-name">🚆 NS International</span>
-            <span class="app-desc"><strong>荷蘭火車：</strong>查時刻、買票、看月台。<br><strong>方便：</strong>直接秀手機 QR Code 給查票員看。</span>
-        </div>
-        <div class="app-card" style="border-left-color: #795548;">
-            <span class="app-name">📷 Google Translate</span>
-            <span class="app-desc"><strong>翻譯菜單：</strong>下載離線包。<br><strong>功能：</strong>用相機鏡頭對準挪威文菜單，直接變中文。</span>
-        </div>
-    </div>
+        <div class="budget-info">💰 <strong>費用估算標準：</strong>1 歐元 ≈ 35 台幣 / 1 挪威克朗 ≈ 3 台幣。標籤為單人預估花費。</div>
 
-    <div class="budget-info">
-        <strong>💰 費用估算標準 (僅供參考)：</strong><br>
-        匯率：1 歐元 (EUR) ≈ 35 台幣 / 1 挪威克朗 (NOK) ≈ 3 台幣。<br>
-        <em>*價格標籤代表單人預估花費。</em>
-    </div>
-
-    <div class="section-header">🇧🇪 第一階段：比利時根特 (3/12 - 3/13)</div>
-
-    <div class="day-box">
-        <div class="day-title">Day 1｜3/12 (四) 抵達根特 & 肋排之夜</div>
-        <div class="timeline">
+        <div class="section-header">🇧🇪 第一階段：比利時根特 (3/12 - 3/13)</div>
+        
+        <div class="day-box">
+            <div class="day-title">Day 1｜3/12 (四) 抵達根特</div>
             <div class="timeline-item">
-                <span class="time">13:10 搭火車前往根特 <span class="cost-tag">💰 車票約 $700</span></span>
-                路線：AMS 機場 -> Antwerpen (轉車) -> Gent-Sint-Pieters。
+                <span class="time">13:10 搭火車往根特 <span class="cost-tag">💰約 $700</span></span>
+                路線：AMS -> Antwerpen -> Gent-Sint-Pieters。
             </div>
             <div class="timeline-item">
-                <span class="time">15:30 飯店 Check-in & 電車 <span class="cost-tag">💰 電車約 $100</span></span>
-                入住 Hotel NH Collection。放下行李。
-            </div>
-            <div class="timeline-item">
-                <span class="time">16:30 古城運河散步 (免費)</span>
-                沿著 <strong>香草河岸 (Graslei)</strong> 走，這是根特最美的地方。
+                <span class="time">16:30 運河散步 (免費)</span>
+                香草河岸 (Graslei) 看夕陽。
                 <div class="spot-options">
-                    <span class="spot-title">🎯 自由探索選項：</span>
+                    <span class="spot-title">🎯 自由探索：</span>
                     <ul class="spot-list">
-                        <li><strong>塗鴉街 (Werregarenstraat)：</strong> 一條充滿色彩的合法塗鴉巷弄，很適合拍照。</li>
-                        <li><strong>根特鼻子 (Cuberdon) 推車：</strong> 在廣場買這種紫色像鼻子一樣的軟糖吃看看 <span class="cost-tag">💰 約 $180</span>。</li>
+                        <li>塗鴉街 (Werregarenstraat)</li>
+                        <li>根特鼻子軟糖推車 <span class="cost-tag">$180</span></li>
                     </ul>
                 </div>
             </div>
             <div class="timeline-item">
-                <span class="time">18:00 晚餐：Amadeus 肋排 <span class="cost-tag">💰 約 $1,200</span></span>
-                知名的肋排吃到飽。包含飲料和小費。
+                <span class="time">18:00 晚餐：Amadeus <span class="cost-tag">💰約 $1,200</span></span>
+                肋排吃到飽，記得點 All-you-can-eat。
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 2｜3/13 (五) 週五市集 & 運河遊船</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 2｜3/13 (五) 根特市集 -> 荷蘭</div>
             <div class="timeline-item">
-                <span class="time">09:00 週五市集 (Vrijdagmarkt) <span class="cost-tag">💰 免費逛</span></span>
-                <div class="note note-tip">剛好今天是週五！這個廣場會有盛大的露天市集。</div>
-                逛逛當地人的攤販，買點水果、烤雞或海鮮小吃當早午餐。
+                <span class="time">09:00 週五市集 <span class="cost-tag">免費</span></span>
+                Vrijdagmarkt 體驗在地生活，買烤雞當早午餐。
             </div>
             <div class="timeline-item">
-                <span class="time">11:00 運河遊船 <span class="cost-tag">💰 約 $350</span></span>
-                不想走路？搭船是最好的選擇。船夫會用英文介紹風景。
+                <span class="time">11:00 運河遊船 <span class="cost-tag">💰約 $350</span></span>
+                搭船聽導覽遊古城，不用走路。
             </div>
             <div class="timeline-item">
-                <span class="time">12:30 午餐：Frites Atelier <span class="cost-tag">💰 約 $500</span></span>
-                米其林主廚開的薯條店。一份豪華薯條（上面有燉牛肉或松露醬）加飲料。
-            </div>
-            <div class="timeline-item">
-                <span class="time">14:30 返回荷蘭機場 <span class="cost-tag">💰 車票約 $700</span></span>
-                搭火車回 Schiphol 機場，入住 ibis。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:30 晚餐：機場超市採買 <span class="cost-tag">💰 約 $400</span></span>
-                在 Albert Heijn 超市買好明天的早餐和飛機上吃的午餐。
+                <span class="time">14:30 返回 AMS 機場 <span class="cost-tag">💰約 $700</span></span>
+                搭火車回機場飯店 ibis，準備明天飛挪威。
             </div>
         </div>
-    </div>
 
-    <div class="section-header">🇳🇴 第二階段：羅浮敦群島 (3/14 - 3/20)</div>
-
-    <div class="day-box">
-        <div class="day-title">Day 3｜3/14 (六) 飛往極圈 & 生存採買</div>
-        <div class="timeline">
+        <div class="section-header">🇳🇴 第二階段：羅浮敦群島 (3/14 - 3/20)</div>
+        
+        <div class="day-box">
+            <div class="day-title">Day 3｜3/14 (六) 飛往極圈</div>
             <div class="timeline-item">
-                <span class="time">15:20 取車 & 加油預授權 <span class="cost-tag">💰 押金約 $5,000</span></span>
-                取車時信用卡可能會被圈存一筆押金，別擔心，還車沒事就會退。
-            </div>
-            <div class="timeline-item">
-                <span class="time">19:30 Rema 1000 超市大採購 <span class="cost-tag">💰 約 $3,000</span></span>
-                <div class="note note-alert">生死攸關：明天週日全挪威超市不開！今晚必須買齊兩人 2-3 天的伙食。</div>
-                <strong>必買清單：</strong> 鮭魚排、冷凍北極甜蝦（解凍即食）、吐司、蛋、大罐水。
+                <span class="time">15:20 取車 & 採買 <span class="cost-tag">💰約 $3,000</span></span>
+                <div class="note note-alert">⛔ 明天週日超市不開！今晚務必買齊兩天份伙食 (早午晚餐)。</div>
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 4｜3/15 (日) 亨寧斯韋爾</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 4｜3/15 (日) 亨寧斯韋爾</div>
             <div class="timeline-item">
-                <span class="time">11:30 海邊足球場 <span class="cost-tag">💰 停車約 $150</span></span>
-                這是全球最美的足球場。去散步拍照，吹吹海風。
+                <span class="time">11:30 海邊足球場 <span class="cost-tag">停車約 $150</span></span>
+                全球最美足球場打卡。
             </div>
             <div class="timeline-item">
-                <span class="time">13:30 午餐：Lysstøperiet Cafe <span class="cost-tag">💰 約 $800</span></span>
-                點一碗著名的魚湯 (Fish Soup) 配麵包，再來一個肉桂捲。
+                <span class="time">13:30 午餐：魚湯 <span class="cost-tag">💰約 $800</span></span>
+                Lysstøperiet Cafe 必吃魚湯與肉桂捲。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 5｜3/16 (一) E10 公路往南</div>
+            <div class="timeline-item">
+                <span class="time">10:00 沿途風景</span>
+                Ramberg 白沙灘、Hamnøy 橋攝影。
             </div>
             <div class="timeline-item">
-                <span class="time">16:00 漁村探險</span>
+                <span class="time">18:00 晚餐：自炊牛排</span>
+                在漁屋煎牛排配紅酒 (請看 <a href="cooking.html">🍳 下廚指南</a>)。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 6｜3/17 (二) Reine 經典</div>
+            <div class="timeline-item">
+                <span class="time">11:00 Reine 散步</span>
+                被譽為最美村莊，停車場旁有經典倒影機位。
+            </div>
+            <div class="timeline-item">
+                <span class="time">14:30 爬小山 <span class="cost-tag">免費</span></span>
+                Olenilsøya 簡單步道看全景 (在 Anita's 後面)。
+            </div>
+            <div class="timeline-item">
+                <span class="time">18:00 晚餐：Anita's <span class="cost-tag">💰約 $700</span></span>
+                必吃經典魚堡 (Classic Fish Burger)。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 7｜3/18 (三) 公路盡頭 Å 鎮</div>
+            <div class="timeline-item">
+                <span class="time">10:00 窯烤肉桂捲 <span class="cost-tag">💰約 $200</span></span>
+                Bakeriet på Å 古法麵包店。
+            </div>
+            <div class="timeline-item">
+                <span class="time">11:00 世界盡頭</span>
+                走到停車場最深處看海。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 8｜3/19 (四) 黑沙灘</div>
+            <div class="timeline-item">
+                <span class="time">10:00 恐龍拱橋</span>
+                Fredvang Bridges 拍照。
+            </div>
+            <div class="timeline-item">
+                <span class="time">11:30 黑沙灘</span>
+                Skagsanden Beach 拍倒影。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 9｜3/20 (五) 長途移動</div>
+            <div class="timeline-item">
+                <span class="time">09:00 開往 Harstad</span>
+                車程 4 小時，中途在 Lødingen 吃熱狗休息。
+            </div>
+        </div>
+
+        <div class="section-header">🇳🇴 第三階段：特羅姆瑟 (3/21 - 3/24)</div>
+        
+        <div class="day-box">
+            <div class="day-title">Day 10｜3/21 (六) 纜車夜景</div>
+            <div class="timeline-item">
+                <span class="time">17:00 Fjellheisen 纜車 <span class="cost-tag">💰約 $900</span></span>
+                上山看夜景與極光。
+            </div>
+            <div class="timeline-item">
+                <span class="time">20:00 晚餐：Peppes <span class="cost-tag">💰約 $600</span></span>
+                挪威連鎖披薩，兩人分食剛好。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 11｜3/22 (日) 馴鹿體驗</div>
+            <div class="timeline-item">
+                <span class="time">10:00 馴鹿餵食 <span class="cost-tag">💰預付</span></span>
+                體驗薩米文化，含午餐。
+            </div>
+            <div class="timeline-item">
+                <span class="time">15:00 室內景點</span>
                 <div class="spot-options">
-                    <span class="spot-title">🎯 沒事做可以去：</span>
+                    <span class="spot-title">✨ 溫暖推薦 (不跳海)：</span>
                     <ul class="spot-list">
-                        <li><strong>KaviarFactory：</strong> 魚子醬工廠改建的美術館 (外觀拍照很美)。</li>
-                        <li><strong>Galleri Lofotens Hus：</strong> 看看關於羅浮敦歷史的畫作。</li>
+                        <li>Polaria 水族館 (看海豹餵食秀)</li>
+                        <li>Ølhallen 啤酒廠酒吧 (氣氛好，有無酒精飲料)</li>
+                        <li>世界最北 7-11 打卡</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 5｜3/16 (一) E10 公路兜風</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 12｜3/23 (一) 狗拉雪橇</div>
             <div class="timeline-item">
-                <span class="time">10:00 沿途風景 (免費)</span>
-                今天的主題是「開車看風景」。
-                <ul>
-                    <li><strong>Ramberg 白沙灘：</strong> 雖然是冬天，但白沙配雪山很美。</li>
-                    <li><strong>Hamnøy 橋：</strong> 抵達住宿前，在橋上拍經典的紅色漁屋照片。</li>
-                </ul>
+                <span class="time">09:00 哈士奇雪橇 <span class="cost-tag">💰預付</span></span>
+                記得穿排汗衣。
             </div>
             <div class="timeline-item">
-                <span class="time">14:00 簡單午餐 <span class="cost-tag">💰 約 $400</span></span>
-                在 Ramberg 的超市買熱食或三明治解決。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：自炊牛排餐 <span class="cost-tag">💰 超市食材</span></span>
-                在溫暖的漁屋裡煎牛排配紅酒。
+                <span class="time">19:00 晚餐：Blårock <span class="cost-tag">💰約 $700</span></span>
+                搖滾漢堡店，份量大。
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 6｜3/17 (二) Reine 經典 & 戶外活動</div>
-        <div class="timeline">
+        <div class="section-header">🇳🇱 第四階段：荷蘭花季 (3/25 - 3/28)</div>
+        
+        <div class="day-box">
+            <div class="day-title">Day 14｜3/25 (三) 庫肯霍夫</div>
             <div class="timeline-item">
-                <span class="time">11:00 Reine 村莊散步 (免費)</span>
-                把車停好，走進這個被譽為挪威最美的村莊。
-            </div>
-            <div class="timeline-item">
-                <span class="time">14:30 爬山 Olenilsøya <span class="cost-tag">💰 免費</span></span>
-                這是一個簡單的小山丘（入口在 Anita's 海鮮舖後面），不用專業裝備也能爬上去，視野無敵好。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：Anita's Sjømat <span class="cost-tag">💰 約 $700</span></span>
-                這家是名店。必點 <strong>Classic Fish Burger (經典魚堡)</strong>，裡面是滿滿的蝦子和鮭魚。
+                <span class="time">10:00 賞花 <span class="cost-tag">💰約 $700</span></span>
+                直奔 Willem-Alexander 室內展館看滿開鬱金香。
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 7｜3/18 (三) 公路盡頭 Å 鎮</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 15｜3/26 (四) 羊角村</div>
             <div class="timeline-item">
-                <span class="time">10:00 Bakeriet på Å 麵包店 <span class="cost-tag">💰 約 $200</span></span>
-                只為了這個而來：古法石窯烤的肉桂捲 (Kanelboller)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">11:00 走到世界盡頭 (免費)</span>
-                穿越 Å 鎮的停車場，沿著小徑走到海邊懸崖，看著大海的盡頭。
+                <span class="time">09:30 開船 <span class="cost-tag">💰約 $800</span></span>
+                租電動船自己開一小時，享受寧靜運河。
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 8｜3/19 (四) 黑沙灘與橋</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 16｜3/27 (五) 阿姆斯特丹</div>
             <div class="timeline-item">
-                <span class="time">10:00 恐龍拱橋 (Fredvang) <span class="cost-tag">💰 免費</span></span>
-                這裡有兩座造型很像恐龍背脊的橋，是空拍機和攝影愛好者的最愛。
+                <span class="time">10:00 市集小吃 <span class="cost-tag">💰約 $300</span></span>
+                Albert Cuyp 吃焦糖煎餅、生鯡魚。
             </div>
             <div class="timeline-item">
-                <span class="time">11:30 Skagsanden 黑沙灘 <span class="cost-tag">💰 免費</span></span>
-                沙子是黑色的，上面有白色的雪和冰裂紋，非常奇幻。
-            </div>
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day-title">Day 9｜3/20 (五) 長途移動日</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">12:30 加油站午餐 <span class="cost-tag">💰 約 $300</span></span>
-                在 Lødingen 的 Circle K 休息。推薦吃挪威熱狗 (Pølse) 或漢堡。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：Egon 餐廳 <span class="cost-tag">💰 約 $1,000</span></span>
-                Egon 是挪威連鎖家庭餐廳，品質穩定，有披薩、義大利麵、排餐。
-            </div>
-        </div>
-    </div>
-
-    <div class="section-header">🇳🇴 第三階段：特羅姆瑟 (3/21 - 3/24)</div>
-
-    <div class="day-box">
-        <div class="day-title">Day 10｜3/21 (六) 纜車夜景</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">17:00 Fjellheisen 纜車 <span class="cost-tag">💰 約 $900</span></span>
-                搭纜車上山看夜景。如果運氣好，這裡也是看極光不用跑太遠的好地方。
-            </div>
-            <div class="timeline-item">
-                <span class="time">20:00 晚餐：Peppes Pizza <span class="cost-tag">💰 約 $600</span></span>
-                挪威必吃的連鎖披薩店。點一個大披薩兩個人分剛好。
-            </div>
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day-title">Day 11｜3/22 (日) 馴鹿 & 溫暖室內遊</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">10:00 馴鹿體驗 <span class="cost-tag">💰 已預付?</span></span>
-                費用約 $4,500 台幣/人 (含午餐)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">15:00 室內景點 (怕冷專用)</span>
+                <span class="time">13:00 城市體驗</span>
                 <div class="spot-options">
-                    <span class="spot-title">✨ 不跳海、不逛博物館的好去處：</span>
+                    <span class="spot-title">✨ 推薦去處 (無博物館)：</span>
                     <ul class="spot-list">
-                        <li><strong>Polaria 水族館：</strong> 看海豹餵食秀，在室內很溫暖。</li>
-                        <li><strong>Ølhallen (Mack 啤酒廠)：</strong> 特羅姆瑟最老的酒吧，有數十種啤酒可以試飲 (也有無酒精的)。氣氛非常棒且溫馨。</li>
-                        <li><strong>世界最北 7-11：</strong> 去買杯熱咖啡打卡。</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day-title">Day 12｜3/23 (一) 狗拉雪橇 & 搖滾漢堡</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">09:00 狗拉雪橇 <span class="cost-tag">💰 已預付?</span></span>
-                費用約 $6,000 台幣/人。
-            </div>
-            <div class="timeline-item">
-                <span class="time">19:00 晚餐：Blårock Cafe <span class="cost-tag">💰 約 $700</span></span>
-                搖滾主題漢堡店，氣氛很High，漢堡份量很大。
-            </div>
-        </div>
-    </div>
-
-    <div class="section-header">🇳🇱 第四階段：荷蘭花季 (3/25 - 3/28)</div>
-
-    <div class="day-box">
-        <div class="day-title">Day 14｜3/25 (三) 庫肯霍夫花園</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">10:00 庫肯霍夫門票 <span class="cost-tag">💰 約 $700</span></span>
-                包含停車費。這是一年一度的盛事，園區像大公園，非常舒服。
-            </div>
-            <div class="timeline-item">
-                <span class="time">13:00 園區午餐 <span class="cost-tag">💰 約 $600</span></span>
-                園區內有餐車賣熱狗、薯條、鬆餅。
-            </div>
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day-title">Day 15｜3/26 (四) 羊角村開船</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">09:30 租電動船 <span class="cost-tag">💰 約 $800/船</span></span>
-                不用證照，自己開一小時。這是羊角村最好玩的體驗。
-            </div>
-            <div class="timeline-item">
-                <span class="time">12:00 午餐：Grand Café Fanfare <span class="cost-tag">💰 約 $800</span></span>
-                這裡氣氛很好，推薦洋蔥湯和豬排。
-            </div>
-        </div>
-    </div>
-
-    <div class="day-box">
-        <div class="day-title">Day 16｜3/27 (五) 阿姆斯特丹 (體驗日)</div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="time">10:00 Albert Cuyp 市集 <span class="cost-tag">💰 約 $300</span></span>
-                <strong>必吃：</strong> 現做荷蘭焦糖煎餅 (Stroopwafel)、生鯡魚 (Haring)、炸魚塊 (Kibbeling)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">13:00 城市體驗 (三選一)</span>
-                <div class="spot-options">
-                    <span class="spot-title">✨ 不去博物館去哪裡？</span>
-                    <ul class="spot-list">
-                        <li><strong>A'DAM Lookout <span class="cost-tag">💰 約 $500</span>：</strong> 搭渡輪過去（免費），上頂樓看風景，還有高空盪鞦韆（要另外付費）。</li>
-                        <li><strong>海尼根體驗館 (Heineken Experience) <span class="cost-tag">💰 約 $800</span>：</strong> 互動性很高，最後可以喝新鮮啤酒。</li>
-                        <li><strong>Foodhallen 美食廣場：</strong> 由舊電車維修廠改建，裡面有超多異國美食攤位，氣氛超好。</li>
+                        <li>A'DAM Lookout 高空盪鞦韆 (看風景)</li>
+                        <li>海尼根體驗館 (喝新鮮啤酒)</li>
+                        <li>Foodhallen 美食廣場 (異國料理)</li>
                     </ul>
                 </div>
             </div>
             <div class="timeline-item">
-                <span class="time">19:00 晚餐：Loetje 牛排 <span class="cost-tag">💰 約 $1,200</span></span>
-                阿姆斯特丹最有名的牛排店。牛排醬汁非常強，記得點白麵包沾醬汁吃。
+                <span class="time">19:00 晚餐：Loetje <span class="cost-tag">💰約 $1,200</span></span>
+                必吃牛排，記得用白麵包沾醬汁。
             </div>
         </div>
-    </div>
 
-    <div class="day-box">
-        <div class="day-title">Day 17｜3/28 (六) 返台</div>
-        <div class="timeline">
+        <div class="day-box">
+            <div class="day-title">Day 17｜3/28 (六) 返台</div>
             <div class="timeline-item">
                 <span class="time">08:00 機場退稅</span>
-                <div class="note note-tip">把這一趟買的戰利品退稅單拿出來，換回一些歐元現金，剛好可以在機場免稅店把最後的零錢花掉。</div>
+                <div class="note note-alert">⛔ 記得先去海關蓋章，再去領錢！</div>
             </div>
         </div>
     </div>
 
-</div>
-
-<script>
-    // 自動亮燈邏輯
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    const navLinks = document.querySelectorAll('.nav-item');
-    navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        if (currentPage.includes(linkHref) || (currentPage === "" && linkHref === "index.html")) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-
-    // 自動隱藏邏輯
-    let lastScrollY = window.scrollY;
-    const navbar = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY && window.scrollY > 50) {
-            navbar.classList.add('nav-hidden');
-        } else {
-            navbar.classList.remove('nav-hidden');
-        }
-        lastScrollY = window.scrollY;
-    });
-</script>
-
+    <script src="navbar.js"></script>
 </body>
 </html>

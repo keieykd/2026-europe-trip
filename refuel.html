@@ -3,186 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歐洲自助加油實戰手冊 (保母級)</title>
+    <title>歐洲自助加油實戰手冊</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --danger: #8a4b4b; --warning: #8c7b50; --safe: #5e8c61; --info: #4a6572; --hero-bg: #455a64;
-            --bg: #f4f4f4; --card-bg: #ffffff; --text: #222222; --text-light: #555555;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
-        }
-        /* 導航樣式 */
-        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
-        .navbar.nav-hidden { transform: translateY(-100%); }
-        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
-        @media (min-width: 768px) { .nav-container { justify-content: center; } }
-        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
-        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .nav-icon { margin-right: 6px; }
-        .navbar::-webkit-scrollbar { display: none; }
-
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { text-align: center; color: #1a1a1a; font-size: 1.8rem; margin-bottom: 10px; font-weight: 800; }
-        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; }
-        .hero-card { background: linear-gradient(135deg, #78909c, var(--hero-bg)); color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); border: 2px solid #fff; }
-        .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; }
-        .fuel-badge { display: inline-block; background-color: #4caf50; color: white; padding: 10px 20px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 6px solid #ccc; }
-        .card-step { border-left-color: var(--info); }
-        .card-danger { border-left-color: var(--danger); }
-        .card-money { border-left-color: var(--warning); }
-        .card-safe { border-left-color: var(--safe); }
-        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; color: #111; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .icon { font-size: 1.5rem; margin-right: 12px; }
+        .hero-card { background: linear-gradient(135deg, #78909c, #455a64); color: #fff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; border: 2px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .fuel-badge { display: inline-block; background-color: var(--success); color: white; padding: 10px 20px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; margin-top: 10px; }
         .step-box { position: relative; padding-left: 30px; margin-bottom: 20px; }
         .step-box::before { content: ""; position: absolute; left: 0; top: 8px; width: 12px; height: 12px; background-color: var(--info); border-radius: 50%; }
         .step-title { font-weight: 800; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        .highlight-box { background-color: #e0f2f1; border: 1px solid #b2dfdb; color: #00695c; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .highlight-box { background-color: #e8f5e9; border: 1px solid #a5d6a7; color: #1b5e20; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .alert-box { background-color: #ffebee; border: 1px solid #ffcdd2; color: #c62828; padding: 15px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
-        .keyword { background-color: #263238; color: #fff; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: bold; }
-        .green-text { color: #2e7d32; font-weight: 900; }
+        .green-text { color: var(--success); font-weight: 900; }
     </style>
 </head>
 <body>
-
-    <nav class="navbar" id="mainNav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
-            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
-            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
-            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
-            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
-            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
-            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
-        </div>
-    </nav>
-
     <div class="container">
         <h1>⛽ 自助加油實戰手冊</h1>
         <div class="subtitle">辨識油品・PIN碼付款・預授權解密</div>
 
         <div class="hero-card">
-            <div class="hero-title">🛑 停車！先確認這一點</div>
-            <div style="font-size: 1.1rem;">
-                您的租車合約是 <strong>Petrol (汽油)</strong> 車<br>
-                請務必尋找「綠色」油槍
-            </div>
+            <div style="font-size: 1.2rem; font-weight: bold;">🛑 停車！先確認這一點</div>
+            <div style="font-size: 1.1rem; margin: 10px 0;">您的租車合約是 <strong>Petrol (汽油)</strong> 車<br>請務必尋找「綠色」油槍</div>
             <div class="fuel-badge">🟢 95 / E10 / Blyfri</div>
-            <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.9;">
-                (絕對不要碰黑色的 Diesel 柴油槍，加錯會賠償天價！)
-            </div>
         </div>
 
-        <div class="card card-safe">
-            <div class="card-header"><span class="icon" style="color: var(--safe);">1️⃣</span>第一步：認準關鍵字</div>
-            <p>下車後，打開油箱蓋（通常在車側後方）。走到機器前，請確認油槍標示：</p>
-            
+        <div class="card" style="border-left-color: var(--success);">
+            <div class="card-header"><span class="icon">1️⃣</span>第一步：認準關鍵字</div>
+            <p>下車後，確認油槍標示：</p>
             <div class="highlight-box">
                 <strong>✅ 您要找的 (汽油)：</strong>
-                <ul>
-                    <li>顏色：<span class="green-text">🟢 綠色</span> (全歐洲通用)</li>
-                    <li>標示：<span class="green-text">95</span> 或 <span class="green-text">E10</span> / <span class="green-text">E5</span></li>
-                    <li>挪威文：<span class="keyword">Blyfri</span> (無鉛的意思)</li>
-                    <li>荷蘭文：<span class="keyword">Euro 95</span></li>
-                </ul>
+                <ul><li>顏色：<span class="green-text">🟢 綠色</span></li><li>標示：<span class="green-text">95</span> / <span class="green-text">E10</span> / <span class="green-text">Blyfri</span></li></ul>
             </div>
-
-            <div class="alert-box" style="background-color: #fff; color: #555; font-weight: normal; border-color: #ddd;">
-                <strong>❌ 絕對禁止 (柴油)：</strong><br>
-                顏色：<span style="color:black; font-weight:bold;">⚫ 黑色</span><br>
-                標示：<span style="color:black; font-weight:bold;">Diesel</span> 或 <span style="color:black; font-weight:bold;">B7</span>
-            </div>
+            <div class="alert-box">❌ 絕對禁止：黑色 Diesel / B7 (柴油)</div>
         </div>
 
-        <div class="card card-step">
-            <div class="card-header"><span class="icon" style="color: var(--info);">2️⃣</span>第二步：機器操作 SOP</div>
-            <p>大多數歐洲加油站是<strong>「先插卡、後加油」</strong>。</p>
-
-            <div class="step-box">
-                <span class="step-title">1. 插入信用卡</span>
-                將您的<strong>中國信託鼎尊卡</strong>晶片朝前插入機器。<br>
-                <em>(若有語言選項，先選 English)</em>
-            </div>
-
-            <div class="step-box">
-                <span class="step-title">2. 輸入 PIN 碼 (最關鍵！)</span>
-                螢幕顯示 <span class="keyword">Enter PIN</span>。<br>
-                請輸入您在台灣設定的<strong>「4位數預借現金密碼」</strong>。<br>
-                <div class="highlight-box" style="background-color: #fff; border: 1px dashed #aaa; color: #555; padding: 10px;">
-                    <strong>💡 突發狀況：機器要 6 位數怎麼辦？</strong><br>
-                    別慌！輸入 4 位數密碼後，直接按 <span class="keyword" style="background: green;">OK</span> (綠色鍵)。<br>
-                    (如果還不行，試試看輸入 4 位數 + 00)
-                </div>
-            </div>
-
-            <div class="step-box">
-                <span class="step-title">3. 選擇油槍號碼 (Pump No.)</span>
-                看一眼您停車的油島柱子上有個大大的數字 (例如 3)。<br>
-                在螢幕上按 <span class="keyword">3</span>。
-            </div>
+        <div class="card" style="border-left-color: var(--info);">
+            <div class="card-header"><span class="icon">2️⃣</span>第二步：機器操作 SOP</div>
+            <div class="step-box"><span class="step-title">1. 插入信用卡</span>晶片朝前。</div>
+            <div class="step-box"><span class="step-title">2. 輸入 PIN 碼 (預借現金密碼)</span>輸入台灣設定的 4 位數密碼。<br><em>*若機器要 6 碼，輸入 4 碼後直接按 OK (綠色鍵)。</em></div>
+            <div class="step-box"><span class="step-title">3. 選擇油槍號碼 (Pump No.)</span>看柱子上的數字，在螢幕輸入。</div>
         </div>
 
-        <div class="card card-money">
-            <div class="card-header"><span class="icon" style="color: var(--warning);">3️⃣</span>第三步：關於「被扣鉅款」的真相</div>
-            
-            <div class="alert-box">
-                <strong>😱 手機跳出通知：消費 NOK 1500 (約台幣 4500)？</strong><br>
-                明明還沒加油，或者只加了一點點，怎麼扣這麼多？
-            </div>
-
-            <p style="margin-top: 15px;"><strong>請冷靜，這不是盜刷！這是「預授權 (Pre-authorization)」。</strong></p>
-            <ul>
-                <li><strong>原理：</strong> 機器怕你加了霸王油就跑，所以先「圈存/凍結」一筆保證金 (通常是加滿一桶油的上限金額)。</li>
-                <li><strong>結果：</strong> 當你加完油掛上槍，系統會算出實際金額 (例如 NOK 400)。</li>
-                <li><strong>歸還：</strong> 銀行會自動取消那筆 NOK 1500 的凍結，只向您請款 NOK 400。</li>
-                <li><strong>時間：</strong> 通常 3-7 個工作天內會更正，不用打電話去銀行止付。</li>
-            </ul>
+        <div class="card" style="border-left-color: var(--accent);">
+            <div class="card-header"><span class="icon">3️⃣</span>第三步：關於「預授權」</div>
+            <div class="alert-box">😱 收到簡訊扣款 5000 元？</div>
+            <p style="margin-top: 10px;"><strong>請冷靜，這是「押金」不是實扣。</strong><br>機器怕你加霸王油，先圈存一筆錢。加完油後，銀行會自動修正為實際金額 (約 3-7 天)。</p>
         </div>
 
-        <div class="card card-safe">
-            <div class="card-header"><span class="icon" style="color: var(--safe);">4️⃣</span>第四步：提槍上陣</div>
-            
-            <div class="step-box">
-                <span class="step-title">1. 取槍與加油</span>
-                螢幕顯示 "Ready" 或 "Lift nozzle" 後，拿起<strong>綠色油槍</strong>。<br>
-                插入油孔到底，按下把手開關。
-                <br><em>(把手上有個小鐵片扣環，扣上後可以自動加油，不用手一直壓著)</em>
-            </div>
-
-            <div class="step-box">
-                <span class="step-title">2. 跳停掛槍</span>
-                聽到「咔」一聲代表加滿了 (或達到預設金額)。<br>
-                等待 3 秒，拿出油槍，掛回機器上。
-            </div>
-
-            <div class="step-box">
-                <span class="step-title">3. 索取收據 (Receipt)</span>
-                螢幕會問 <span class="keyword">Receipt?</span>，選 <span class="keyword">Yes</span>。<br>
-                <em>*萬一沒印出來？用手機拍下油島上的金額顯示畫面，以備記帳。</em>
-            </div>
+        <div class="card" style="border-left-color: var(--success);">
+            <div class="card-header"><span class="icon">4️⃣</span>第四步：提槍上陣</div>
+            <div class="step-box"><span class="step-title">1. 加油</span>螢幕顯示 "Ready" 後，拿綠色油槍插入加油。</div>
+            <div class="step-box"><span class="step-title">2. 掛槍與收據</span>跳停後掛回。螢幕問 Receipt? 選 Yes。</div>
         </div>
-
     </div>
-
-    <script>
-        const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const navLinks = document.querySelectorAll('.nav-item');
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
-            else { link.classList.remove('active'); }
-        });
-        let lastScrollY = window.scrollY;
-        const navbar = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
-            else { navbar.classList.remove('nav-hidden'); }
-            lastScrollY = window.scrollY;
-        });
-    </script>
-
+    <script src="navbar.js"></script>
 </body>
 </html>
