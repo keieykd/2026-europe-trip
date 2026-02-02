@@ -1,4 +1,4 @@
-/* === style.css - 終極防遮擋修復版 === */
+/* === style.css - 導航列瘦身優化版 === */
 
 :root {
     --primary: #2c3e50;   /* 深岩灰 */
@@ -11,7 +11,7 @@
     --nav-bg: #263238;    /* 導航背景 */
 }
 
-/* 🔥 修正 1：網頁整體往下推 (PC/手機通殺) */
+/* 🔥 修正 1：頂部空間縮減 (160px -> 100px) */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Heiti TC", sans-serif;
     line-height: 1.6;
@@ -19,34 +19,33 @@ body {
     background-color: var(--bg-light);
     margin: 0;
     
-    /* 設定為 140px，確保標題上方有足夠的呼吸空間 */
-    padding-top: 140px !important; 
+    /* 因為導航列變矮了，這裡改為 100px 就夠了 */
+    padding-top: 100px !important; 
     
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 50px;
 }
 
-/* 🔥 修正 2：錨點跳轉「踩煞車」 (解決分頁被切掉的問題) */
+/* 🔥 修正 2：錨點跳轉同步縮減 (150px -> 110px) */
 html {
-    /* 當點擊 #id 連結時，瀏覽器會自動預留 150px 的頂部空間 */
-    scroll-padding-top: 150px;
+    scroll-padding-top: 110px;
 }
 
-/* === 導航列核心樣式 === */
+/* === 導航列核心樣式 (瘦身) === */
 .navbar {
     background-color: var(--nav-bg);
-    padding: 15px 0;
+    /* 內距減半，讓高度變矮 */
+    padding: 8px 0; 
+    
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    /* 加深陰影，增加層次感 */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
     
-    /* 確保高度 */
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     
@@ -55,8 +54,8 @@ html {
     -webkit-overflow-scrolling: touch;
     transition: transform 0.3s ease-in-out;
     
-    /* 手機動態島適配 */
-    padding-top: max(15px, env(safe-area-inset-top));
+    /* 手機動態島適配 (保留安全區) */
+    padding-top: max(8px, env(safe-area-inset-top));
 }
 
 .navbar.nav-hidden {
@@ -67,12 +66,11 @@ html {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start; /* 手機版靠左滑動 */
+    justify-content: flex-start;
     padding: 0 15px;
     width: 100%;
 }
 
-/* PC 版置中 */
 @media (min-width: 768px) {
     .nav-container {
         justify-content: center;
@@ -83,10 +81,12 @@ html {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
-    padding: 10px 18px;
-    margin: 0 5px;
-    border-radius: 25px;
+    /* 字體稍微改小一點點，更精緻 */
+    font-size: 0.95rem; 
+    /* 按鈕內距縮小 */
+    padding: 6px 14px; 
+    margin: 0 4px;
+    border-radius: 20px;
     transition: all 0.2s;
     display: inline-flex;
     align-items: center;
@@ -102,22 +102,23 @@ html {
 .nav-item.active {
     background-color: var(--accent);
     color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.nav-icon { margin-right: 8px; }
+.nav-icon { margin-right: 6px; }
 .navbar::-webkit-scrollbar { display: none; }
 
-/* === 內容容器修正 === */
+/* === 內容容器 === */
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    margin-top: 10px; 
 }
 
 h1 {
     text-align: center;
     color: var(--primary);
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 15px;
     font-weight: 800;
     border-bottom: 4px solid var(--accent);
@@ -127,8 +128,13 @@ h1 {
 .subtitle {
     text-align: center;
     color: #7f8c8d;
-    margin-bottom: 40px;
-    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+/* === 修正 3：各區塊的錨點偏移量 (同步改為 110px) === */
+section, div[id], .card, .check-group {
+    scroll-margin-top: 110px;
 }
 
 /* === 通用元件 === */
@@ -139,17 +145,10 @@ h1 {
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-left: 6px solid #ccc;
-    /* 舊版瀏覽器備用方案 */
-    scroll-margin-top: 150px;
-}
-
-.check-group {
-    /* 讓清單頁面的群組也能正確跳轉 */
-    scroll-margin-top: 150px;
 }
 
 .card-header {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 800;
     margin-bottom: 15px;
     display: flex;
@@ -159,29 +158,29 @@ h1 {
     padding-bottom: 10px;
 }
 
-.icon { font-size: 1.6rem; margin-right: 12px; }
+.icon { font-size: 1.5rem; margin-right: 12px; }
 
 /* 提示框 */
-.note { font-size: 0.95rem; padding: 15px; border-radius: 8px; margin-top: 12px; display: block; }
+.note { font-size: 0.9rem; padding: 12px; border-radius: 6px; margin-top: 10px; display: block; }
 .note-tip { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
 .note-alert { background: #fadbd8; color: #922b21; border: 1px solid #f5b7b1; }
 .note-tip::before { content: "💡 "; }
 .note-alert::before { content: "⛔ "; }
 
 /* 列表優化 */
-ul, ol { padding-left: 25px; margin: 0; }
-li { margin-bottom: 10px; }
+ul, ol { padding-left: 20px; margin: 0; }
+li { margin-bottom: 8px; }
 
 /* 折疊區塊優化 */
 details {
     background-color: #fff;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #eee;
     overflow: hidden;
 }
 summary {
-    padding: 15px 20px;
+    padding: 12px 15px;
     font-weight: 700;
     cursor: pointer;
     list-style: none;
@@ -190,9 +189,9 @@ summary {
     align-items: center;
     background-color: #fafafa;
     transition: background-color 0.2s;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 summary:hover { background-color: #f0f0f0; }
-summary::after { content: '+'; font-size: 1.4rem; color: #999; }
+summary::after { content: '+'; font-size: 1.2rem; color: #999; }
 details[open] summary::after { content: '-'; color: var(--info); }
-.details-content { padding: 20px; border-top: 1px solid #eee; }
+.details-content { padding: 15px; border-top: 1px solid #eee; }
