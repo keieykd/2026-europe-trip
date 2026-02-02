@@ -11,7 +11,7 @@
     --nav-bg: #263238;    /* 導航背景 */
 }
 
-/* 🔥 修正 1：暴力增加頂部空間 (由 110px -> 160px) */
+/* 🔥 修正 1：網頁整體往下推 (PC/手機通殺) */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Heiti TC", sans-serif;
     line-height: 1.6;
@@ -19,12 +19,18 @@ body {
     background-color: var(--bg-light);
     margin: 0;
     
-    /* 這裡設定為 160px，確保絕對不會被擋住 */
-    padding-top: 160px !important;
+    /* 設定為 140px，確保標題上方有足夠的呼吸空間 */
+    padding-top: 140px !important; 
     
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 50px;
+}
+
+/* 🔥 修正 2：錨點跳轉「踩煞車」 (解決分頁被切掉的問題) */
+html {
+    /* 當點擊 #id 連結時，瀏覽器會自動預留 150px 的頂部空間 */
+    scroll-padding-top: 150px;
 }
 
 /* === 導航列核心樣式 === */
@@ -36,7 +42,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 9999;
-    /* 加深陰影，讓層次更明顯 */
+    /* 加深陰影，增加層次感 */
     box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
     
     /* 確保高度 */
@@ -61,11 +67,12 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start; /* 手機版靠左滑動 */
     padding: 0 15px;
     width: 100%;
 }
 
+/* PC 版置中 */
 @media (min-width: 768px) {
     .nav-container {
         justify-content: center;
@@ -101,12 +108,10 @@ body {
 .nav-icon { margin-right: 8px; }
 .navbar::-webkit-scrollbar { display: none; }
 
-/* === 修正 2：內容容器額外往下推 === */
+/* === 內容容器修正 === */
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    /* 雙重保險：如果 body padding 不夠，這裡再推 20px */
-    margin-top: 20px; 
 }
 
 h1 {
@@ -126,16 +131,6 @@ h1 {
     font-size: 1.1rem;
 }
 
-/* === 修正 3：錨點跳轉偏移量 (針對清單和英文頁面) === */
-/* 當點擊 #id 時，讓瀏覽器以為頁面頂部在 180px 下方，避免標題衝進導航列 */
-html {
-    scroll-padding-top: 180px;
-}
-
-section, div[id], .card, .check-group {
-    scroll-margin-top: 180px;
-}
-
 /* === 通用元件 === */
 .card {
     background: #ffffff;
@@ -144,6 +139,13 @@ section, div[id], .card, .check-group {
     margin-bottom: 25px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-left: 6px solid #ccc;
+    /* 舊版瀏覽器備用方案 */
+    scroll-margin-top: 150px;
+}
+
+.check-group {
+    /* 讓清單頁面的群組也能正確跳轉 */
+    scroll-margin-top: 150px;
 }
 
 .card-header {
