@@ -4,51 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 荷比挪自駕：行程總表</title>
-    
     <link rel="stylesheet" href="style.css">
-
     <style>
-        /* === 首頁專用微調樣式 (只影響這一頁) === */
-        
-        /* APP 卡片區 */
+        /* === 首頁專用樣式 === */
         .app-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 40px; }
         .app-card { background-color: #fff; border: 1px solid #e9ecef; border-left: 4px solid var(--info); padding: 15px; border-radius: 8px; transition: transform 0.2s; }
         .app-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .app-name { font-weight: bold; color: var(--info); display: block; margin-bottom: 5px; font-size: 1.1rem; }
         .app-desc { font-size: 0.9rem; color: #666; }
         
-        /* 預算說明條 */
         .budget-info { background-color: #e8f6f3; border: 1px solid #a2d9ce; padding: 15px; border-radius: 8px; margin-bottom: 30px; color: #16a085; font-size: 0.95rem; }
         
-        /* 行程區塊 */
         .section-header { background-color: var(--primary); color: white; padding: 12px 20px; border-radius: 8px; margin-top: 40px; font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; }
         .section-header::before { content: "📍"; margin-right: 10px; }
         
-        /* 每日行程卡 */
         .day-box { border-left: 5px solid var(--accent); background: #fff; margin-bottom: 30px; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .day-title { font-size: 1.3rem; font-weight: bold; color: var(--primary); margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
         
-        /* 時間軸 */
         .timeline-item { position: relative; padding-bottom: 30px; border-left: 2px solid #eee; padding-left: 20px; margin-left: 10px; }
         .timeline-item:last-child { border-left: none; }
         .timeline-item::before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
         .time { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 5px; }
         
-        /* 價格標籤 */
         .cost-tag { display: inline-block; background-color: #fce4ec; color: #c2185b; border: 1px solid #f8bbd0; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-left: 8px; vertical-align: middle; }
         
-        /* 景點選項框 */
         .spot-options { background-color: #fff8e1; border: 1px dashed #ffc107; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .spot-title { color: #d35400; font-weight: bold; display: block; margin-bottom: 8px; }
         .spot-list { margin: 0; padding-left: 20px; list-style-type: disc; }
         .spot-list li { margin-bottom: 5px; color: #555; }
+
+        .hotel-tag { font-size: 0.9rem; color: #555; background: #eee; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 10px; border-left: 3px solid #795548; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>2026 荷比挪自駕總表</h1>
-        <div class="subtitle">APP 工具包 ＋ 多元體驗行程 ＋ 預算估算</div>
+        <div class="subtitle">住宿對應深度版 ＋ 隱藏景點 ＋ 美食推薦</div>
 
         <h3 style="color: var(--info); border-left: 5px solid var(--info); padding-left: 10px; margin-bottom: 20px;">📱 出發前必備 APP</h3>
         <div class="app-section">
@@ -65,209 +57,307 @@
         <div class="section-header">🇧🇪 第一階段：比利時根特 (3/12 - 3/13)</div>
         
         <div class="day-box">
-            <div class="day-title">Day 1｜3/12 (四) 抵達根特</div>
+            <div class="day-title">Day 1｜3/12 (四) 抵達根特：中世紀之夜</div>
+            <div class="hotel-tag">🏨 住宿：Hotel NH Collection Gent (市中心)</div>
+            
             <div class="timeline-item">
-                <span class="time">13:10 搭火車往根特 <span class="cost-tag">💰約 $700</span></span>
-                路線：AMS -> Antwerpen -> Gent-Sint-Pieters。
+                <span class="time">13:10 抵達 Schiphol 機場 -> 往根特 <span class="cost-tag">💰約 $700</span></span>
+                搭乘大力士 (Thalys) 或 IC 火車。NH 飯店就在市政廳對面，位置絕佳。
             </div>
             <div class="timeline-item">
-                <span class="time">16:30 運河散步 (免費)</span>
-                香草河岸 (Graslei) 看夕陽。
-                <div class="spot-options">
-                    <span class="spot-title">🎯 自由探索：</span>
-                    <ul class="spot-list">
-                        <li>塗鴉街 (Werregarenstraat)</li>
-                        <li>根特鼻子軟糖推車 <span class="cost-tag">$180</span></li>
-                    </ul>
-                </div>
+                <span class="time">16:30 香草河岸與聖米歇爾橋 <span class="cost-tag">免費</span></span>
+                飯店走出來就是了！一定要走上 <strong>St Michael's Bridge</strong>，這是唯一可以同時拍到根特「三塔連線」的絕佳機位。
             </div>
             <div class="timeline-item">
                 <span class="time">18:00 晚餐：Amadeus <span class="cost-tag">💰約 $1,200</span></span>
-                肋排吃到飽，記得點 All-you-can-eat。
+                肋排吃到飽，就在古城區巷弄內，氣氛像老酒館。
+            </div>
+            <div class="timeline-item">
+                <span class="time">20:00 伯爵城堡夜拍 (Gravensteen)</span>
+                吃飽散步去城堡，晚上外圍護城河打燈非常美，像電影場景。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 2｜3/13 (五) 根特市集 -> 荷蘭</div>
+            <div class="day-title">Day 2｜3/13 (五) 根特市集 -> 荷蘭移動日</div>
+            <div class="hotel-tag">🏨 住宿：ibis Amsterdam Airport (機場過境)</div>
+
             <div class="timeline-item">
-                <span class="time">09:00 週五市集 <span class="cost-tag">免費</span></span>
-                Vrijdagmarkt 體驗在地生活，買烤雞當早午餐。
+                <span class="time">09:00 週五市集 (Vrijdagmarkt)</span>
+                就在 NH 飯店後面！體驗在地生活，廣場上有便宜的烤雞車，可以買半隻當早午餐。
             </div>
             <div class="timeline-item">
-                <span class="time">11:00 運河遊船 <span class="cost-tag">💰約 $350</span></span>
-                搭船聽導覽遊古城，不用走路。
+                <span class="time">10:30 聖巴夫主教座堂 <span class="cost-tag">看祭壇畫需購票</span></span>
+                進去看一眼宏偉的管風琴，有時間可付費看國寶《神秘羔羊之愛》。
+            </div>
+            <div class="timeline-item">
+                <span class="time">11:30 運河遊船 <span class="cost-tag">💰約 $350</span></span>
+                搭船 40 分鐘，聽船夫講古城故事，讓雙腳休息。
             </div>
             <div class="timeline-item">
                 <span class="time">14:30 返回 AMS 機場 <span class="cost-tag">💰約 $700</span></span>
-                搭火車回機場飯店 ibis，準備明天飛挪威。
+                搭火車回機場，入住 ibis。ibis 有機場接駁車，或者搭公車。今晚早點休息，明天飛極圈。
             </div>
         </div>
 
         <div class="section-header">🇳🇴 第二階段：羅浮敦群島 (3/14 - 3/20)</div>
         
         <div class="day-box">
-            <div class="day-title">Day 3｜3/14 (六) 飛往極圈</div>
+            <div class="day-title">Day 3｜3/14 (六) 飛往極圈：斯沃爾韋爾</div>
+            <div class="hotel-tag">🏨 住宿：Lofoten Rorbuer AS (Svolvær)</div>
+
             <div class="timeline-item">
-                <span class="time">15:20 取車 & 採買 <span class="cost-tag">💰約 $3,000</span></span>
-                <div class="note note-alert">⛔ 明天週日超市不開！今晚務必買齊兩天份伙食 (早午晚餐)。</div>
+                <span class="time">15:20 抵達 EVE 機場 & 取車</span>
+                檢查車子輪胎與外觀 (請參考 <a href="driving.html">🚗 自駕攻略</a>)。
+            </div>
+            <div class="timeline-item">
+                <span class="time">17:00 斯沃爾韋爾 (Svolvær) 採買 <span class="cost-tag">💰約 $3,000</span></span>
+                這是羅浮敦最大城，去 <strong>Rema 1000</strong> 買齊未來幾天的戰備糧食。今晚住宿就在海邊。
+            </div>
+            <div class="timeline-item">
+                <span class="time">19:00 拍攝：Svolværgeita (山羊角)</span>
+                不用爬山，在市區碼頭就能遠眺這個著名的雙峰山頭，搭配漁船是經典畫面。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 4｜3/15 (日) 亨寧斯韋爾</div>
+            <div class="day-title">Day 4｜3/15 (日) 亨寧斯韋爾：威尼斯漁村</div>
+            <div class="hotel-tag">🏨 住宿：Lofoten Rorbuer AS (續住)</div>
+
             <div class="timeline-item">
-                <span class="time">11:30 海邊足球場 <span class="cost-tag">停車約 $150</span></span>
-                全球最美足球場打卡。
+                <span class="time">10:30 亨寧斯韋爾 (Henningsvær) 散步</span>
+                距離 Svolvær 開車約 30 分鐘。這裡有很多文青小店，推薦參觀 <strong>KaviarFactory</strong> 美術館。
             </div>
             <div class="timeline-item">
-                <span class="time">13:30 午餐：魚湯 <span class="cost-tag">💰約 $800</span></span>
-                Lysstøperiet Cafe 必吃魚湯與肉桂捲。
+                <span class="time">11:30 世界最美足球場 <span class="cost-tag">免費</span></span>
+                必打卡！爬上旁邊的小丘 (Heia) 俯瞰球場與大海，這是空拍機視角。
+            </div>
+            <div class="timeline-item">
+                <span class="time">13:30 午餐：Lysstøperiet Cafe <span class="cost-tag">💰約 $800</span></span>
+                必點：濃郁魚湯 (Fiskesuppe) 和 肉桂捲。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 5｜3/16 (一) E10 公路往南</div>
+            <div class="day-title">Day 5｜3/16 (一) 往南移動：入住黃色小屋</div>
+            <div class="hotel-tag">🏨 住宿：Rostad Retro Rorbuer (Sakrisøy 黃色小屋)</div>
+
             <div class="timeline-item">
-                <span class="time">10:00 沿途風景</span>
-                Ramberg 白沙灘、Hamnøy 橋攝影。
+                <span class="time">10:00 努斯峽灣 (Nusfjord) <span class="cost-tag">門票約 $300</span></span>
+                保存最完整的古老漁村，木棧道非常有味道，還有古老的雜貨店 (Landhandel)。
             </div>
             <div class="timeline-item">
-                <span class="time">18:00 晚餐：自炊牛排</span>
-                在漁屋煎牛排配紅酒 (請看 <a href="cooking.html">🍳 下廚指南</a>)。
+                <span class="time">12:30 拉姆貝格海灘 (Ramberg)</span>
+                著名的白沙灘，旁邊有紅色小木屋，是絕佳的攝影點。
+            </div>
+            <div class="timeline-item">
+                <span class="time">15:00 入住 Rostad (Sakrisøy)</span>
+                <strong>重點行程！</strong> 您住的地方就是景點。這區的小屋是獨特的「黃色」，與 Hamnøy 的紅色形成對比。
+            </div>
+            <div class="timeline-item">
+                <span class="time">16:00 晚餐前採買：Anita's Seafood</span>
+                就在住宿點走路可到的距離。買有名的「魚漢堡」或煙燻鮭魚當晚餐。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 6｜3/17 (二) Reine 經典</div>
+            <div class="day-title">Day 6｜3/17 (二) Reine & Hamnøy：經典機位</div>
+            <div class="hotel-tag">🏨 住宿：Rostad Retro Rorbuer (續住)</div>
+
             <div class="timeline-item">
-                <span class="time">11:00 Reine 散步</span>
-                被譽為最美村莊，停車場旁有經典倒影機位。
+                <span class="time">10:00 哈姆諾伊 (Hamnøy) 橋上攝影</span>
+                <strong>全羅浮敦最經典機位！</strong> 從您的住宿點往北走一點點就是橋。建議早上順光去拍。
             </div>
             <div class="timeline-item">
-                <span class="time">14:30 爬小山 <span class="cost-tag">免費</span></span>
-                Olenilsøya 簡單步道看全景 (在 Anita's 後面)。
+                <span class="time">11:30 雷納 (Reine) 經典倒影</span>
+                開車進 Reine 村莊前的停車場，無風時可以拍到完美的山水倒影。
             </div>
             <div class="timeline-item">
-                <span class="time">18:00 晚餐：Anita's <span class="cost-tag">💰約 $700</span></span>
-                必吃經典魚堡 (Classic Fish Burger)。
+                <span class="time">14:30 爬小山 Olenilsøya <span class="cost-tag">免費</span></span>
+                就在您住的 Sakrisøy！這個小山丘就在 Anita's 餐廳後面，只要 15 分鐘就能看全景。
+            </div>
+            <div class="timeline-item">
+                <span class="time">18:00 極光守候</span>
+                Rostad 前面面海，光害少，如果 KP 值高，走出房門就能拍極光。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 7｜3/18 (三) 公路盡頭 Å 鎮</div>
+            <div class="day-title">Day 7｜3/18 (三) 公路盡頭 Å 鎮 (深度遊)</div>
+            <div class="hotel-tag">🏨 住宿：Rostad Retro Rorbuer (續住)</div>
+
             <div class="timeline-item">
                 <span class="time">10:00 窯烤肉桂捲 <span class="cost-tag">💰約 $200</span></span>
-                Bakeriet på Å 古法麵包店。
+                Bakeriet på Å 古法麵包店，19世紀的老爐灶，味道很特別。
             </div>
             <div class="timeline-item">
-                <span class="time">11:00 世界盡頭</span>
-                走到停車場最深處看海。
-            </div>
-        </div>
-
-        <div class="day-box">
-            <div class="day-title">Day 8｜3/19 (四) 黑沙灘</div>
-            <div class="timeline-item">
-                <span class="time">10:00 恐龍拱橋</span>
-                Fredvang Bridges 拍照。
+                <span class="time">10:30 挪威漁村博物館 <span class="cost-tag">💰約 $350</span></span>
+                這是一個「活的博物館」，整個 Å 鎮就是展區。看古老魚肝油工廠與曬魚架。
             </div>
             <div class="timeline-item">
-                <span class="time">11:30 黑沙灘</span>
-                Skagsanden Beach 拍倒影。
+                <span class="time">12:30 秘境：Ågvatnet 湖泊 <span class="cost-tag">免費</span></span>
+                就在村子後方，走路約 10-15 分鐘。湖面被群山包圍，是一個遠離遊客的寧靜角落。
+            </div>
+            <div class="timeline-item">
+                <span class="time">13:30 午餐：Sørvågen <span class="cost-tag">💰約 $900</span></span>
+                推薦 <strong>Maren Anna</strong> 餐廳 (若有開)，這裡的魚湯比 Å 鎮更豪華，風景也美。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 9｜3/20 (五) 長途移動</div>
+            <div class="day-title">Day 8｜3/19 (四) 黑沙灘與玻璃工坊</div>
+            <div class="hotel-tag">🏨 住宿：Rostad Retro Rorbuer (續住)</div>
+
             <div class="timeline-item">
-                <span class="time">09:00 開往 Harstad</span>
-                車程 4 小時，中途在 Lødingen 吃熱狗休息。
+                <span class="time">10:00 恐龍拱橋 (Fredvang)</span>
+                兩座彎曲的橋梁連接海島，用長焦鏡頭拍有壓縮感。
+            </div>
+            <div class="timeline-item">
+                <span class="time">11:30 斯卡格桑德黑沙灘 (Skagsanden)</span>
+                這裡的沙是黑色的，海水退潮時會在沙灘上留下美麗的紋路 (冰裂紋)。
+            </div>
+            <div class="timeline-item">
+                <span class="time">14:00 Glasshytta Vikten <span class="cost-tag">免費參觀</span></span>
+                <strong>雨備/暖身推薦：</strong>位於海邊的「玻璃工坊」，建築像大岩石嵌入海岸。可參觀玻璃製作，並在室內看海喝咖啡。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 9｜3/20 (五) 北上移動日</div>
+            <div class="hotel-tag">🏨 住宿：Thon Hotel Harstad (中繼站)</div>
+
+            <div class="timeline-item">
+                <span class="time">09:00 退房北上 (約 4 小時車程)</span>
+                告別黃色小屋。這段路程較長，建議中途在 <strong>Lødingen</strong> 休息吃熱狗。
+            </div>
+            <div class="timeline-item">
+                <span class="time">12:30 休息站：Tjeldsundbrua 橋</span>
+                這座大橋連接大陸與群島，橋下有休息站和餐廳，風景開闊。
+            </div>
+            <div class="timeline-item">
+                <span class="time">16:00 抵達 Harstad</span>
+                Thon Hotel 就在市中心，旁邊有購物中心。這是個放鬆的中轉站，準備明天前往特羅姆瑟。
             </div>
         </div>
 
         <div class="section-header">🇳🇴 第三階段：特羅姆瑟 (3/21 - 3/24)</div>
         
         <div class="day-box">
-            <div class="day-title">Day 10｜3/21 (六) 纜車夜景</div>
+            <div class="day-title">Day 10｜3/21 (六) 前往特羅姆瑟：纜車夜景</div>
+            <div class="hotel-tag">🏨 住宿：Cozy ground floor apartment (Tromsø)</div>
+
+            <div class="timeline-item">
+                <span class="time">09:00 前往 Tromsø (駕車/還車)</span>
+                從 Harstad 開車到 Tromsø 約 4 小時 (含渡輪)。如果是在 EVE 還車飛 TOS，則依航班時間。
+            </div>
             <div class="timeline-item">
                 <span class="time">17:00 Fjellheisen 纜車 <span class="cost-tag">💰約 $900</span></span>
-                上山看夜景與極光。
+                <strong>必去！</strong> 上山看百萬夜景。如果運氣好，在觀景台就能看到極光飛舞在城市上空。
             </div>
             <div class="timeline-item">
-                <span class="time">20:00 晚餐：Peppes <span class="cost-tag">💰約 $600</span></span>
-                挪威連鎖披薩，兩人分食剛好。
+                <span class="time">20:00 晚餐：Peppes Pizza <span class="cost-tag">💰約 $600</span></span>
+                就在碼頭旁，老牌披薩店，溫暖舒適，適合剛到這座城市的夜晚。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 11｜3/22 (日) 馴鹿體驗</div>
+            <div class="day-title">Day 11｜3/22 (日) 馴鹿與人文</div>
+            <div class="hotel-tag">🏨 住宿：Cozy ground floor apartment (續住)</div>
+
             <div class="timeline-item">
-                <span class="time">10:00 馴鹿餵食 <span class="cost-tag">💰預付</span></span>
-                體驗薩米文化，含午餐。
+                <span class="time">10:00 馴鹿餵食 & 薩米文化 <span class="cost-tag">💰預付</span></span>
+                近距離接觸馴鹿，聽薩米人講故事，喝熱湯。
             </div>
             <div class="timeline-item">
-                <span class="time">15:00 室內景點</span>
-                <div class="spot-options">
-                    <span class="spot-title">✨ 溫暖推薦 (不跳海)：</span>
-                    <ul class="spot-list">
-                        <li>Polaria 水族館 (看海豹餵食秀)</li>
-                        <li>Ølhallen 啤酒廠酒吧 (氣氛好，有無酒精飲料)</li>
-                        <li>世界最北 7-11 打卡</li>
-                    </ul>
-                </div>
+                <span class="time">15:00 特羅姆瑟圖書館 (Bibliotek)</span>
+                非常有設計感的建築，屋頂像波浪一樣，內部溫暖明亮，是休息的好地方。
+            </div>
+            <div class="timeline-item">
+                <span class="time">19:00 Ølhallen 啤酒廠酒吧</span>
+                北極圈最古老的酒吧，有數十種麥基 (Mack) 啤酒，也有無酒精飲料，氣氛極佳。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 12｜3/23 (一) 狗拉雪橇</div>
+            <div class="day-title">Day 12｜3/23 (一) 狗拉雪橇與市區</div>
+            <div class="hotel-tag">🏨 住宿：Cozy ground floor apartment (續住)</div>
+
             <div class="timeline-item">
                 <span class="time">09:00 哈士奇雪橇 <span class="cost-tag">💰預付</span></span>
-                記得穿排汗衣。
+                最刺激的體驗！記得穿排汗衣，因為這也是一種運動。
             </div>
             <div class="timeline-item">
-                <span class="time">19:00 晚餐：Blårock <span class="cost-tag">💰約 $700</span></span>
-                搖滾漢堡店，份量大。
+                <span class="time">16:30 Polaria 水族館</span>
+                外觀像倒下的骨牌。這時間通常有海豹餵食秀，非常有療癒感。
+            </div>
+            <div class="timeline-item">
+                <span class="time">19:00 晚餐：Blårock Cafe <span class="cost-tag">💰約 $700</span></span>
+                充滿搖滾樂元素的漢堡店，漢堡份量巨大。
             </div>
         </div>
 
         <div class="section-header">🇳🇱 第四階段：荷蘭花季 (3/25 - 3/28)</div>
         
         <div class="day-box">
-            <div class="day-title">Day 14｜3/25 (三) 庫肯霍夫</div>
+            <div class="day-title">Day 13｜3/24 (二) 飛回荷蘭</div>
+            <div class="hotel-tag">🏨 住宿：citizenM Schiphol Airport (機場飯店)</div>
             <div class="timeline-item">
-                <span class="time">10:00 賞花 <span class="cost-tag">💰約 $700</span></span>
-                直奔 Willem-Alexander 室內展館看滿開鬱金香。
+                <span class="time">14:00 離開 Tromsø -> 飛往 AMS</span>
+                這天是移動日。入住 citizenM，就在機場步行距離內，非常科技感的飯店。晚上可以在機場廣場覓食。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 15｜3/26 (四) 羊角村</div>
+            <div class="day-title">Day 14｜3/25 (三) 庫肯霍夫鬱金香 -> 羊角村</div>
+            <div class="hotel-tag">🏨 住宿：Hotel de Harmonie (羊角村內)</div>
+
             <div class="timeline-item">
-                <span class="time">09:30 開船 <span class="cost-tag">💰約 $800</span></span>
-                租電動船自己開一小時，享受寧靜運河。
+                <span class="time">10:00 庫肯霍夫花園 (Keukenhof) <span class="cost-tag">💰約 $700</span></span>
+                直奔 <strong>Willem-Alexander 館</strong> (室內展館)，這裡的鬱金香狀況通常最好。
+            </div>
+            <div class="timeline-item">
+                <span class="time">14:00 麗瑟 (Lisse) 花田騎行</span>
+                如果天氣好，可以在公園門口租腳踏車，騎到外面的花田拍照 (花田是免費的)。
+            </div>
+            <div class="timeline-item">
+                <span class="time">16:00 開車往羊角村 (約 1.5 小時)</span>
+                入住 Hotel de Harmonie，這間飯店就在運河旁，環境清幽。
             </div>
         </div>
 
         <div class="day-box">
-            <div class="day-title">Day 16｜3/27 (五) 阿姆斯特丹</div>
+            <div class="day-title">Day 15｜3/26 (四) 羊角村 -> 阿姆斯特丹</div>
+            <div class="hotel-tag">🏨 住宿：Volkshotel (阿姆斯特丹東區)</div>
+
             <div class="timeline-item">
-                <span class="time">10:00 市集小吃 <span class="cost-tag">💰約 $300</span></span>
-                Albert Cuyp 吃焦糖煎餅、生鯡魚。
+                <span class="time">09:30 租船自駕 <span class="cost-tag">💰約 $800</span></span>
+                一定要租 "Whisper Boat" (靜音船)，自己開一小時，穿越小橋流水。
             </div>
             <div class="timeline-item">
-                <span class="time">13:00 城市體驗</span>
-                <div class="spot-options">
-                    <span class="spot-title">✨ 推薦去處 (無博物館)：</span>
-                    <ul class="spot-list">
-                        <li>A'DAM Lookout 高空盪鞦韆 (看風景)</li>
-                        <li>海尼根體驗館 (喝新鮮啤酒)</li>
-                        <li>Foodhallen 美食廣場 (異國料理)</li>
-                    </ul>
-                </div>
+                <span class="time">13:00 運河邊散步</span>
+                沿著 Binnenpad 小徑走，這裡是遊客最少、風景最美的一段。
+            </div>
+            <div class="timeline-item">
+                <span class="time">15:00 開往阿姆斯特丹 -> 入住 Volkshotel</span>
+                這間飯店很酷！頂樓有 <strong>Canvas</strong> 酒吧和露天熱水浴缸 (Hot Tubs)，晚上可以上去看夜景喝一杯。
+            </div>
+        </div>
+
+        <div class="day-box">
+            <div class="day-title">Day 16｜3/27 (五) 阿姆斯特丹：運河與市集</div>
+            <div class="hotel-tag">🏨 住宿：Volkshotel (續住)</div>
+
+            <div class="timeline-item">
+                <span class="time">10:00 Albert Cuyp 市場 <span class="cost-tag">💰約 $300</span></span>
+                離飯店不遠。必吃：現做荷蘭焦糖煎餅 (Stroopwafel) 和 國民美食「生鯡魚」(Haring)。
+            </div>
+            <div class="timeline-item">
+                <span class="time">13:00 喬達安區 (Jordaan) & 九條街</span>
+                這裡有最美的運河屋、安妮之家 (外面拍照)、以及著名的特色小店區。
             </div>
             <div class="timeline-item">
                 <span class="time">19:00 晚餐：Loetje <span class="cost-tag">💰約 $1,200</span></span>
-                必吃牛排，記得用白麵包沾醬汁。
+                荷蘭最紅的牛排店。牛排浸在充滿蒜香的肉汁裡，記得點白麵包沾著吃！
             </div>
         </div>
 
@@ -275,7 +365,7 @@
             <div class="day-title">Day 17｜3/28 (六) 返台</div>
             <div class="timeline-item">
                 <span class="time">08:00 機場退稅</span>
-                <div class="note note-alert">⛔ 記得先去海關蓋章，再去領錢！</div>
+                <div class="note note-alert">⛔ 記得先去海關 (Customs) 蓋章，再去 Global Blue / Planet 櫃檯領錢！</div>
             </div>
         </div>
     </div>
