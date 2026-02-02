@@ -1,4 +1,4 @@
-/* === style.css - 終極通用樣式表 === */
+/* === style.css - 終極防遮擋修復版 === */
 
 :root {
     --primary: #2c3e50;   /* 深岩灰 */
@@ -11,7 +11,7 @@
     --nav-bg: #263238;    /* 導航背景 */
 }
 
-/* 🔥 關鍵修復：大幅增加頂部空間 */
+/* 🔥 修正 1：暴力增加頂部空間 (由 110px -> 160px) */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Heiti TC", sans-serif;
     line-height: 1.6;
@@ -19,34 +19,37 @@ body {
     background-color: var(--bg-light);
     margin: 0;
     
-    /* 這裡原本是 80px 或 110px，現在改為 130px 以確保絕對安全 */
-    padding-top: 130px !important; 
+    /* 這裡設定為 160px，確保絕對不會被擋住 */
+    padding-top: 160px !important;
     
-    /* 左右與底部留白 */
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 
 /* === 導航列核心樣式 === */
 .navbar {
     background-color: var(--nav-bg);
-    /* 增加導航列本身的內距，讓它看起來不那麼擠 */
-    padding: 15px 0; 
+    padding: 15px 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* 加深陰影，增加層次感 */
+    /* 加深陰影，讓層次更明顯 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
     
-    /* 確保在各種裝置上都能滑動 */
+    /* 確保高度 */
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     transition: transform 0.3s ease-in-out;
     
-    /* 處理 iPhone 動態島/瀏海 (若在手機看) */
+    /* 手機動態島適配 */
     padding-top: max(15px, env(safe-area-inset-top));
 }
 
@@ -58,11 +61,11 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start; /* 手機靠左 */
+    justify-content: flex-start;
     padding: 0 15px;
+    width: 100%;
 }
 
-/* PC 版置中 */
 @media (min-width: 768px) {
     .nav-container {
         justify-content: center;
@@ -73,13 +76,14 @@ body {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem; /* 字體稍微加大 */
-    padding: 10px 18px; /* 按鈕變大一點，比較好點 */
+    font-size: 1rem;
+    padding: 10px 18px;
     margin: 0 5px;
     border-radius: 25px;
     transition: all 0.2s;
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .nav-item:hover {
@@ -97,18 +101,18 @@ body {
 .nav-icon { margin-right: 8px; }
 .navbar::-webkit-scrollbar { display: none; }
 
-/* === 內容容器修正 === */
+/* === 修正 2：內容容器額外往下推 === */
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    /* 雙重保險：讓標題上方再多一點點呼吸空間 */
-    margin-top: 10px; 
+    /* 雙重保險：如果 body padding 不夠，這裡再推 20px */
+    margin-top: 20px; 
 }
 
 h1 {
     text-align: center;
     color: var(--primary);
-    font-size: 2rem; /* 標題加大 */
+    font-size: 2rem;
     margin-bottom: 15px;
     font-weight: 800;
     border-bottom: 4px solid var(--accent);
@@ -122,10 +126,14 @@ h1 {
     font-size: 1.1rem;
 }
 
-/* === 錨點跳轉修正 (針對「清單」和「英文」頁面) === */
-/* 當您點擊頁面內的按鈕跳轉時，這個設定會避免標題衝進導航列裡面 */
-section, div[id], .card {
-    scroll-margin-top: 150px;
+/* === 修正 3：錨點跳轉偏移量 (針對清單和英文頁面) === */
+/* 當點擊 #id 時，讓瀏覽器以為頁面頂部在 180px 下方，避免標題衝進導航列 */
+html {
+    scroll-padding-top: 180px;
+}
+
+section, div[id], .card, .check-group {
+    scroll-margin-top: 180px;
 }
 
 /* === 通用元件 === */
