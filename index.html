@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 荷比挪自駕：終極保姆級實戰手冊</title>
+    <title>2026 荷比挪自駕：行程總表</title>
     <style>
         :root {
-            --primary: #003049; /* 專業深藍 */
-            --secondary: #d62828; /* 警示紅 */
-            --accent: #f77f00; /* 重點橘 */
-            --bg-light: #fdf0d5; /* 柔和底色 */
-            --nav-bg: #263238; /* 導航列背景-深岩灰 */
-            --nav-active: #455a64; /* 導航列選取色 */
+            --primary: #003049;
+            --secondary: #d62828;
+            --accent: #f77f00;
+            --bg-light: #fdf0d5;
+            --nav-bg: #263238;
             --text-dark: #333;
         }
         body {
@@ -20,36 +19,40 @@
             color: var(--text-dark);
             background-color: #f4f4f4;
             margin: 0;
-            padding: 0; /* 為了讓導航列貼頂，這裡改為0 */
-            padding-bottom: 20px;
+            padding: 0;
+            padding-bottom: 40px;
         }
 
-        /* === ✨ 新增：美型導航列樣式 === */
+        /* === 導航列 (含自動隱藏特效) === */
         .navbar {
             background-color: var(--nav-bg);
             padding: 10px 0;
-            position: sticky; /* 黏性定位 */
+            position: fixed; /* 改為 fixed 固定在視窗 */
             top: 0;
+            width: 100%;
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow-x: auto; /* 手機版可左右滑動 */
-            white-space: nowrap; /* 不換行 */
-            -webkit-overflow-scrolling: touch; /* 讓滑動更順暢 */
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            transition: transform 0.3s ease-in-out; /* 滑動特效關鍵 */
         }
         
+        /* 隱藏狀態的 class */
+        .navbar.nav-hidden {
+            transform: translateY(-100%);
+        }
+
         .nav-container {
             max-width: 1000px;
             margin: 0 auto;
             display: flex;
-            justify-content: flex-start; /* 手機版靠左 */
+            justify-content: flex-start;
             padding: 0 15px;
         }
 
-        /* 電腦版置中 */
         @media (min-width: 768px) {
-            .nav-container {
-                justify-content: center;
-            }
+            .nav-container { justify-content: center; }
         }
 
         .nav-item {
@@ -59,8 +62,8 @@
             font-size: 0.95rem;
             padding: 8px 16px;
             margin: 0 4px;
-            border-radius: 20px; /* 膠囊形狀 */
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
         }
@@ -68,109 +71,91 @@
         .nav-item:hover {
             background-color: rgba(255, 255, 255, 0.15);
             color: #fff;
-            transform: translateY(-2px);
         }
 
-        /* 當前頁面的樣式 */
         .nav-item.active {
             background-color: var(--accent);
             color: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        .nav-icon {
-            margin-right: 6px;
-            font-size: 1.1rem;
-        }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
-        /* 隱藏捲軸但保留功能 */
-        .navbar::-webkit-scrollbar {
-            display: none; 
-        }
-
-        /* === 原有樣式 === */
+        /* === 內容區塊 === */
         .container {
             max-width: 1000px;
-            margin: 20px auto; /* 上方加一點間距 */
+            margin: 80px auto 20px auto; /* 上方留白給導航列 */
             background: #fff;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
+
         h1 {
             text-align: center;
             color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 10px;
-            border-bottom: 5px solid var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            border-bottom: 4px solid var(--accent);
             padding-bottom: 15px;
         }
         .subtitle {
             text-align: center;
             color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* === APP 下載區 === */
+        .app-box {
+            background-color: #e3f2fd;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            padding: 20px;
             margin-bottom: 40px;
         }
+        .app-title { font-weight: bold; color: #1565c0; display: block; margin-bottom: 10px; }
         
+        /* === 行程樣式 === */
         .section-header {
             background-color: var(--primary);
             color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin-top: 50px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        .section-header::before {
-            content: "📌";
-            margin-right: 10px;
-        }
-
-        .survival-guide {
-            background-color: #e3f2fd;
-            border: 2px solid #2196f3;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .guide-title {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 40px;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #0d47a1;
-            margin-bottom: 15px;
-            display: block;
-            border-bottom: 1px dashed #90caf9;
-            padding-bottom: 10px;
         }
-        .guide-item { margin-bottom: 15px; }
-        .guide-item strong { color: #d84315; display: block; margin-bottom: 5px; }
 
         .day-box {
-            border-left: 6px solid var(--accent);
+            border-left: 5px solid var(--accent);
             background: #fff;
-            margin-bottom: 40px;
-            padding-left: 20px;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            margin-top: 20px;
         }
         .day-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--primary);
             margin-bottom: 15px;
-            padding-top: 10px;
+            padding-top: 5px;
         }
-        .timeline { position: relative; padding-left: 20px; }
+        
+        .timeline { position: relative; padding-left: 15px; }
         .timeline-item {
             position: relative;
-            padding-bottom: 30px;
-            border-left: 2px solid #ddd;
-            padding-left: 25px;
+            padding-bottom: 25px;
+            border-left: 2px solid #eee;
+            padding-left: 20px;
         }
+        .timeline-item:last-child { border-left: none; }
         .timeline-item::before {
             content: "";
             position: absolute;
             left: -6px;
-            top: 5px;
+            top: 6px;
             width: 10px;
             height: 10px;
             background: var(--accent);
@@ -179,37 +164,28 @@
         .time {
             font-weight: bold;
             color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
             display: block;
+            margin-bottom: 4px;
         }
-        .nanny-note {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 10px;
-            border-radius: 6px;
+        
+        /* === 提示框 === */
+        .note {
             font-size: 0.9rem;
-            margin-top: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+            width: 100%;
         }
-        .nanny-note::before { content: "💡 保母叮嚀："; font-weight: bold; }
-        .alert-note {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            margin-top: 8px;
-            font-weight: bold;
-        }
-        .alert-note::before { content: "⛔ 絕對注意："; }
-        .price { color: #2e7d32; font-weight: bold; }
+        .note-tip { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .note-alert { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
     </style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar" id="mainNav">
     <div class="nav-container">
         <a href="index.html" class="nav-item active"><span class="nav-icon">📅</span>行程</a>
         <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
@@ -222,320 +198,184 @@
 </nav>
 
 <div class="container">
-    <h1>2026 荷比挪自駕：終極保姆級實戰手冊</h1>
-    <div class="subtitle">專為新手小白設計．絕不跳過任何細節．包含生存指南</div>
+    <h1>2026 荷比挪自駕總表</h1>
+    <div class="subtitle">行程核心控制台</div>
 
-    <div class="survival-guide" style="background-color: #fff8e1; border-color: #ffb74d;">
-        <span class="guide-title">📱 出發前必做：下載這些 APP (在台灣先裝好！)</span>
-        <ul>
-            <li><strong>Google Maps：</strong> 請先下載「挪威、荷蘭、比利時」的離線地圖。</li>
-            <li><strong>EasyPark：</strong> (極重要) 歐洲停車神器。請下載並綁定信用卡。</li>
-            <li><strong>Aurora (My Aurora Forecast)：</strong> 預測極光指數與雲層覆蓋率。</li>
-            <li><strong>YR.no：</strong> 挪威最準的氣象 APP。</li>
-            <li><strong>NS International：</strong> 查詢荷蘭/比利時火車時刻。</li>
-            <li><strong>Google 翻譯：</strong> 下載離線翻譯包，用鏡頭掃描菜單很方便。</li>
+    <div class="app-box">
+        <span class="app-title">📱 出發前必備 APP 清單</span>
+        <ul style="margin: 0; padding-left: 20px;">
+            <li><strong>導航/交通：</strong> Google Maps (離線地圖)、EasyPark (停車)、NS International (荷蘭火車)</li>
+            <li><strong>天氣/極光：</strong> YR.no (挪威氣象)、Aurora Forecast</li>
+            <li><strong>生活：</strong> Google Translate (離線包)</li>
         </ul>
     </div>
 
-    <div class="section-header">🚗 歐洲自駕與生活生存指南 (請反覆閱讀)</div>
-    
-    <div class="survival-guide">
-        <div class="guide-item">
-            <strong>1. 加油站實戰教學 (別怕預授權)</strong>
-            <ul>
-                <li><strong>分辨油種：</strong> 租車合約會寫 Petrol (汽油) 或 Diesel (柴油)。通常 95 汽油是 <span style="color:green; font-weight:bold;">綠色</span> 槍，柴油是 <span style="color:black; font-weight:bold;">黑色</span> 槍。加錯會賠天價，請再三確認。</li>
-                <li><strong>PIN 碼：</strong> 插入信用卡後，機器會要你輸入 PIN。這就是你在台灣跟銀行設定的<strong>「預借現金密碼」(4碼)</strong>。沒開通會無法加油。</li>
-                <li><strong>預授權 (Pre-authorization)：</strong> 加油前，機器可能會先凍結一筆錢 (例如 €150)，這是正常的！加完油後，幾天內會依照實際金額扣款，多凍結的錢會解凍，看到簡訊通知別嚇到。</li>
-            </ul>
-        </div>
-
-        <div class="guide-item">
-            <strong>2. 挪威超市潛規則 (Pant 回收系統)</strong>
-            <ul>
-                <li><strong>買水：</strong> 歐洲寶特瓶飲料價格通常包含「瓶子押金 (Pant)」。</li>
-                <li><strong>回收：</strong> 喝完別丟！下次去超市時，門口通常有一台機器，把空瓶子塞進去，機器會吐出一張「折價券」。</li>
-                <li><strong>使用：</strong> 結帳時把這張券給店員，可以折抵現金。</li>
-                <li><strong>買菜：</strong> 蔬果如果沒有條碼，通常要去旁邊的秤重機，按對應的圖片，貼上標籤再去結帳。</li>
-            </ul>
-        </div>
-
-        <div class="guide-item">
-            <strong>3. 廁所很貴，哪裡有免費的？</strong>
-            <ul>
-                <li>歐洲車站/商場廁所通常收費 €0.5 - €1 (只能刷卡或投幣)。</li>
-                <li><strong>免費廁所攻略：</strong> 火車上(免費)、飛機上(免費)、博物館內(通常免費)、餐廳/咖啡廳(消費即可使用)。</li>
-                <li><strong>保母叮嚀：</strong> 離開飯店、下火車、下飛機前，不管有沒有尿意，都先去上廁所！</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section-header">🇧🇪 第一階段：適應歐洲 (3/12 - 3/14)</div>
+    <div class="section-header">🇧🇪 第一階段：適應歐洲</div>
 
     <div class="day-box">
-        <div class="day-title">Day 1｜3/12 (四) 抵達與移動：台北 -> 根特</div>
+        <div class="day-title">Day 1｜3/12 (四) 抵達根特</div>
         <div class="timeline">
             <div class="timeline-item">
                 <span class="time">11:00 抵達阿姆斯特丹 (AMS)</span>
-                下機跟隨 "Arrivals" 指標。通關可能排隊，請準備好回程機票證明備查。
+                入境通關，準備好回程機票備查。
             </div>
             <div class="timeline-item">
-                <span class="time">12:30 機場買火車票</span>
-                地點：入境大廳地下一樓 (Plaza)。找黃藍色售票機。<br>
-                操作：English -> Destination: <strong>Gent-Sint-Pieters</strong> -> 刷卡。<br>
-                <div class="nanny-note">票是沒有指定時間的，當天任何一班往根特的車都可以搭。</div>
+                <span class="time">13:10 搭火車前往根特</span>
+                路線：AMS -> Antwerpen -> Gent-Sint-Pieters。
             </div>
             <div class="timeline-item">
-                <span class="time">13:10 搭火車 (需轉車)</span>
-                通常路線：AMS -> Antwerpen-Centraal (安特衛普) -> Gent。<br>
-                在安特衛普轉車時，確認月台看板。
+                <span class="time">15:30 入住 Hotel NH Collection</span>
+                搭 1 號電車至 Korenmarkt 站。
             </div>
             <div class="timeline-item">
-                <span class="time">15:30 抵達根特與入住</span>
-                <strong>住宿：Hotel NH Collection Gent</strong><br>
-                交通：出根特車站，跟著 Tram 指標，搭 <strong>1 號電車</strong> 到 <strong>Korenmarkt</strong> 站。飯店就在下車處對面。
-                <div class="nanny-note">電車票可以直接刷感應式信用卡 (Contactless)，上車刷一次即可。</div>
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：Amadeus Gent 1</span>
-                這家是「肋排吃到飽」。<br>
-                點餐攻略：服務生來直接點 "Spare Ribs Mozarella" (或其他口味) 和飲料。吃完服務生會拿著大盆肋排問你要不要加 (Free refill)。
+                <span class="time">18:00 晚餐：Amadeus 肋排</span>
+                <div class="note note-tip">💡 記得點 All-you-can-eat 吃到飽方案。</div>
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 2｜3/13 (五) 根特漫步 -> 返回 AMS 機場</div>
+        <div class="day-title">Day 2｜3/13 (五) 根特 -> 機場</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:00 伯爵城堡 (Gravensteen)</span>
-                就在飯店走路 5 分鐘距離。一定要租導覽機，內容很幽默。
+                <span class="time">09:00 市區觀光</span>
+                伯爵城堡、香草河岸。
             </div>
             <div class="timeline-item">
-                <span class="time">11:00 香草河岸 (Graslei)</span>
-                根特最美的地方，沿著河岸散步拍照。
+                <span class="time">14:30 返回阿姆斯特丹機場</span>
             </div>
             <div class="timeline-item">
-                <span class="time">12:30 午餐：Frites Atelier</span>
-                這是米其林主廚開的薯條店。不用怕語言不通，指著圖片點餐即可 (推薦燉牛肉口味)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">14:30 搭火車回荷蘭</span>
-                回飯店拿行李，搭電車回火車站，買票去 <strong>Schiphol Airport</strong>。
-            </div>
-            <div class="timeline-item">
-                <div class="time">17:00 入住 ibis Amsterdam Airport</div>
-                <strong>怎麼去飯店？</strong> 在機場外面的巴士站，找 A9-A13 月台，有 ibis 的免費接駁車 (Shuttle Bus)。
-            </div>
-            <div class="timeline-item">
-                <div class="time">18:30 晚餐：機場超市 (Albert Heijn)</div>
-                <div class="alert-note">明天要轉機，建議今晚在機場超市買些好攜帶的麵包、三明治，明天在飛機上或轉機時吃。機場餐廳太貴且慢。</div>
+                <span class="time">17:00 入住 ibis Airport</span>
+                <div class="note note-tip">💡 晚餐建議在機場超市 Albert Heijn 買好，明天轉機可吃。</div>
             </div>
         </div>
     </div>
 
-    <div class="section-header">🇳🇴 第二階段：羅浮敦群島自駕 (3/14 - 3/21)</div>
+    <div class="section-header">🇳🇴 第二階段：羅浮敦群島</div>
 
     <div class="day-box">
-        <div class="day-title">Day 3｜3/14 (六) 飛往極圈 & 生存採買</div>
+        <div class="day-title">Day 3｜3/14 (六) 飛往極圈</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">07:00 前往機場</span>
-                搭飯店接駁車去機場。飛機 SK6685 (10:05 起飛)。
+                <span class="time">10:05 飛機 SK6685 -> EVE</span>
             </div>
             <div class="timeline-item">
-                <span class="time">15:20 抵達 EVE 機場 & 取車</span>
-                SIXT 櫃台取車。<br>
-                <div class="nanny-note">驗車重點：1. 輪胎是不是有釘子的冬季胎？ 2. 後車廂有沒有刮雪板？ 3. 檢查大燈怎麼開 (挪威規定全天開大燈)。</div>
+                <span class="time">15:20 取車 (SIXT)</span>
+                <div class="note note-alert">⛔ 驗車重點：冬季胎、刮雪板、大燈開啟。</div>
             </div>
             <div class="timeline-item">
-                <span class="time">16:00 開車前往 Svolvær (170km)</span>
-                慢慢開，適應雪地煞車距離。如果發現後車貼很近，那是當地人，請打右轉燈靠邊讓他超車，不要有壓力。
+                <span class="time">19:30 超市採買 (Svolvær)</span>
+                <div class="note note-alert">⛔ 明天週日超市不開！今晚務必買齊兩天的糧食。</div>
             </div>
             <div class="timeline-item">
-                <span class="time">19:30 超市大採購 (生死攸關)</span>
-                導航：<strong>Rema 1000 Svolvær</strong>。<br>
-                <div class="alert-note">明天週日超市不開門！請買齊：今晚晚餐、明天早餐、明天午餐、明天晚餐、大罐水、零食。</div>
-            </div>
-            <div class="timeline-item">
-                <span class="time">20:30 入住 Lofoten Rorbuer AS</span>
-                建議第一晚在漁屋裡煮超市買的烤雞或微波食品，早點休息調時差。
+                <span class="time">20:30 入住 Lofoten Rorbuer</span>
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 4｜3/15 (日) 斯沃爾瓦爾 & 亨寧斯韋爾</div>
+        <div class="day-title">Day 4｜3/15 (日) 亨寧斯韋爾</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">10:00 Svolvær 曬魚架</span>
-                就在 Svinøya Rorbuer 附近，你會聞到很濃的魚乾味，這是當地特色，去拍拍照。
-            </div>
-            <div class="timeline-item">
-                <span class="time">11:30 前往 Henningsvær</span>
-                車程約 30 分鐘。這段路沿海開，風景很美。
-            </div>
-            <div class="timeline-item">
-                <span class="time">12:30 海邊足球場</span>
-                導航：<strong>Henningsvær Stadion</strong>。<br>
-                把車停在旁邊停車場 (看有沒有收費牌，用 EasyPark)。
+                <span class="time">11:30 Henningsvær</span>
+                海邊足球場。
             </div>
             <div class="timeline-item">
                 <span class="time">13:30 午餐：Lysstøperiet Cafe</span>
-                這家有開！推薦點魚湯 (Fish Soup) 和肉桂捲。
-            </div>
-            <div class="timeline-item">
-                <span class="time">16:00 回飯店耍廢</span>
-                因為超市沒開，晚上也沒地方去，回飯店享受漁屋設施，煮昨晚買的食物。
+                魚湯、肉桂捲。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 5｜3/16 (一) 最美 E10 公路 -> 黃色小屋</div>
+        <div class="day-title">Day 5｜3/16 (一) 黃色小屋</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">10:00 退房往南開</span>
-                今天的 E10 公路風景最精華。看到 "Møteplass" (避車彎) 或相機標誌就可以停下來拍照。
+                <span class="time">10:00 E10 最美公路</span>
+                沿途停靠避車彎拍照。
             </div>
             <div class="timeline-item">
-                <span class="time">12:00 順遊 Nusfjord</span>
-                轉進支線。這是要門票的古蹟漁村。
+                <span class="time">14:00 Ramberg 補給</span>
+                最後的大型超市補給點。
             </div>
             <div class="timeline-item">
-                <span class="time">14:00 午餐與補給：Ramberg</span>
-                停在 <strong>Bunnpris Ramberg</strong> 超市。<br>
-                1. 去超市買接下來幾天在南部的食材 (Hamnøy 附近只有小貴的超市)。<br>
-                2. 去旁邊 Ramberg Gjestegård 吃午餐 (漢堡/三明治)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">16:00 入住 Hamnøy (黃色小屋)</span>
-                <strong>住宿：Rostad Retro Rorbuer</strong>。<br>
-                <div class="nanny-note">Check-in 通常是自助的（會收到密碼）或是去櫃檯拿鑰匙，出發前留意 Email。</div>
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：Anita's Sjømat</span>
-                開車 3 分鐘到隔壁島。必吃：<strong>Fish Burger (Classic)</strong>。
+                <span class="time">16:00 入住 Hamnøy</span>
+                住宿：Rostad Retro Rorbuer。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 6｜3/17 (二) Reine 經典攝影日</div>
+        <div class="day-title">Day 6｜3/17 (二) Reine 經典</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:30 飯店旁橋上拍照</span>
-                不用開車，走路到 Hamnøy Bridge。往回拍你的住宿，這是經典機位。
+                <span class="time">09:30 橋上攝影</span>
+                步行至 Hamnøy Bridge。
             </div>
             <div class="timeline-item">
                 <span class="time">11:00 Reine 村莊</span>
-                開車 10 分鐘。導航至 Circle K Reine 旁的停車場。<br>
-                步行進入村莊，拍紅色小屋倒影。
             </div>
             <div class="timeline-item">
-                <span class="time">13:00 午餐：自製三明治</span>
-                早上在漁屋做好三明治帶出來。省錢又方便。
-            </div>
-            <div class="timeline-item">
-                <span class="time">14:30 秘密景點：Olenilsøya Kystfort</span>
-                位於 Sakrisøy (Anita's 海鮮舖後面)。<br>
-                是一條簡單的步道，爬上去只要 15-20 分鐘，可以看到超美的 360 度全景。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：自炊牛排</span>
-                在超市買好的牛排，回漁屋煎來吃。配紅酒。
+                <span class="time">14:30 爬山 Olenilsøya</span>
+                簡單步道看全景。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 7｜3/18 (三) 公路盡頭 Å 鎮</div>
+        <div class="day-title">Day 7｜3/18 (三) 公路盡頭</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">10:00 前往 Å (奧鎮)</span>
-                導航 "Å i Lofoten Parking"。要穿過一個單向隧道（有紅綠燈，綠燈才能過）。
-            </div>
-            <div class="timeline-item">
-                <span class="time">11:00 漁村博物館 & 麵包店</span>
-                必買：<strong>Bakeriet på Å</strong> 的肉桂捲。這是全羅浮敦最好吃的古法窯烤肉桂捲。
-            </div>
-            <div class="timeline-item">
-                <span class="time">13:00 走到世界盡頭</span>
-                從停車場往海邊走，會看到路不見了，就是大海。
-            </div>
-            <div class="timeline-item">
-                <span class="time">15:00 回程停靠：Djupfjorden</span>
-                回程路上過了一座橋後，有個避車彎。回頭拍橋樑跨越峽灣的景色。
+                <span class="time">10:00 Å 鎮 (奧鎮)</span>
+                窯烤麵包店肉桂捲。
             </div>
             <div class="timeline-item">
                 <span class="time">18:00 晚餐：清冰箱</span>
-                把剩下的食材全煮了，因為後天要大移動。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 8｜3/19 (四) 黑沙灘與橋樑</div>
+        <div class="day-title">Day 8｜3/19 (四) 黑沙灘</div>
         <div class="timeline">
             <div class="timeline-item">
                 <span class="time">10:00 Fredvang Bridges</span>
-                往北開一點。那裡有兩座像恐龍背脊一樣的拱橋，非常特別。
+                恐龍拱橋。
             </div>
             <div class="timeline-item">
                 <span class="time">11:30 Skagsanden Beach</span>
-                這裡的沙灘是黑色的，還有特殊的紋路。
-            </div>
-            <div class="timeline-item">
-                <span class="time">16:00 整理行李</span>
-                明天要開很遠的車，建議今天早點回住宿休息，把行李整理好。
+                黑沙灘。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 9｜3/20 (五) 長途移動：Hamnøy -> Harstad</div>
+        <div class="day-title">Day 9｜3/20 (五) 長途移動</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:00 準時退房出發</span>
-                車程約 290 公里。請檢查油箱，不夠就先加滿。
+                <span class="time">09:00 出發往 Harstad</span>
+                車程約 290km。
             </div>
             <div class="timeline-item">
-                <span class="time">12:30 午餐休息點：Lødingen</span>
-                導航：<strong>Circle K Lødingen</strong>。<br>
-                <div class="nanny-note">這是最佳的中繼站。進去買挪威熱狗 (Pølse) 當午餐，上個廁所，加個油。挪威熱狗通常用捲餅皮包著吃，很特別。</div>
-            </div>
-            <div class="timeline-item">
-                <span class="time">16:30 抵達 Harstad</span>
-                <strong>住宿：Thon Hotel Harstad</strong>。<br>
-                這家飯店對面就有超市，如果餓了可以去買點東西。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：Egon Harstad</span>
-                當地家庭餐廳，可以吃披薩或義大利麵。
+                <span class="time">16:30 入住 Thon Hotel Harstad</span>
             </div>
         </div>
     </div>
 
-    <div class="section-header">🇳🇴 第三階段：特羅姆瑟極光 (3/21 - 3/24)</div>
+    <div class="section-header">🇳🇴 第三階段：極光城市</div>
 
     <div class="day-box">
-        <div class="day-title">Day 10｜3/21 (六) 飛往 Tromsø</div>
+        <div class="day-title">Day 10｜3/21 (六) 飛往特羅姆瑟</div>
         <div class="timeline">
             <div class="timeline-item">
                 <span class="time">11:30 機場還車</span>
-                從 Harstad 開去 EVE 機場 (50分鐘)。<br>
-                還車步驟：1. 機場附近加滿油。 2. 停回 SIXT 停車格。 3. 鑰匙丟櫃台。
             </div>
             <div class="timeline-item">
                 <span class="time">13:50 飛機 WF874 -> TOS</span>
-                14:30 抵達。出機場搭計程車去民宿。
             </div>
             <div class="timeline-item">
                 <span class="time">17:00 Fjellheisen 纜車</span>
-                <strong>必去！</strong> 搭 26 號公車去。上山看特羅姆瑟夜景。
-            </div>
-            <div class="timeline-item">
-                <span class="time">20:00 晚餐：Peppes Pizza</span>
-                市區連鎖披薩。點一個大披薩兩人分，吃不完打包。
+                看夜景。
             </div>
         </div>
     </div>
@@ -544,20 +384,10 @@
         <div class="day-title">Day 11｜3/22 (日) 馴鹿體驗</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:30 集合</span>
-                請看票券上的集合地點 (通常是 Radisson Blu Hotel)。
-            </div>
-            <div class="timeline-item">
-                <span class="time">10:00 馴鹿活動</span>
-                這活動很輕鬆，餵鹿、喝熱湯。午餐已包含在內。
+                <span class="time">10:00 馴鹿餵食 & 拉雪橇</span>
             </div>
             <div class="timeline-item">
                 <span class="time">15:00 北極大教堂</span>
-                白色三角形建築，去拍張照。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:00 晚餐：7-11 或 Narvesen</span>
-                推薦試試挪威超商的烤雞腿熱食，便宜又好吃。
             </div>
         </div>
     </div>
@@ -566,102 +396,74 @@
         <div class="day-title">Day 12｜3/23 (一) 狗拉雪橇</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:00 集合出發</span>
-                狗拉雪橇需要體力，建議穿排汗一點的內衣，因為動起來會熱。
+                <span class="time">09:00 哈士奇雪橇</span>
             </div>
             <div class="timeline-item">
                 <span class="time">15:00 Polaria 水族館</span>
-                看海豹餵食秀。
-            </div>
-            <div class="timeline-item">
-                <span class="time">19:00 晚餐：Blårock Cafe</span>
-                搖滾漢堡店。份量大，氣氛好。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 13｜3/24 (二) 飛回阿姆斯特丹</div>
+        <div class="day-title">Day 13｜3/24 (二) 返回荷蘭</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">11:10 航班 TOS -> AMS</span>
-                經奧斯陸轉機。
+                <span class="time">11:10 飛機 TOS -> AMS</span>
             </div>
             <div class="timeline-item">
                 <span class="time">19:30 入住 citizenM Schiphol</span>
-                走路就能到的機場飯店。iPad 控制房間很有趣。
-            </div>
-            <div class="timeline-item">
-                <span class="time">20:00 晚餐</span>
-                在機場大廳吃 Burger King。
             </div>
         </div>
     </div>
 
-    <div class="section-header">🇳🇱 第四階段：荷蘭花季 (3/25 - 3/28)</div>
+    <div class="section-header">🇳🇱 第四階段：荷蘭花季</div>
 
     <div class="day-box">
         <div class="day-title">Day 14｜3/25 (三) 庫肯霍夫 -> 羊角村</div>
         <div class="timeline">
             <div class="timeline-item">
                 <span class="time">09:00 機場取車</span>
-                這次是平地自駕，輕鬆很多。
             </div>
             <div class="timeline-item">
                 <span class="time">10:00 庫肯霍夫花園</span>
-                <div class="nanny-note">3月戶外花可能不多，請直奔室內展館 (Willem-Alexander)，那裡一定滿開。</div>
-            </div>
-            <div class="timeline-item">
-                <span class="time">14:00 開車去羊角村</span>
-                車程 1.5 小時。
+                <div class="note note-tip">💡 直奔室內展館看花。</div>
             </div>
             <div class="timeline-item">
                 <span class="time">16:30 入住 Hotel de Harmonie</span>
-                飯店有停車場。
-            </div>
-            <div class="timeline-item">
-                <span class="time">18:30 晚餐：Grand Café Fanfare</span>
-                羊角村名店。如果不餓，可以去當地的 PLUS 超市買東西吃。
+                (羊角村)
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 15｜3/26 (四) 開船體驗 -> 阿姆斯特丹</div>
+        <div class="day-title">Day 15｜3/26 (四) 羊角村 -> 阿姆斯特丹</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">09:30 租電動船 (Whisper Boat)</span>
-                就在飯店租。自己當船長，開在運河上。早上去才不會「塞船」。
+                <span class="time">09:30 租電動船</span>
+                自駕遊船。
             </div>
             <div class="timeline-item">
-                <span class="time">13:00 返回 AMS 還車</span>
-                還車後搭火車進市區。
+                <span class="time">13:00 機場還車</span>
+                改搭火車進市區。
             </div>
             <div class="timeline-item">
                 <span class="time">17:00 入住 Volkshotel</span>
-                頂樓有熱水浴缸，記得帶泳衣去泡！
-            </div>
-            <div class="timeline-item">
-                <span class="time">19:00 晚餐：FEBO</span>
-                找一家 FEBO 自動販賣店，投幣買可樂餅吃，體驗荷蘭文化。
             </div>
         </div>
     </div>
 
     <div class="day-box">
-        <div class="day-title">Day 16｜3/27 (五) 阿姆斯特丹自由行</div>
+        <div class="day-title">Day 16｜3/27 (五) 市區觀光</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">10:00 Albert Cuyp Market 市集</span>
-                吃現做荷蘭煎餅 (Stroopwafel)、吃生鯡魚。
+                <span class="time">10:00 Albert Cuyp 市集</span>
+                吃荷蘭煎餅。
             </div>
             <div class="timeline-item">
                 <span class="time">13:00 運河遊船</span>
-                去中央車站前搭觀光船。
             </div>
             <div class="timeline-item">
-                <span class="time">19:00 最後晚餐：Loetje</span>
-                去吃荷蘭最有名的牛排。記得點白麵包沾醬汁吃。
+                <span class="time">19:00 Loetje 牛排</span>
             </div>
         </div>
     </div>
@@ -670,21 +472,32 @@
         <div class="day-title">Day 17｜3/28 (六) 返台</div>
         <div class="timeline">
             <div class="timeline-item">
-                <span class="time">08:00 前往機場</span>
-                搭 Uber 或火車。
-            </div>
-            <div class="timeline-item">
-                <span class="time">09:00 退稅</span>
-                <div class="nanny-note">如果有在店裡拿到退稅單 (Global Blue)，記得在機場海關蓋章並投遞。</div>
+                <span class="time">09:00 機場退稅</span>
+                <div class="note note-alert">⛔ 記得先去海關蓋章，再去領錢。</div>
             </div>
             <div class="timeline-item">
                 <span class="time">11:10 飛機起飛</span>
-                平安回家！
             </div>
         </div>
     </div>
 
 </div>
+
+<script>
+    let lastScrollY = window.scrollY;
+    const navbar = document.getElementById('mainNav');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY && window.scrollY > 50) {
+            // 往下捲動 -> 隱藏
+            navbar.classList.add('nav-hidden');
+        } else {
+            // 往上捲動 -> 顯示
+            navbar.classList.remove('nav-hidden');
+        }
+        lastScrollY = window.scrollY;
+    });
+</script>
 
 </body>
 </html>
