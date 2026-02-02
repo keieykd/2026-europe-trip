@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歐洲生存補完手冊 (退稅/電壓)</title>
+    <style>
+        :root {
+            /* 莫蘭迪深色系配色 */
+            --primary: #5d6d7e;   /* 鋼鐵灰藍 */
+            --accent: #b03a2e;    /* 磚紅 (警告/重點) */
+            --highlight: #d4ac0d; /* 芥末黃 (金錢相關) */
+            --safe: #28b463;      /* 森林綠 (正確/通過) */
+            --bg: #f2f3f4;
+            --card-bg: #ffffff;
+            --text: #212f3d;
+            --text-light: #566573;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px 15px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        h1 {
+            text-align: center;
+            color: var(--text);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-size: 1rem;
+        }
+
+        /* === 卡片樣式 === */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 6px solid #ccc;
+        }
+
+        .card-money { border-left-color: var(--highlight); }
+        .card-danger { border-left-color: var(--accent); }
+        .card-info { border-left-color: var(--primary); }
+
+        .card-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            color: var(--text);
+        }
+
+        .icon { font-size: 1.5rem; margin-right: 12px; }
+
+        /* === 標籤與列表 === */
+        ul, ol { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 10px; font-weight: 500; }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 5px;
+        }
+        .tag-yes { background-color: var(--safe); }
+        .tag-no { background-color: var(--accent); }
+
+        /* === 重點強調框 === */
+        .alert-box {
+            background-color: #fadbd8;
+            border: 1px solid #f5b7b1;
+            color: #7b241c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background-color: #d6eaf8;
+            border: 1px solid #aed6f1;
+            color: #21618c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* === 表格樣式 === */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f8f9f9; }
+
+        /* === 步驟流程 === */
+        .step {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid var(--highlight);
+        }
+        .step-title { font-weight: 800; color: #000; display: block; margin-bottom: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🛡️ 生存補完手冊</h1>
+        <div class="subtitle">退稅實戰教學・電壓與插座</div>
+
+        <div class="card card-money">
+            <div class="card-header"><span class="icon">💰</span>退稅 (Tax Refund) 核心觀念</div>
+            <p><strong>一句話搞懂：</strong>「只有你會帶回台灣的『商品』可以退稅。你在當地吃掉、用掉的，都不能退。」</p>
+            
+            <table style="margin-bottom: 20px;">
+                <tr>
+                    <th style="width: 50%;">✅ 可以退 (YES)</th>
+                    <th>❌ 不能退 (NO)</th>
+                </tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>衣服、包包、鞋子</li>
+                            <li>手錶、珠寶、電子產品</li>
+                            <li>紀念品 (磁鐵、玩偶)</li>
+                            <li><strong>密封的食品</strong> (如要帶回國送人的巧克力禮盒、罐頭)</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li><strong>餐廳吃飯</strong> (吃進肚子了)</li>
+                            <li><strong>飯店住宿</strong> (睡過了)</li>
+                            <li><strong>租車、火車票</strong> (用掉了)</li>
+                            <li><strong>超市生鮮</strong> (水果、牛奶、優格)</li>
+                            <li><strong>已拆封使用</strong>的商品</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="info-box">
+                <strong>💡 多少錢才能退？ (最低消費門檻)</strong><br>
+                <ul>
+                    <li><strong>🇳🇴 挪威：</strong> 單筆滿 <strong>NOK 315</strong> (約台幣 950元)。</li>
+                    <li><strong>🇳🇱 荷蘭：</strong> 單筆滿 <strong>€ 50</strong> (約台幣 1,750元)。</li>
+                </ul>
+                <small>*結帳前先算一下，如果只差一點點，多拿一個小東西湊滿額度最划算！</small>
+            </div>
+        </div>
+
+        <div class="card card-danger">
+            <div class="card-header"><span class="icon">📍</span>退稅地點陷阱 (必讀！)</div>
+            <p>您的行程橫跨「歐盟」與「非歐盟」，退稅地點不同，<strong>搞錯就退不到錢！</strong></p>
+
+            <div class="step">
+                <span class="step-title">1. 挪威購物 (非歐盟) 👉 在挪威退！</span>
+                一定要在<strong>「離開挪威的最後一個機場」</strong>處理。<br>
+                例如：您從特羅姆瑟(TOS)飛奧斯陸(OSL)轉機離開挪威，最好在 TOS 或 OSL 機場海關蓋章退稅。<br>
+                <span style="color:red; font-weight:bold;">⛔ 千萬不要把挪威的退稅單帶去荷蘭，荷蘭海關不會理你！</span>
+            </div>
+
+            <div class="step">
+                <span class="step-title">2. 荷蘭/比利時購物 (歐盟) 👉 在阿姆斯特丹退！</span>
+                這是在您<strong>「搭機回台灣的那一天」</strong>，在 AMS 史基浦機場辦理。<br>
+                因為荷蘭是您離開歐盟的最後一站。
+            </div>
+        </div>
+
+        <div class="card card-money">
+            <div class="card-header"><span class="icon">📝</span>保母級退稅流程 SOP</div>
+            
+            <div class="step">
+                <span class="step-title">Step 1：商店結帳時</span>
+                確認金額達標後，跟店員說：<strong>"Tax Refund, please."</strong><br>
+                店員會給您一張長長的單子 (Global Blue 或 Planet)。<br>
+                <em>*保母叮嚀：拿回飯店後，請檢查單子上名字、護照號碼有沒有填對，沒填的要自己補上。</em>
+            </div>
+
+            <div class="step">
+                <span class="step-title">Step 2：打包行李時</span>
+                <strong>海關有權利抽查商品！</strong><br>
+                請將要退稅的東西放在<strong>「手提行李」</strong>或<strong>「托運行李的最上層」</strong>。<br>
+                不要埋在行李箱最深處，萬一海關要看，你翻不出來就不給蓋章。
+            </div>
+
+            <div class="step">
+                <span class="step-title">Step 3：抵達機場時 (提早3-4小時)</span>
+                <ol>
+                    <li>先去<strong>海關櫃檯 (Customs)</strong> 蓋章。</li>
+                    <li>再去<strong>退稅公司櫃檯 (Global Blue/Planet)</strong> 領錢。</li>
+                    <li><strong>選退信用卡還是現金？</strong>
+                        <ul>
+                            <li><strong>退信用卡：</strong> 免手續費，但要等幾週。</li>
+                            <li><strong>退現金：</strong> 每一張單子會收手續費，但錢馬上落袋為安。(建議新手選現金，雖然扣手續費但比較安心)。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card card-info">
+            <div class="card-header"><span class="icon">🔌</span>電壓與插座 (燒壞警告)</div>
+            
+            <div class="alert-box">
+                <strong>🔥 吹風機警告：</strong><br>
+                台灣的吹風機、離子夾是 110V，插在歐洲 230V 插座會<strong>「瞬間燒掉」</strong>甚至跳電！<br>
+                <strong>除非：</strong>您的吹風機手把上有「電壓切換開關 (110v/220v)」，否則絕對不要帶。
+            </div>
+
+            <ul style="margin-top: 20px;">
+                <li><strong>電壓：</strong> 歐洲統一為 <strong>220V - 230V</strong> (台灣是 110V)。</li>
+                <li><strong>手機/相機/筆電：</strong> 充電器上面通常寫 "Input: 100-240V"，這種<strong>可以直接插</strong>，不用變壓器。</li>
+                <li><strong>插頭形狀：</strong> 雙圓孔 (Type C / F)。請務必帶 <strong>2 個萬國轉接頭</strong> (一個充手機，一個充行動電源/相機)。</li>
+            </ul>
+        </div>
+
+        <div class="card card-info">
+            <div class="card-header"><span class="icon">📶</span>網路 SIM 卡建議</div>
+            <ul>
+                <li><strong>購買建議：</strong> 買<strong>「全歐洲通用」</strong>的網卡 (包含挪威、荷蘭、比利時)。不要分開買。</li>
+                <li><strong>推薦品牌：</strong> 實體卡 (Orange, Vodafone) 或 eSIM (Airalo, DJB)。</li>
+                <li><strong>通話功能：</strong> 強烈建議買<strong>「有附通話號碼」</strong>的卡。
+                    <br><em>*理由：萬一車子拋錨要叫救援、或是聯絡飯店晚到，有電話號碼非常重要。</em>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 50px; color: #777; font-size: 0.9rem;">
+        存好這份攻略，購物退稅不吃虧，電器使用更安全！
+    </div>
+
+</body>
+</html>

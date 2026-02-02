@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手指英文・緊急應變救命包</title>
+    <style>
+        :root {
+            /* 深色莫蘭迪 - 延續風格 */
+            --primary: #455a64;   /* 深岩灰 */
+            --accent: #d84315;    /* 磚橘紅 (緊急用) */
+            --highlight: #00695c; /* 深綠 (醫療用) */
+            --bg: #eceff1;
+            --card-bg: #ffffff;
+            --text: #263238;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 15px;
+            line-height: 1.5;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #546e7a;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* === 對話卡片 === */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-left: 8px solid #ccc;
+        }
+
+        .border-immi { border-left-color: #1976d2; } /* 入境藍 */
+        .border-med { border-left-color: var(--highlight); } /* 醫療綠 */
+        .border-sos { border-left-color: var(--accent); } /* 警急紅 */
+        .border-life { border-left-color: #fbc02d; } /* 生活黃 */
+
+        .card-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .icon { margin-right: 10px; font-size: 1.5rem; }
+
+        /* === 手指對話框 === */
+        .phrase-box {
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .phrase-en {
+            font-size: 1.2rem; /* 英文特大，方便給對方看 */
+            font-weight: 800;
+            color: #000;
+            display: block;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .phrase-cn {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .action-hint {
+            font-size: 0.8rem;
+            color: #d84315;
+            margin-top: 5px;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* === 護照遺失資訊 === */
+        .embassy-box {
+            background-color: #fff3e0;
+            border: 1px solid #ffe0b2;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🗣️ 手指英文・緊急救命包</h1>
+        <div class="subtitle">不懂英文沒關係，直接拿手機給對方看</div>
+
+        <div class="card border-immi">
+            <div class="card-header"><span class="icon">🛃</span>入境海關 (Immigration)</div>
+            <p>海關問話時，直接秀出這些答案：</p>
+
+            <div class="phrase-box">
+                <span class="phrase-cn">💡 問題：你來做什麼？(Business or Tourism?)</span>
+                <span class="phrase-en">I am here for tourism. Sightseeing.</span>
+                <span class="phrase-cn">我是來觀光旅遊的。</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-cn">💡 問題：你會待多久？(How long?)</span>
+                <span class="phrase-en">I will stay for 17 days.</span>
+                <span class="phrase-cn">我會待 17 天。</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-cn">💡 問題：回程機票呢？(Return Ticket?)</span>
+                <span class="phrase-en">Here is my return ticket and hotel bookings.</span>
+                <span class="phrase-cn">這是我的回程機票和住宿訂單。</span>
+                <span class="action-hint">👉 (請配合遞上紙本行程單)</span>
+            </div>
+        </div>
+
+        <div class="card border-med">
+            <div class="card-header"><span class="icon">💊</span>藥局買藥 (Pharmacy)</div>
+            <p>身體不舒服，給藥師看這些字：</p>
+
+            <div class="phrase-box">
+                <span class="phrase-en">I have a fever and sore throat.</span>
+                <span class="phrase-cn">我發燒，而且喉嚨痛。</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">I have a bad stomach ache and diarrhea.</span>
+                <span class="phrase-cn">我胃痛，而且拉肚子。</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">I feel dizzy and want to vomit.</span>
+                <span class="phrase-cn">我頭暈，想吐。(暈車/暈船)</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">I need painkillers.</span>
+                <span class="phrase-cn">我需要止痛藥。</span>
+            </div>
+        </div>
+
+        <div class="card border-sos">
+            <div class="card-header"><span class="icon">🆘</span>緊急求助 (Emergency)</div>
+            
+            <div class="phrase-box">
+                <span class="phrase-en">I lost my passport. Where is the police station?</span>
+                <span class="phrase-cn">我的護照不見了。請問警察局在哪裡？</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">My luggage is missing. Here is my bag tag.</span>
+                <span class="phrase-cn">我的行李不見了。這是我的行李託運條。</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">My car broke down. I need help.</span>
+                <span class="phrase-cn">我的車拋錨了，我需要協助。</span>
+            </div>
+        </div>
+
+        <div class="card border-sos">
+            <div class="card-header"><span class="icon">🇹🇼</span>護照遺失聯絡資訊</div>
+            <div class="embassy-box">
+                <strong>🇳🇱 駐荷蘭代表處 (海牙)</strong><br>
+                電話：+31-70-2503000<br>
+                急難救助：+31-654-948-849<br>
+                <hr style="border:0; border-top:1px dashed #ccc; margin:10px 0;">
+                <strong>🇳🇴 駐挪威代表處 (奧斯陸)</strong><br>
+                電話：+47-2311-1730<br>
+                急難救助：+47-926-64-592
+            </div>
+            <p style="font-size:0.8rem; color:#666; margin-top:10px;">*若護照遺失，需先去當地警察局報案取得「報案證明」，再去代表處補辦。</p>
+        </div>
+
+        <div class="card border-life">
+            <div class="card-header"><span class="icon">🏨</span>飯店與餐廳 (General)</div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">Can I leave my luggage here?</span>
+                <span class="phrase-cn">我可以寄放行李嗎？</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">Do you have free Wi-Fi? What is the password?</span>
+                <span class="phrase-cn">有免費 Wi-Fi 嗎？密碼是多少？</span>
+            </div>
+
+            <div class="phrase-box">
+                <span class="phrase-en">Check, please. (Credit card)</span>
+                <span class="phrase-cn">我要結帳。(刷卡)</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; color: #999; font-size: 0.8rem; margin-bottom: 40px;">
+        遇到困難不要慌，秀出手機，當地人都很樂意幫忙！
+    </div>
+
+</body>
+</html>

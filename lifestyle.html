@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歐洲生活起居萬用手冊</title>
+    <style>
+        :root {
+            /* 深色莫蘭迪配色 - 統一視覺 */
+            --primary: #546e7a;  /* 深藍灰 */
+            --accent: #8d6e63;   /* 暖棕色 */
+            --highlight: #d4e157; /* 橄欖黃 (重點標示) */
+            --bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text: #222222;
+            --text-light: #555555;
+            --border: #cfd8dc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px 15px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        h1 {
+            text-align: center;
+            color: var(--text);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-size: 1rem;
+        }
+
+        /* === 卡片樣式 === */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--primary);
+        }
+
+        .card-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: var(--text);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .icon { font-size: 1.5rem; margin-right: 12px; }
+
+        /* === 內容樣式 === */
+        ul { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 10px; font-weight: 500; }
+        strong { color: #000; font-weight: 800; }
+
+        .tag {
+            display: inline-block;
+            background-color: #eceff1;
+            color: #455a64;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        /* === 穿搭圖解區 === */
+        .outfit-box {
+            background-color: #fffde7;
+            border: 1px solid #fff59d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* === 折疊清單 === */
+        details {
+            background-color: #fafafa;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        summary {
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+        }
+        summary::after { content: '+'; font-size: 1.2rem; color: #ccc; }
+        details[open] summary::after { content: '-'; color: var(--primary); }
+        .details-content { padding: 15px; border-top: 1px solid #eee; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🏠 歐洲生活・起居萬用手冊</h1>
+        <div class="subtitle">穿衣・洗衣・飯店備品・藥局</div>
+
+        <div class="card" style="border-left-color: #5d4037;">
+            <div class="card-header"><span class="icon">🧥</span>穿衣攻略：洋蔥式穿法</div>
+            <p>3 月的挪威 (-5°C ~ 2°C) 和荷蘭 (5°C ~ 12°C) 溫差很大。重點是<strong>「穿脫方便」</strong>。</p>
+            
+            <div class="outfit-box">
+                <strong>🏔️ 挪威極地裝備 (必備)</strong>
+                <ul>
+                    <li><strong>外層 (Shell)：</strong> 防風防水外套 (Gore-tex)。擋風就贏一半。</li>
+                    <li><strong>中層 (Warmth)：</strong> 輕羽絨 或 厚刷毛 (Fleece)。</li>
+                    <li><strong>內層 (Base)：</strong> 發熱衣 (Heattech)。</li>
+                    <li><strong>腳下關鍵：</strong>
+                        <ul>
+                            <li><strong>防水靴：</strong> 雪融化時地上全是冰水，普通球鞋會濕透凍傷。</li>
+                            <li><strong>冰爪 (Crampons)：</strong> <span style="background:yellow;">強烈建議在迪卡儂買簡易冰爪帶去！</span> 走路去極光點或市區結冰路面，能救你一命，防摔倒。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="outfit-box" style="margin-top:10px; background-color: #e0f2f1; border-color: #b2dfdb;">
+                <strong>🌷 荷蘭城市裝備</strong>
+                <ul>
+                    <li>荷蘭風很大，雨傘容易開花。建議穿<strong>有帽子的防水外套</strong>或輕便雨衣。</li>
+                    <li>阿姆斯特丹很多石板路，請穿好走的平底鞋。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="border-left-color: #00897b;">
+            <div class="card-header"><span class="icon">🏨</span>飯店沒有提供的東西</div>
+            <p>歐洲飯店為了環保，很多東西<strong>不主動提供</strong>，請務必自己從台灣帶：</p>
+            <ul>
+                <li>❌ <strong>牙刷、牙膏：</strong> 90% 的飯店沒有。</li>
+                <li>❌ <strong>拖鞋：</strong> 地板通常很冰，建議帶紙拖鞋或浴室拖鞋。</li>
+                <li>❌ <strong>熱水壺：</strong> 漁屋 (Rorbuer) 通常有，但城市商務飯店不一定有。想泡麵建議帶折疊壺或保溫瓶去櫃檯裝。</li>
+                <li>⚠️ <strong>吹風機：</strong> 通常有，但有些風力很弱。<strong>絕對不要帶台灣吹風機</strong>（電壓不同會燒掉），如果很介意，請買「雙電壓旅行用吹風機」。</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left-color: #1e88e5;">
+            <div class="card-header"><span class="icon">🧺</span>長途旅行・洗衣攻略</div>
+            <p>17 天的衣服不可能全帶，一定會洗衣服。</p>
+            <details>
+                <summary>哪裡可以洗？</summary>
+                <div class="details-content">
+                    <ul>
+                        <li><strong>羅浮敦漁屋 (Rorbuer)：</strong> 許多獨棟漁屋裡面就有洗衣機（請檢查訂房網設施）。</li>
+                        <li><strong>自助洗衣店 (Vaskeri)：</strong> 大城市才有，鄉下很難找。</li>
+                        <li><strong>手洗大法：</strong> 帶一小罐洗衣精或水晶肥皂，洗內衣褲與襪子。掛在暖氣片 (Heater) 附近，一晚就乾了（歐洲非常乾燥）。</li>
+                    </ul>
+                </div>
+            </details>
+            <details>
+                <summary>歐洲很乾・皮膚保養</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>歐洲比台灣乾燥非常多。</li>
+                        <li><strong>必帶：</strong> 護唇膏、身體乳液、護手霜。</li>
+                        <li><strong>流鼻血：</strong> 鼻子太乾容易流血，可以在鼻孔塗一點凡士林。</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <div class="card" style="border-left-color: #fbc02d;">
+            <div class="card-header"><span class="icon">🍷</span>買酒與超市時間限制</div>
+            <p>這是挪威最嚴格的規定，想小酌一杯請注意：</p>
+            <ul>
+                <li><strong>買酒時間限制：</strong>
+                    <ul>
+                        <li><strong>平日：</strong> 晚上 8 點後不能買酒。</li>
+                        <li><strong>週六：</strong> 晚上 6 點後不能買酒。</li>
+                        <li><strong>週日：</strong> <span style="color:red; font-weight:bold;">完全不能買酒！而且很多超市都不開門！</span></li>
+                    </ul>
+                </li>
+                <li><strong>度數限制：</strong> 超市只賣 4.7% 以下的啤酒。要買烈酒或紅酒，要去國營專賣店 <strong>Vinmonopolet</strong> (營業時間更短)。</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left-color: #e53935;">
+            <div class="card-header"><span class="icon">💊</span>藥局與健康</div>
+            <ul>
+                <li><strong>自備藥品：</strong> 感冒藥、止痛藥、胃藥、暈車藥（搭渡輪或山路用）、OK繃。</li>
+                <li><strong>藥局識別：</strong>
+                    <ul>
+                        <li>挪威：<strong>Apotek</strong></li>
+                        <li>荷蘭：<strong>Apotheek</strong></li>
+                        <li>標誌通常是綠色十字。</li>
+                    </ul>
+                </li>
+                <li><strong>緊急狀況：</strong> 如果真的非常嚴重，請撥打 <strong>112</strong> 叫救護車（但費用極高，回台請用保險理賠）。</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; color: #777; font-size: 0.9rem;">
+        準備越周全，旅行越優雅。祝您旅途愉快！
+    </div>
+
+</body>
+</html>
