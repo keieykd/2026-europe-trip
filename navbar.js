@@ -1,10 +1,11 @@
 (function() {
-    // 1. 定義導航列 HTML
+    // 1. 定義導航列 HTML (新增了 checklist.html)
     const navHTML = `
     <nav class="navbar" id="mainNav">
         <div class="nav-container">
             <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
             <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="checklist.html" class="nav-item"><span class="nav-icon">📋</span>清單</a>
             <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
             <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
             <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
