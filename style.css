@@ -1,4 +1,5 @@
-/* === 全站通用樣式 === */
+/* === style.css - 全站通用樣式 (修復版) === */
+
 :root {
     --primary: #2c3e50;   /* 主色：深岩灰 */
     --secondary: #e74c3c; /* 次要色：價格紅 */
@@ -10,78 +11,196 @@
     --nav-bg: #263238;    /* 導航背景 */
 }
 
+/* 🔥 關鍵修正：增加頂部內距，防止導航列擋住標題 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Heiti TC", sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
     margin: 0;
-    padding: 20px 15px;
-    padding-top: 80px !important; /* 避開導航列 */
+    padding: 0 15px 40px 15px; /* 上 右 下 左 */
+    padding-top: 110px !important; /* 原本 80px 不夠，改為 110px */
 }
 
 /* === 導航列核心樣式 === */
 .navbar {
     background-color: var(--nav-bg);
-    padding: 10px 0;
+    padding: 12px 0; /* 稍微增加導航列高度 */
     position: fixed;
-    top: 0; left: 0; width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 9999;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     transition: transform 0.3s ease-in-out;
 }
-.navbar.nav-hidden { transform: translateY(-100%); }
-.nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
-@media (min-width: 768px) { .nav-container { justify-content: center; } }
+
+.navbar.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .nav-container {
+        justify-content: center;
+    }
+}
 
 .nav-item {
     color: rgba(255, 255, 255, 0.9);
-    text-decoration: none; font-weight: bold; font-size: 0.95rem;
-    padding: 8px 16px; margin: 0 4px; border-radius: 20px;
-    transition: all 0.2s; display: inline-flex; align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
 }
-.nav-item:hover { background-color: rgba(255, 255, 255, 0.2); color: #fff; }
-.nav-item.active { background-color: var(--accent); color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-.nav-icon { margin-right: 6px; }
-.navbar::-webkit-scrollbar { display: none; }
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* 自動亮燈樣式 */
+.nav-item.active {
+    background-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-icon {
+    margin-right: 6px;
+}
+
+/* 隱藏捲軸 */
+.navbar::-webkit-scrollbar {
+    display: none;
+}
 
 /* === 通用容器與標題 === */
-.container { max-width: 1000px; margin: 0 auto; }
-h1 {
-    text-align: center; color: var(--primary); font-size: 1.8rem;
-    margin-bottom: 10px; font-weight: 800;
-    border-bottom: 4px solid var(--accent); padding-bottom: 15px;
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    /* 這裡不需要再加 margin-top，因為 body 已經撐開了 */
 }
-.subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-size: 1rem; }
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: 15px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 40px; /* 增加標題與內容的距離 */
+    font-size: 1rem;
+}
 
 /* === 通用卡片樣式 === */
 .card {
-    background: #ffffff; border-radius: 12px; padding: 25px; margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 6px solid #ccc;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 6px solid #ccc;
+    /* 修正錨點跳轉時被導航擋住的問題 */
+    scroll-margin-top: 130px; 
 }
+
 .card-header {
-    font-size: 1.3rem; font-weight: 800; margin-bottom: 15px;
-    display: flex; align-items: center; color: var(--primary);
-    border-bottom: 1px solid #eee; padding-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
 }
-.icon { font-size: 1.5rem; margin-right: 12px; }
+
+.icon {
+    font-size: 1.5rem;
+    margin-right: 12px;
+}
 
 /* === 通用提示框 === */
-.note { font-size: 0.9rem; padding: 12px; border-radius: 6px; margin-top: 10px; display: block; }
+.note {
+    font-size: 0.9rem;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    display: block;
+}
 .note-tip { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
 .note-alert { background: #fadbd8; color: #922b21; border: 1px solid #f5b7b1; }
 .note-tip::before { content: "💡 "; }
 .note-alert::before { content: "⛔ "; }
 
 /* === 列表與細節 === */
-ul, ol { padding-left: 20px; margin: 0; }
-li { margin-bottom: 8px; }
-details { background-color: #fff; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; overflow: hidden; }
-summary { padding: 15px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background-color: #fafafa; }
-summary:hover { background-color: #f0f0f0; }
-summary::after { content: '+'; font-size: 1.2rem; color: #999; }
-details[open] summary::after { content: '-'; color: var(--info); }
-.details-content { padding: 15px; border-top: 1px solid #eee; }
+ul, ol {
+    padding-left: 20px;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+details {
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+summary {
+    padding: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    transition: background-color 0.2s;
+}
+
+summary:hover {
+    background-color: #f0f0f0;
+}
+
+summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: #999;
+}
+
+details[open] summary::after {
+    content: '-';
+    color: var(--info);
+}
+
+.details-content {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
