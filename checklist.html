@@ -7,210 +7,140 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* === 清單專用樣式 === */
-        .check-group { margin-bottom: 30px; }
+        .check-group { margin-bottom: 30px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .group-title {
-            font-size: 1.2rem; font-weight: bold; color: var(--primary);
-            border-left: 5px solid var(--accent); padding-left: 10px; margin-bottom: 15px;
-            background: #fff; padding: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 1.2rem; font-weight: 800; color: var(--primary);
+            border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 15px;
+            display: flex; align-items: center;
         }
+        .group-icon { margin-right: 10px; font-size: 1.4rem; }
         
         .check-item {
-            background: #fff;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            display: flex;
-            align-items: flex-start; /* 讓長文字對齊 */
-            transition: all 0.2s;
-            cursor: pointer;
+            display: flex; align-items: flex-start; padding: 10px 0;
+            border-bottom: 1px dashed #eee; cursor: pointer; transition: background 0.2s;
         }
+        .check-item:last-child { border-bottom: none; }
+        .check-item:hover { background-color: #fafafa; }
         
-        .check-item:hover { background-color: #f1f8ff; }
-        
-        /* 隱藏原生 checkbox，改用自定義樣式 */
+        /* 自定義 Checkbox */
         .check-item input[type="checkbox"] {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            margin-right: 12px;
-            flex-shrink: 0; /* 防止被擠壓 */
-            position: relative;
-            cursor: pointer;
-            background: #fff;
+            appearance: none; -webkit-appearance: none;
+            width: 22px; height: 22px; border: 2px solid #bdc3c7; border-radius: 6px;
+            margin-right: 15px; flex-shrink: 0; position: relative; cursor: pointer;
+            background: #fff; margin-top: 2px;
         }
-
         .check-item input[type="checkbox"]:checked {
-            background-color: var(--success);
-            border-color: var(--success);
+            background-color: var(--success); border-color: var(--success);
         }
-
         .check-item input[type="checkbox"]:checked::after {
-            content: '✔';
-            color: white;
-            font-size: 16px;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            content: '✔'; color: white; font-size: 14px; font-weight: bold;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
-
-        /* 選中後的文字效果 */
-        .check-item input[type="checkbox"]:checked + span {
-            text-decoration: line-through;
-            color: #aaa;
-        }
-
-        .item-text { font-weight: 500; color: #333; }
-        .item-note { display: block; font-size: 0.85rem; color: #7f8c8d; margin-top: 3px; }
         
-        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .tab-btn {
-            background: #e0e0e0; border: none; padding: 10px 20px; border-radius: 20px;
-            font-weight: bold; color: #555; cursor: pointer;
-        }
-        .tab-btn.active { background: var(--primary); color: #fff; }
+        /* 文字樣式 */
+        .item-content { display: flex; flex-direction: column; }
+        .item-text { font-weight: 600; color: var(--text-dark); font-size: 1rem; }
+        .item-note { font-size: 0.85rem; color: #7f8c8d; margin-top: 2px; }
+        .tag-important { color: #e74c3c; font-weight: bold; font-size: 0.8rem; border: 1px solid #e74c3c; padding: 1px 5px; border-radius: 4px; margin-left: 5px; }
 
+        /* 完成後的刪除線效果 */
+        .check-item input:checked + .item-content .item-text {
+            text-decoration: line-through; color: #bdc3c7;
+        }
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav"></nav>
 
     <div class="container">
         <h1>📋 行前準備與行李清單</h1>
         <div class="subtitle">互動式檢查表・打勾確認不遺漏</div>
 
-        <div class="tabs">
-            <a href="#todo" class="tab-btn active" style="text-decoration:none;">⏳ 待辦事項</a>
-            <a href="#pack" class="tab-btn active" style="text-decoration:none; background-color: var(--accent);">🧳 行李清單</a>
-        </div>
-
-        <div id="todo" class="check-group">
-            <div class="group-title">⏳ 出發前 1-2 週 (關鍵代辦)</div>
+        <div class="check-group">
+            <div class="group-title"><span class="group-icon">⏳</span>出發前 2 週必做 (關鍵)</div>
             
             <label class="check-item">
                 <input type="checkbox">
-                <span>
-                    <span class="item-text">開通信用卡「預借現金密碼」 (PIN Code)</span>
-                    <span class="item-note">⚠️ 極重要！自助加油、無人車站買票必用 (通常是4碼)。</span>
-                </span>
+                <div class="item-content">
+                    <span class="item-text">開通「預借現金密碼」 (PIN Code)<span class="tag-important">必備</span></span>
+                    <span class="item-note">打電話給銀行開通 4 位數密碼。自助加油、買車票一定要用。</span>
+                </div>
             </label>
 
             <label class="check-item">
                 <input type="checkbox">
-                <span>
+                <div class="item-content">
                     <span class="item-text">購買上網 SIM 卡 / eSIM</span>
-                    <span class="item-note">建議買全歐通用，並確認包含通話功能 (聯絡住宿/租車用)。</span>
-                </span>
+                    <span class="item-note">確認覆蓋範圍包含：荷蘭、比利時、挪威。一定要有「通話功能」以備緊急聯絡。</span>
+                </div>
             </label>
 
             <label class="check-item">
                 <input type="checkbox">
-                <span>
+                <div class="item-content">
                     <span class="item-text">檢查護照效期</span>
-                    <span class="item-note">必須在回國當天仍有「6個月以上」效期。</span>
-                </span>
+                    <span class="item-note">回國當天必須還有「6個月以上」效期。</span>
+                </div>
             </label>
 
             <label class="check-item">
                 <input type="checkbox">
-                <span>
+                <div class="item-content">
                     <span class="item-text">換領「國際駕照」</span>
-                    <span class="item-note">去監理站辦理。出國時「台灣駕照正本」也要帶著！</span>
-                </span>
+                    <span class="item-note">去監理站辦。出國時「台灣駕照正本」也要帶！</span>
+                </div>
             </label>
 
             <label class="check-item">
                 <input type="checkbox">
-                <span>
+                <div class="item-content">
                     <span class="item-text">下載離線地圖 (Google Maps)</span>
-                    <span class="item-note">範圍：荷蘭全境、挪威羅浮敦群島、特羅姆瑟。</span>
-                </span>
+                    <span class="item-note">範圍：荷蘭全境、挪威羅浮敦、特羅姆瑟。</span>
+                </div>
             </label>
 
             <label class="check-item">
                 <input type="checkbox">
-                <span>
+                <div class="item-content">
                     <span class="item-text">列印紙本憑證 (Hard Copy)</span>
-                    <span class="item-note">機票、住宿、租車合約、保險單。手機沒電時的救命符。</span>
-                </span>
-            </label>
-
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">購買旅遊保險</span>
-                    <span class="item-note">含醫療險 (申根險證明) 與 不便險。</span>
-                </span>
-            </label>
-        </div>
-
-        <div id="pack" class="check-group">
-            <div class="group-title">🧳 隨身行李 (登機用)</div>
-            
-            <label class="check-item"><input type="checkbox"><span><strong>護照</strong> (含護照影本備份)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>台灣駕照 + 國際駕照</strong> (租車必備)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>信用卡</strong> (建議帶 2-3 張不同銀行的)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>歐元現鈔</strong> (不用太多，小額備用)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>原子筆</strong> (填入境卡用)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>行動電源</strong> (絕對不能託運！)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>長途飛行備品</strong> (頸枕、眼罩、拖鞋)</span></label>
-        </div>
-
-        <div class="check-group">
-            <div class="group-title">👕 衣物類 (針對北極圈)</div>
-            
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">防風防水外套 (Gore-tex)</span>
-                    <span class="item-note">最外層，擋風就是保暖的關鍵。</span>
-                </span>
-            </label>
-            <label class="check-item"><input type="checkbox"><span><strong>發熱衣 / 羊毛內衣</strong> (3-4套)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>中層保暖衣</strong> (刷毛 Fleece 或 輕羽絨)</span></label>
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">防水防滑靴子</span>
-                    <span class="item-note">一般球鞋在雪地會溼透，非常痛苦。</span>
-                </span>
-            </label>
-            <label class="check-item"><input type="checkbox"><span><strong>羊毛襪</strong> (厚底，保暖腳趾)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>毛帽、圍巾、手套</strong> (手套最好防水)</span></label>
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">簡易冰爪 (Crampons)</span>
-                    <span class="item-note">套在鞋底的防滑釘，迪卡儂有賣，走路神物。</span>
-                </span>
+                    <span class="item-note">機票、住宿單、租車合約、保險單。手機遺失時的救命符。</span>
+                </div>
             </label>
         </div>
 
         <div class="check-group">
-            <div class="group-title">🔌 電器與雜物</div>
-            
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">萬國轉接頭 x 2</span>
-                    <span class="item-note">歐規雙圓孔 (Type C/F)。</span>
-                </span>
-            </label>
-            <label class="check-item"><input type="checkbox"><span><strong>車充頭</strong> (點菸器轉 USB)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>手機架</strong> (租車導航用)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>各種充電線</strong></span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>個人藥品</strong> (感冒、腸胃、暈車藥)</span></label>
-            <label class="check-item">
-                <input type="checkbox">
-                <span>
-                    <span class="item-text">牙刷、牙膏、拖鞋</span>
-                    <span class="item-note">歐洲環保旅館 99% 不提供，必須自備。</span>
-                </span>
-            </label>
-            <label class="check-item"><input type="checkbox"><span><strong>保溫瓶 / 泡麵 / 筷子</strong> (想念熱食時用)</span></label>
-            <label class="check-item"><input type="checkbox"><span><strong>保濕乳液 / 護唇膏</strong> (歐洲極乾)</span></label>
+            <div class="group-title"><span class="group-icon">🎒</span>隨身行李 (登機用)</div>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">護照 + 護照影本</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">台灣駕照 + 國際駕照</span><span class="item-note">缺一不可，租車公司會檢查。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">信用卡 (2-3張)</span><span class="item-note">不同發卡組織 (Visa/Master)。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">歐元現鈔</span><span class="item-note">不用多，約 €200 小額備用。挪威幾乎全刷卡。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">行動電源</span><span class="item-note">嚴禁託運！一定要隨身帶。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">原子筆</span><span class="item-note">填寫入境卡或筆記用。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">頸枕 / 眼罩 / 耳塞</span><span class="item-note">長途飛行三寶。</span></div></label>
+        </div>
+
+        <div class="check-group">
+            <div class="group-title"><span class="group-icon">🧥</span>衣物與極地裝備</div>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">防風防水外套 (Gore-tex)</span><span class="item-note">最外層，擋風就是保暖。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">發熱衣 / 羊毛內衣 (3-4套)</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">防水防滑靴子</span><span class="item-note">一般球鞋在雪地會濕透。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">簡易冰爪 (Crampons)<span class="tag-important">必備</span></span><span class="item-note">套在鞋底的防滑釘 (迪卡儂有)，羅浮敦結冰路面救星。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">毛帽 / 圍巾 / 手套</span><span class="item-note">手套建議買防水、可觸控螢幕的。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">厚羊毛襪</span><span class="item-note">腳底保暖最重要。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">墨鏡</span><span class="item-note">雪地反光非常刺眼 (雪盲症)。</span></div></label>
+        </div>
+
+        <div class="check-group">
+            <div class="group-title"><span class="group-icon">🔌</span>電器與生活雜物</div>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">萬國轉接頭 x2</span><span class="item-note">歐規雙圓孔 (Type C/F)。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">車充頭 (點菸器轉 USB)</span><span class="item-note">租車必備，手機導航才不會沒電。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">手機架</span><span class="item-note">夾在冷氣出風口的款式最通用。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">牙刷 / 牙膏 / 拖鞋</span><span class="item-note">歐洲飯店 99% 不提供。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">指甲剪 / 刮鬍刀</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">常備藥品</span><span class="item-note">感冒、腸胃、暈車藥、OK繃。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">保濕乳液 / 護唇膏 / 護手霜</span><span class="item-note">歐洲非常乾燥，沒帶會裂開。</span></div></label>
+            <label class="check-item"><input type="checkbox"><div class="item-content"><span class="item-text">保溫瓶 / 泡麵 / 筷子</span><span class="item-note">亞洲胃的救贖。</span></div></label>
         </div>
 
     </div>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>極光攝影與美景攻略</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .photo-card { background: #263238; color: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .photo-title { color: var(--accent); font-size: 1.3rem; font-weight: bold; border-bottom: 1px solid #546e7a; padding-bottom: 10px; margin-bottom: 15px; }
+        
+        .param-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .param-box { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 6px; text-align: center; }
+        .param-label { display: block; font-size: 0.8rem; color: #b0bec5; }
+        .param-value { display: block; font-size: 1.2rem; font-weight: bold; color: #fff; }
+
+        .tips-list li { margin-bottom: 8px; color: #eceff1; }
+        .tips-list strong { color: var(--accent); }
+        
+        .phone-mode { background: #fff; color: #333; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 5px solid var(--info); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNav"></nav>
+
+    <div class="container">
+        <h1>📷 極光攝影與美景攻略</h1>
+        <div class="subtitle">傻瓜參數・手機也能拍・構圖建議</div>
+
+        <div class="photo-card">
+            <div class="photo-title">🌌 相機拍攝參數 (M模式)</div>
+            <p style="color: #cfd8dc; font-size: 0.9rem; margin-bottom: 15px;">請先在家裡練習調整到 M 模式，現場太黑會找不到按鈕。</p>
+            
+            <div class="param-grid">
+                <div class="param-box">
+                    <span class="param-label">光圈 (Aperture)</span>
+                    <span class="param-value">F2.8</span>
+                    <span class="param-label">(最大光圈)</span>
+                </div>
+                <div class="param-box">
+                    <span class="param-label">ISO 感光度</span>
+                    <span class="param-value">1600 - 3200</span>
+                    <span class="param-label">(太高會噪點)</span>
+                </div>
+                <div class="param-box">
+                    <span class="param-label">快門 (Shutter)</span>
+                    <span class="param-value">6s - 15s</span>
+                    <span class="param-label">(極光強就短，弱就長)</span>
+                </div>
+                <div class="param-box">
+                    <span class="param-label">對焦 (Focus)</span>
+                    <span class="param-value">手動 (MF)</span>
+                    <span class="param-label">(對焦到無限遠 ∞)</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; border-top: 1px dashed #546e7a; padding-top: 10px;">
+                <ul class="tips-list">
+                    <li><strong>腳架必備：</strong> 沒有腳架絕對拍不出來 (快門好幾秒，手持會糊)。</li>
+                    <li><strong>延遲快門：</strong> 設定 2 秒倒數拍攝，避免按快門時手震。</li>
+                    <li><strong>無限遠對焦：</strong> 對著遠處的燈光或月亮，把對焦環轉到最清晰，然後貼上膠帶固定。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="phone-mode">
+            <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary); margin-bottom: 10px;">📱 手機也能拍 (iPhone/Android)</div>
+            <ol style="padding-left: 20px;">
+                <li><strong>開啟「夜間模式」 (Night Mode)：</strong>
+                    <ul>
+                        <li>iPhone：點選左上角黃色月亮圖示，將秒數拉到最長 (通常是 10s 或 30s)。</li>
+                        <li>Android：切換到「專業模式」或「夜景模式」。</li>
+                    </ul>
+                </li>
+                <li><strong>一定要穩：</strong> 手機也要上腳架，或是靠在車頂、石頭上，手持 10 秒一定會晃。</li>
+                <li><strong>曝光調整：</strong> 點擊螢幕對焦後，將旁邊的「小太陽」往下拉一點，避免過曝。</li>
+            </ol>
+        </div>
+
+        <div class="card" style="border-left-color: var(--success);">
+            <div class="card-header"><span class="icon">🏔️</span>羅浮敦必拍構圖</div>
+            <ul style="padding-left: 20px;">
+                <li><strong>Hamnøy Bridge：</strong> 站在橋上往回拍紅色漁屋 + 後面的大山。這是羅浮敦的證件照。</li>
+                <li><strong>Sakrisøy 黃色小屋：</strong> 這裡的房子是黃色的，就在 Hamnøy 隔壁，顏色對比很鮮明。</li>
+                <li><strong>Reine 倒影：</strong> 進 Reine 村莊前的停車場，無風時可以拍到完美的山水倒影。</li>
+                <li><strong>Skagsanden 黑沙灘：</strong> 拍攝黑沙上的冰裂紋 + 極光倒影。</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left-color: var(--danger);">
+            <div class="card-header"><span class="icon">⚠️</span>器材保命守則</div>
+            <div class="note note-alert">
+                <strong>進室內前注意！</strong><br>
+                在室外拍久了相機會變冰棒。<strong>進溫暖室內前，請先把相機放入密封袋或包包拉好拉鍊。</strong><br>
+                等 1-2 小時回溫後再拿出來。否則鏡頭和機身內部會瞬間「起霧結露」，導致器材損壞。
+            </div>
+            <ul style="margin-top: 10px; padding-left: 20px;">
+                <li><strong>電池保暖：</strong> 鋰電池在低溫下耗電極快。備用電池請放在貼身口袋保暖。</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="navbar.js"></script>
+</body>
+</html>

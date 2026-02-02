@@ -3,56 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歐洲生活起居萬用手冊</title>
+    <title>歐洲生活與生存指南</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* === 樣式設定 === */
+        .hero-warning {
+            background: #ffebee; border-left: 5px solid #c62828; padding: 20px;
+            border-radius: 8px; margin-bottom: 30px; color: #b71c1c;
+        }
+        .hero-title { font-size: 1.2rem; font-weight: bold; display: flex; align-items: center; margin-bottom: 10px; }
+        
+        .card { height: 100%; }
+        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; color: var(--primary); }
+        .icon { font-size: 1.5rem; margin-right: 12px; }
+        
+        /* 兩欄佈局 */
+        .grid-row { display: grid; gap: 20px; margin-bottom: 30px; }
+        .cols-2 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+
+        /* 標籤 */
+        .tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; color: white; margin-right: 5px; }
+        .tag-yes { background-color: var(--success); }
+        .tag-no { background-color: var(--secondary); }
+        
+        /* 退稅計算盒 */
+        .tax-box { background-color: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px dashed #2196f3; }
+        
+        /* 穿搭盒 */
         .outfit-box { background-color: #fffde7; border: 1px solid #fff59d; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .tag { display: inline-block; background-color: #eceff1; color: #455a64; padding: 3px 8px; border-radius: 4px; font-size: 0.9rem; margin-right: 5px; font-weight: bold; }
+        
+        /* 列表 */
+        ul { padding-left: 20px; margin: 0; }
+        li { margin-bottom: 8px; }
+        
+        details { background-color: #fafafa; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; }
+        summary { padding: 12px 15px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+        summary::after { content: '+'; font-size: 1.2rem; color: #999; }
+        details[open] summary::after { content: '-'; color: var(--primary); }
+        .details-content { padding: 15px; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>🏠 生活起居萬用手冊</h1>
-        <div class="subtitle">穿衣・洗衣・飯店備品・藥局</div>
+        <h1>🏠 生活與生存指南</h1>
+        <div class="subtitle">電壓・退稅・穿衣・飯店・醫療・超市</div>
 
-        <div class="card" style="border-left-color: #5d4037;">
-            <div class="card-header"><span class="icon">🧥</span>穿衣攻略：洋蔥式</div>
-            <p>挪威 (-5°C) 荷蘭 (10°C) 溫差大。</p>
-            <div class="outfit-box">
-                <strong>🏔️ 挪威裝備：</strong>
-                <ul><li>外層：防風防水 (Gore-tex)。</li><li>中層：輕羽絨/刷毛。</li><li>內層：發熱衣。</li><li><strong>腳下：防水靴 + 簡易冰爪 (必備)。</strong></li></ul>
+        <div class="hero-warning">
+            <div class="hero-title">🔥 嚴重警告：關於吹風機</div>
+            <p>台灣電壓是 110V，歐洲是 220V。<strong>千萬不要帶台灣的吹風機、離子夾插上去，會瞬間燒掉甚至跳電！</strong></p>
+            <ul style="margin-top: 10px;">
+                <li><strong>解決方案：</strong> 帶「國際電壓 (110-240V)」的旅行用吹風機，或是只用飯店提供的。</li>
+                <li><strong>手機/相機/筆電：</strong> 充電器通常支援 100-240V，可以直接插，不用擔心。</li>
+            </ul>
+        </div>
+
+        <div class="grid-row cols-2">
+            <div class="card" style="border-left-color: var(--primary);">
+                <div class="card-header"><span class="icon">🔌</span>電壓與網路 (Power & Net)</div>
+                <ul>
+                    <li><strong>插座形狀：</strong> 雙圓孔 (Type C / F)。請務必攜帶 <strong>2 個萬國轉接頭</strong> (一個充手機，一個充行動電源)。</li>
+                    <li><strong>SIM 卡：</strong> 建議買「全歐洲通用」網卡 (含挪威/荷蘭)。</li>
+                    <li><strong>通話功能：</strong> 強烈建議要有門號，緊急聯絡飯店或道路救援時非常重要。</li>
+                </ul>
             </div>
-            <div class="outfit-box" style="background-color: #e0f2f1; border-color: #b2dfdb;">
-                <strong>🌷 荷蘭裝備：</strong> 有帽子的防水外套 (風大雨傘易壞)、好走的鞋。
+
+            <div class="card" style="border-left-color: var(--accent);">
+                <div class="card-header"><span class="icon">💰</span>購物退稅 (Tax Refund)</div>
+                <p><strong>原則：</strong>「帶回台灣的商品」才能退。當地吃掉用掉的不能退。</p>
+                <div style="margin: 10px 0;">
+                    <span class="tag tag-yes">可退</span> 衣服、包包、電子產品、密封食品<br>
+                    <span class="tag tag-no">不可</span> 餐廳吃飯、住宿、車票、生鮮水果
+                </div>
+                <div class="tax-box">
+                    <strong>門檻：</strong> 挪威 NOK 315 / 荷蘭 €50。<br>
+                    <strong>地點：</strong>
+                    <ul>
+                        <li>挪威買 👉 <strong>離開挪威時退</strong> (OSL/TOS 機場)。</li>
+                        <li>荷蘭買 👉 <strong>離開歐洲最後一站退</strong> (AMS 機場)。</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="card" style="border-left-color: #00897b;">
-            <div class="card-header"><span class="icon">🏨</span>飯店沒有提供的東西</div>
-            <ul>
-                <li>❌ <strong>牙刷、牙膏：</strong> 90% 不提供。</li>
-                <li>❌ <strong>拖鞋：</strong> 地板冰冷，建議自備。</li>
-                <li>❌ <strong>熱水壺：</strong> 城市商旅不一定有，想泡麵請自備折疊壺或保溫瓶。</li>
-            </ul>
+        <div class="grid-row cols-2">
+            <div class="card" style="border-left-color: #5d4037;">
+                <div class="card-header"><span class="icon">🧥</span>洋蔥式穿法 (Clothing)</div>
+                <p>3 月挪威 (-5°C) 與荷蘭 (10°C) 溫差大。</p>
+                <div class="outfit-box">
+                    <strong>🏔️ 挪威極地裝備：</strong>
+                    <ul>
+                        <li><strong>外層：</strong> 防風防水外套 (Gore-tex)。</li>
+                        <li><strong>中層：</strong> 輕羽絨 或 厚刷毛。</li>
+                        <li><strong>內層：</strong> 發熱衣 (Heattech)。</li>
+                        <li><strong>腳下(最重要)：</strong> 防水靴 + <strong>簡易冰爪</strong> (迪卡儂有賣，防滑保命神器)。</li>
+                    </ul>
+                </div>
+                <div class="outfit-box" style="background-color: #e0f2f1; border-color: #b2dfdb;">
+                    <strong>🌷 荷蘭城市裝備：</strong> 
+                    風大雨傘易壞，建議穿有帽子的防水外套。
+                </div>
+            </div>
+
+            <div class="card" style="border-left-color: #00897b;">
+                <div class="card-header"><span class="icon">🏨</span>飯店沒有的東西 (Hotel)</div>
+                <p>歐洲響應環保，很多東西<strong>不主動提供</strong>，請自備：</p>
+                <ul>
+                    <li>❌ <strong>牙刷、牙膏：</strong> 90% 飯店沒有。</li>
+                    <li>❌ <strong>室內拖鞋：</strong> 地板很冰，建議帶飛機上那種紙拖鞋或浴室拖鞋。</li>
+                    <li>❌ <strong>熱水壺：</strong> 漁屋通常有，但城市商旅不一定有。想泡麵建議自備折疊壺或保溫瓶去櫃檯裝水。</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="card" style="border-left-color: var(--accent);">
-            <div class="card-header"><span class="icon">🍷</span>買酒與超市時間限制 (挪威)</div>
-            <ul>
-                <li><strong>平日：</strong> 晚上 8 點後禁賣酒。</li>
-                <li><strong>週六：</strong> 晚上 6 點後禁賣酒。</li>
-                <li><strong>週日：</strong> <span style="color:var(--secondary); font-weight:bold;">超市通常不開！也買不到酒。</span></li>
-            </ul>
+        <div class="grid-row cols-2">
+            <div class="card" style="border-left-color: #fbc02d;">
+                <div class="card-header"><span class="icon">🍷</span>超市買酒限制 (Alcohol)</div>
+                <p>挪威法規極嚴，想小酌請注意時間：</p>
+                <ul>
+                    <li><strong>平日：</strong> 晚上 8 點後禁賣酒。</li>
+                    <li><strong>週六：</strong> 晚上 6 點後禁賣酒。</li>
+                    <li><strong>週日：</strong> <span style="color:red; font-weight:bold;">超市通常不開！也買不到酒。</span></li>
+                    <li><strong>度數：</strong> 超市只賣 4.7% 以下啤酒。烈酒要去國營店 Vinmonopolet。</li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-left-color: #e53935;">
+                <div class="card-header"><span class="icon">💊</span>藥局與乾燥 (Health)</div>
+                <ul>
+                    <li><strong>必備藥品：</strong> 感冒藥、止痛藥、胃藥、暈車藥 (搭渡輪/山路)、OK繃。</li>
+                    <li><strong>極度乾燥：</strong> 歐洲比台灣乾非常多。請狂擦護唇膏、護手霜、身體乳液，以免皮膚龜裂流血。</li>
+                    <li><strong>藥局招牌：</strong> 綠色十字圖案 (Apotek / Apotheek)。</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="card" style="border-left-color: var(--secondary);">
-            <div class="card-header"><span class="icon">💊</span>藥局與健康</div>
-            <ul>
-                <li><strong>藥局識別：</strong> Apotek (挪威) / Apotheek (荷蘭)，標誌為綠色十字。</li>
-                <li><strong>必備藥品：</strong> 感冒藥、止痛藥、胃藥、暈車藥、OK繃。</li>
-            </ul>
+        <div class="card" style="border-left-color: #1976d2;">
+            <div class="card-header"><span class="icon">🧺</span>長途洗衣攻略</div>
+            <details>
+                <summary>去哪裡洗衣服？</summary>
+                <div class="details-content">
+                    <ul>
+                        <li><strong>羅浮敦漁屋：</strong> 許多獨棟漁屋內就有洗衣機 (訂房時確認)。</li>
+                        <li><strong>自助洗衣店 (Vaskeri)：</strong> 大城市才有，鄉下難找且貴。</li>
+                        <li><strong>手洗大法：</strong> 帶一小罐洗衣精。洗完後掛在室內暖氣片 (Heater) 附近，因為空氣乾，一晚就會乾了 (襪子/內衣褲適用)。</li>
+                    </ul>
+                </div>
+            </details>
         </div>
+
     </div>
+
     <script src="navbar.js"></script>
 </body>
 </html>
