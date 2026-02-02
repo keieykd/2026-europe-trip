@@ -6,225 +6,66 @@
     <title>2026 荷比挪自駕：完美合體版</title>
     <style>
         :root {
-            --primary: #2c3e50; /* 沈穩深藍 */
-            --secondary: #e74c3c; /* 價格紅 */
-            --accent: #f39c12; /* 重點橘 */
-            --bg-light: #ecf0f1;
-            --nav-bg: #34495e;
-            --text-dark: #2c3e50;
+            --primary: #2c3e50; --secondary: #e74c3c; --accent: #f39c12; --bg-light: #ecf0f1; --nav-bg: #263238; --text-dark: #2c3e50;
         }
         body {
             font-family: "Microsoft JhengHei", "Heiti TC", sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 40px;
+            line-height: 1.6; color: var(--text-dark); background-color: #f8f9fa; margin: 0; padding: 20px 15px; padding-top: 80px; /* 預留導航空間 */
         }
-
-        /* === 導航列 (自動隱藏特效) === */
+        /* === 導航列樣式 === */
         .navbar {
-            background-color: var(--nav-bg);
-            padding: 10px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            transition: transform 0.3s ease-in-out;
+            background-color: var(--nav-bg); padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out;
         }
         .navbar.nav-hidden { transform: translateY(-100%); }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: flex-start;
-            padding: 0 15px;
-        }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
         @media (min-width: 768px) { .nav-container { justify-content: center; } }
-
         .nav-item {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            padding: 8px 16px;
-            margin: 0 4px;
-            border-radius: 20px;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
+            color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center;
         }
-        .nav-item:hover { background-color: rgba(255, 255, 255, 0.2); color: #fff; }
-        .nav-item.active {
-            background-color: var(--accent);
-            color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: var(--accent); color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .nav-icon { margin-right: 6px; }
         .navbar::-webkit-scrollbar { display: none; }
-
-        /* === 內容區塊 === */
-        .container {
-            max-width: 1000px;
-            margin: 80px auto 20px auto;
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            border-bottom: 4px solid var(--accent);
-            padding-bottom: 15px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-
-        /* === APP 卡片區 (回來了！) === */
-        .app-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        .app-card {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
+        
+        /* === 內容樣式 === */
+        .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 5px; border-bottom: 4px solid var(--accent); padding-bottom: 15px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-size: 0.9rem; }
+        
+        .app-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 40px; }
+        .app-card { background-color: #f8f9fa; border: 1px solid #e9ecef; border-left: 4px solid #3498db; padding: 15px; border-radius: 8px; transition: transform 0.2s; }
         .app-card:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .app-name { font-weight: bold; color: #2980b9; display: block; margin-bottom: 5px; font-size: 1.1rem; }
         .app-desc { font-size: 0.9rem; color: #555; }
-
-        /* === 預算說明卡 === */
-        .budget-info {
-            background-color: #e8f6f3;
-            border: 1px solid #a2d9ce;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            color: #16a085;
-            font-size: 0.95rem;
-        }
         
-        /* === 行程樣式 === */
-        .section-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin-top: 40px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
+        .budget-info { background-color: #e8f6f3; border: 1px solid #a2d9ce; padding: 15px; border-radius: 8px; margin-bottom: 30px; color: #16a085; font-size: 0.95rem; }
+        .section-header { background-color: var(--primary); color: white; padding: 12px 20px; border-radius: 8px; margin-top: 40px; font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; }
         .section-header::before { content: "📍"; margin-right: 10px; }
-
-        .day-box {
-            border-left: 5px solid var(--accent);
-            background: #fff;
-            margin-bottom: 30px;
-            padding-left: 20px;
-            margin-top: 25px;
-        }
-        .day-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 20px;
-            padding-top: 5px;
-        }
-        
+        .day-box { border-left: 5px solid var(--accent); background: #fff; margin-bottom: 30px; padding-left: 20px; margin-top: 25px; }
+        .day-title { font-size: 1.4rem; font-weight: bold; color: var(--primary); margin-bottom: 20px; padding-top: 5px; }
         .timeline { position: relative; padding-left: 10px; }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 35px;
-            border-left: 2px solid #eee;
-            padding-left: 25px;
-        }
+        .timeline-item { position: relative; padding-bottom: 35px; border-left: 2px solid #eee; padding-left: 25px; }
         .timeline-item:last-child { border-left: none; }
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-        .time {
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 1.1rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        /* === 價格標籤 === */
-        .cost-tag {
-            display: inline-block;
-            background-color: #fff0f0;
-            color: #c0392b;
-            border: 1px solid #ffcccc;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        /* === 景點選單樣式 (回來了！) === */
-        .spot-options {
-            background-color: #fcf3cf; /* 暖黃色背景 */
-            border: 1px dashed #f1c40f;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
+        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+        .time { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 5px; }
+        .cost-tag { display: inline-block; background-color: #fff0f0; color: #c0392b; border: 1px solid #ffcccc; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-left: 8px; vertical-align: middle; }
+        .spot-options { background-color: #fcf3cf; border: 1px dashed #f1c40f; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .spot-title { color: #d35400; font-weight: bold; display: block; margin-bottom: 8px; font-size: 1rem; }
         .spot-list { margin: 0; padding-left: 20px; list-style-type: disc; }
         .spot-list li { margin-bottom: 6px; color: #555; }
-
-        /* === 提示框 === */
-        .note {
-            font-size: 0.9rem;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-            display: block;
-        }
+        .note { font-size: 0.9rem; padding: 10px; border-radius: 6px; margin-top: 8px; display: block; }
         .note-tip { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
         .note-alert { background: #fadbd8; color: #922b21; border: 1px solid #f5b7b1; }
         .note-tip::before { content: "💡 "; }
         .note-alert::before { content: "⛔ "; }
-
     </style>
 </head>
 <body>
 
 <nav class="navbar" id="mainNav">
     <div class="nav-container">
-        <a href="index.html" class="nav-item active"><span class="nav-icon">📅</span>行程</a>
+        <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
         <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
         <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
         <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
@@ -572,9 +413,21 @@
 </div>
 
 <script>
+    // 自動亮燈邏輯
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const navLinks = document.querySelectorAll('.nav-item');
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (currentPage.includes(linkHref) || (currentPage === "" && linkHref === "index.html")) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    // 自動隱藏邏輯
     let lastScrollY = window.scrollY;
     const navbar = document.getElementById('mainNav');
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > lastScrollY && window.scrollY > 50) {
             navbar.classList.add('nav-hidden');

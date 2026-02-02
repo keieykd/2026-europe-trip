@@ -6,114 +6,54 @@
     <title>歐洲生活起居萬用手冊</title>
     <style>
         :root {
-            /* 深色莫蘭迪配色 - 統一視覺 */
-            --primary: #546e7a;  /* 深藍灰 */
-            --accent: #8d6e63;   /* 暖棕色 */
-            --highlight: #d4e157; /* 橄欖黃 (重點標示) */
-            --bg: #f4f4f4;
-            --card-bg: #ffffff;
-            --text: #222222;
-            --text-light: #555555;
-            --border: #cfd8dc;
+            --primary: #546e7a; --accent: #8d6e63; --highlight: #d4e157; --bg: #f4f4f4; --card-bg: #ffffff; --text: #222222; --text-light: #555555; --border: #cfd8dc;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.6;
+            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
         }
+        /* 導航樣式 */
+        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
+        @media (min-width: 768px) { .nav-container { justify-content: center; } }
+        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
         .container { max-width: 900px; margin: 0 auto; }
-
-        h1 {
-            text-align: center;
-            color: var(--text);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 35px;
-            font-size: 1rem;
-        }
-
-        /* === 卡片樣式 === */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 6px solid var(--primary);
-        }
-
-        .card-header {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            color: var(--text);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
+        h1 { text-align: center; color: var(--text); font-size: 1.8rem; margin-bottom: 10px; font-weight: 800; }
+        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 6px solid var(--primary); }
+        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; color: var(--text); border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .icon { font-size: 1.5rem; margin-right: 12px; }
-
-        /* === 內容樣式 === */
         ul { padding-left: 20px; margin: 0; }
         li { margin-bottom: 10px; font-weight: 500; }
         strong { color: #000; font-weight: 800; }
-
-        .tag {
-            display: inline-block;
-            background-color: #eceff1;
-            color: #455a64;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            margin-right: 5px;
-            font-weight: bold;
-        }
-
-        /* === 穿搭圖解區 === */
-        .outfit-box {
-            background-color: #fffde7;
-            border: 1px solid #fff59d;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        /* === 折疊清單 === */
-        details {
-            background-color: #fafafa;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-        summary {
-            padding: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            color: var(--primary);
-        }
+        .tag { display: inline-block; background-color: #eceff1; color: #455a64; padding: 3px 8px; border-radius: 4px; font-size: 0.9rem; margin-right: 5px; font-weight: bold; }
+        .outfit-box { background-color: #fffde7; border: 1px solid #fff59d; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        details { background-color: #fafafa; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; }
+        summary { padding: 15px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; color: var(--primary); }
         summary::after { content: '+'; font-size: 1.2rem; color: #ccc; }
         details[open] summary::after { content: '-'; color: var(--primary); }
         .details-content { padding: 15px; border-top: 1px solid #eee; }
-
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
+            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+        </div>
+    </nav>
 
     <div class="container">
         <h1>🏠 歐洲生活・起居萬用手冊</h1>
@@ -214,9 +154,22 @@
 
     </div>
 
-    <div style="text-align: center; margin-top: 30px; color: #777; font-size: 0.9rem;">
-        準備越周全，旅行越優雅。祝您旅途愉快！
-    </div>
+    <script>
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
+            else { link.classList.remove('active'); }
+        });
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 
 </body>
 </html>

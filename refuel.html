@@ -6,150 +6,59 @@
     <title>歐洲自助加油實戰手冊 (保母級)</title>
     <style>
         :root {
-            /* 深色莫蘭迪配色方案 (與自駕攻略統一) */
-            --danger: #8a4b4b;   /* 深磚紅 */
-            --warning: #8c7b50;  /* 深大地黃 */
-            --safe: #5e8c61;     /* 莫蘭迪綠 (重點色) */
-            --info: #4a6572;     /* 深鋼藍 */
-            --hero-bg: #455a64;  /* 深岩灰藍 */
-            
-            --bg: #f4f4f4;
-            --card-bg: #ffffff;
-            --text: #222222;
-            --text-light: #555555;
+            --danger: #8a4b4b; --warning: #8c7b50; --safe: #5e8c61; --info: #4a6572; --hero-bg: #455a64;
+            --bg: #f4f4f4; --card-bg: #ffffff; --text: #222222; --text-light: #555555;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.6;
+            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
         }
+        /* 導航樣式 */
+        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
+        @media (min-width: 768px) { .nav-container { justify-content: center; } }
+        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
         .container { max-width: 900px; margin: 0 auto; }
-
-        h1 {
-            text-align: center;
-            color: #1a1a1a;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 35px;
-            font-size: 1rem;
-        }
-
-        /* === 核心資訊卡 (生死攸關) === */
-        .hero-card {
-            background: linear-gradient(135deg, #78909c, var(--hero-bg));
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3);
-            border: 2px solid #fff;
-        }
+        h1 { text-align: center; color: #1a1a1a; font-size: 1.8rem; margin-bottom: 10px; font-weight: 800; }
+        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; }
+        .hero-card { background: linear-gradient(135deg, #78909c, var(--hero-bg)); color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); border: 2px solid #fff; }
         .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; }
-        
-        .fuel-badge {
-            display: inline-block;
-            background-color: #4caf50; /* 鮮綠色標示 */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        /* === 卡片樣式 === */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 6px solid #ccc;
-        }
-
+        .fuel-badge { display: inline-block; background-color: #4caf50; color: white; padding: 10px 20px; border-radius: 50px; font-size: 1.2rem; font-weight: bold; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 6px solid #ccc; }
         .card-step { border-left-color: var(--info); }
         .card-danger { border-left-color: var(--danger); }
         .card-money { border-left-color: var(--warning); }
         .card-safe { border-left-color: var(--safe); }
-
-        .card-header {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            color: #111;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
+        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; color: #111; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .icon { font-size: 1.5rem; margin-right: 12px; }
-
-        /* === 步驟流程 === */
-        .step-box {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 20px;
-        }
-        .step-box::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            background-color: var(--info);
-            border-radius: 50%;
-        }
+        .step-box { position: relative; padding-left: 30px; margin-bottom: 20px; }
+        .step-box::before { content: ""; position: absolute; left: 0; top: 8px; width: 12px; height: 12px; background-color: var(--info); border-radius: 50%; }
         .step-title { font-weight: 800; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-
-        /* === 重點強調 === */
-        .highlight-box {
-            background-color: #e0f2f1;
-            border: 1px solid #b2dfdb;
-            color: #00695c;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        .alert-box {
-            background-color: #ffebee;
-            border: 1px solid #ffcdd2;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        /* === 關鍵字標籤 === */
-        .keyword {
-            background-color: #263238;
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-weight: bold;
-        }
-        
+        .highlight-box { background-color: #e0f2f1; border: 1px solid #b2dfdb; color: #00695c; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .alert-box { background-color: #ffebee; border: 1px solid #ffcdd2; color: #c62828; padding: 15px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
+        .keyword { background-color: #263238; color: #fff; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: bold; }
         .green-text { color: #2e7d32; font-weight: 900; }
-
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
+            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+        </div>
+    </nav>
 
     <div class="container">
         <h1>⛽ 自助加油實戰手冊</h1>
@@ -258,9 +167,22 @@
 
     </div>
 
-    <div style="text-align: center; color: var(--text-light); font-size: 0.85rem; margin-top: 30px; margin-bottom: 50px;">
-        存好這份攻略，加油不求人，看到帳單不心慌！
-    </div>
+    <script>
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
+            else { link.classList.remove('active'); }
+        });
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 
 </body>
 </html>

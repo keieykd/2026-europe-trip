@@ -6,224 +6,72 @@
     <title>挪威超市大廚：自炊完全手冊</title>
     <style>
         :root {
-            --primary: #d63031; /* 警示/重點紅 */
-            --secondary: #0984e3; /* 資訊藍 */
-            --accent: #fdcb6e; /* 強調黃 */
-            --bg: #f7f9fa;
-            --card-bg: #ffffff;
-            --text-main: #2d3436;
-            --text-light: #636e72;
+            --primary: #d63031; --secondary: #0984e3; --accent: #fdcb6e; --bg: #f7f9fa; --card-bg: #ffffff; --text-main: #2d3436; --text-light: #636e72;
         }
-
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            background-color: var(--bg); color: var(--text-main); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
         }
+        /* 導航樣式 */
+        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
+        @media (min-width: 768px) { .nav-container { justify-content: center; } }
+        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
-        /* === 佈局容器 (RWD 核心) === */
-        .container {
-            width: 100%;
-            max-width: 1200px; /* 電腦版最大寬度，避免文字太寬難讀 */
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* === 標題區 === */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #fff, #f1f2f6);
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-            color: var(--text-main);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
-
-        /* === 網格系統 (Grid System) === */
-        .grid-row {
-            display: grid;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        /* 手機預設 1 欄，平板 2 欄，電腦 3 欄 */
-        .cols-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .cols-2 {
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        }
-
-        /* === 卡片通用樣式 === */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #eee;
-            height: 100%; /* 讓同列卡片等高 */
-        }
-
-        /* 電腦版滑鼠懸停效果 */
-        @media (hover: hover) {
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-
-        /* === 生存指南樣式 === */
-        .survival-card {
-            border-left: 5px solid var(--primary);
-        }
-
-        .highlight-box {
-            background-color: #2d3436;
-            color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-        
-        .step-list ol {
-            padding-left: 20px;
-            margin: 0;
-        }
-        .step-list li {
-            margin-bottom: 8px;
-        }
-
-        /* === 超市字典樣式 === */
-        .dict-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .dict-table td {
-            padding: 10px 5px;
-            border-bottom: 1px dashed #eee;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin-bottom: 40px; padding: 40px 0; background: linear-gradient(135deg, #fff, #f1f2f6); border-bottom: 1px solid #e1e1e1; }
+        h1 { font-size: 2.5rem; margin: 0 0 10px 0; color: var(--text-main); }
+        .subtitle { font-size: 1.2rem; color: var(--text-light); }
+        .grid-row { display: grid; gap: 20px; margin-bottom: 40px; }
+        .cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .cols-2 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #eee; height: 100%; }
+        @media (hover: hover) { .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); } }
+        .card-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .card-icon { font-size: 1.5rem; margin-right: 10px; }
+        .survival-card { border-left: 5px solid var(--primary); }
+        .highlight-box { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .step-list ol { padding-left: 20px; margin: 0; }
+        .step-list li { margin-bottom: 8px; }
+        .dict-table { width: 100%; border-collapse: collapse; }
+        .dict-table td { padding: 10px 5px; border-bottom: 1px dashed #eee; }
         .word-no { color: var(--secondary); font-weight: bold; font-size: 1.1rem; }
         .word-tw { color: var(--text-light); }
-
-        /* === 食譜折疊區 (Details/Summary) === */
-        /* 在電腦版我們希望它看起來像完整的卡片，但保持折疊功能以節省空間，或者您可以選擇預設展開 */
-        
-        details {
-            background-color: #fafafa;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #eee;
-            margin-bottom: 0; /* 在 Grid 中由 gap 控制間距 */
-            height: fit-content;
-        }
-
-        summary {
-            padding: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            transition: background-color 0.2s;
-        }
-        
-        summary:hover {
-            background-color: #f1f8ff;
-        }
-
+        details { background-color: #fafafa; border-radius: 8px; overflow: hidden; border: 1px solid #eee; margin-bottom: 0; height: fit-content; }
+        summary { padding: 15px; font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background-color: #fff; transition: background-color 0.2s; }
+        summary:hover { background-color: #f1f8ff; }
         summary::-webkit-details-marker { display: none; }
-
-        summary::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: #ccc;
-        }
-
-        details[open] summary::after {
-            content: '-';
-            color: var(--secondary);
-        }
-
-        details[open] summary {
-            border-bottom: 1px solid #eee;
-            color: var(--secondary);
-        }
-
-        .recipe-content {
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        /* 食材標籤 */
+        summary::after { content: '+'; font-size: 1.5rem; color: #ccc; }
+        details[open] summary::after { content: '-'; color: var(--secondary); }
+        details[open] summary { border-bottom: 1px solid #eee; color: var(--secondary); }
+        .recipe-content { padding: 20px; background-color: #fff; }
         .tags { margin-bottom: 15px; }
-        .tag {
-            display: inline-block;
-            font-size: 0.85rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
+        .tag { display: inline-block; font-size: 0.85rem; padding: 3px 8px; border-radius: 4px; margin-right: 5px; margin-bottom: 5px; }
         .t-main { background-color: #e3f2fd; color: #0984e3; border: 1px solid #b3e5fc; }
         .t-sauce { background-color: #fff3e0; color: #e67e22; border: 1px solid #ffe0b2; }
-
-        /* === 區塊標題 === */
-        .section-heading {
-            text-align: center;
-            font-size: 1.8rem;
-            margin: 60px 0 30px 0;
-            color: var(--text-main);
-            position: relative;
-        }
-        .section-heading::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--secondary);
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-
+        .section-heading { text-align: center; font-size: 1.8rem; margin: 60px 0 30px 0; color: var(--text-main); position: relative; }
+        .section-heading::after { content: ""; display: block; width: 60px; height: 4px; background-color: var(--secondary); margin: 10px auto; border-radius: 2px; }
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
+            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+        </div>
+    </nav>
 
     <header>
         <div class="container">
@@ -508,6 +356,23 @@
     <div style="text-align: center; padding: 40px; color: #999;">
         Bon Appétit! 祝您在挪威吃得開心！
     </div>
+
+    <script>
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
+            else { link.classList.remove('active'); }
+        });
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 
 </body>
 </html>

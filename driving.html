@@ -6,165 +6,68 @@
     <title>歐洲自駕保命全攻略 (深色清晰版)</title>
     <style>
         :root {
-            /* 深色莫蘭迪配色方案 (加強對比度) */
-            --danger: #8a4b4b;   /* 深磚紅 (取代淺粉) */
-            --warning: #8c7b50;  /* 深大地黃 (取代淺米黃) */
-            --info: #4a6572;     /* 深鋼藍 (取代淺灰藍) */
-            --hero-bg: #455a64;  /* 深岩灰藍 */
-            
-            --bg: #f4f4f4;       /* 乾淨的淺灰背景 */
-            --card-bg: #ffffff;  /* 純白卡片背景 */
-            
-            --text: #222222;     /* 近乎全黑 (最清晰) */
-            --text-light: #555555; /* 深灰色 (次要文字) */
-            --border-color: #dcdcdc;
+            --danger: #8a4b4b; --warning: #8c7b50; --info: #4a6572; --hero-bg: #455a64;
+            --bg: #f4f4f4; --card-bg: #ffffff; --text: #222222; --text-light: #555555; --border-color: #dcdcdc;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.6; /* 行距稍微縮小一點點，讓閱讀更緊湊 */
+            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
         }
+        /* 導航樣式 (通用) */
+        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
+        @media (min-width: 768px) { .nav-container { justify-content: center; } }
+        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: #1a1a1a;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 35px;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        /* === 核心資訊卡 (深色強調) === */
-        .hero-card {
-            background: linear-gradient(135deg, #607d8b, var(--hero-bg));
-            color: #ffffff;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3);
-        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; color: #1a1a1a; font-size: 1.8rem; margin-bottom: 10px; letter-spacing: 1px; font-weight: 800; }
+        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; font-weight: 500; }
+        .hero-card { background: linear-gradient(135deg, #607d8b, var(--hero-bg)); color: #ffffff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); }
         .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
         .hero-text { font-size: 1.2rem; font-weight: 600; }
         .hero-sub { margin-top: 12px; font-size: 0.95rem; opacity: 0.95; font-weight: 400; }
-
-        /* === 卡片通用樣式 === */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 6px solid #999; /* 預設邊框加粗 */
-        }
-
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 6px solid #999; }
         .border-danger { border-left-color: var(--danger); }
         .border-warning { border-left-color: var(--warning); }
         .border-info { border-left-color: var(--info); }
-
-        .card-header {
-            font-size: 1.3rem;
-            font-weight: 800; /* 標題加粗 */
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            color: #111; /* 純黑標題 */
-        }
+        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; color: #111; }
         .icon { font-size: 1.5rem; margin-right: 12px; }
-
-        /* === 英文會話折疊區 === */
-        details {
-            background-color: #fcfcfc;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #ddd;
-        }
-
-        summary {
-            padding: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--info); /* 使用深藍色 */
-            background-color: #f9f9f9;
-            transition: background-color 0.2s;
-        }
+        details { background-color: #fcfcfc; margin-bottom: 12px; border-radius: 8px; overflow: hidden; border: 1px solid #ddd; }
+        summary { padding: 15px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--info); background-color: #f9f9f9; transition: background-color 0.2s; }
         summary:hover { background-color: #eef2f5; }
-
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; font-size: 1.5rem; color: #999; font-weight: bold; }
         details[open] summary::after { content: '-'; color: var(--info); }
-
-        .eng-box {
-            padding: 18px;
-            background-color: #fff;
-            border-top: 1px solid #eee;
-        }
-
-        .eng-phrase {
-            margin-bottom: 18px;
-            border-bottom: 1px dashed #ccc; /* 分隔線加深 */
-            padding-bottom: 12px;
-        }
+        .eng-box { padding: 18px; background-color: #fff; border-top: 1px solid #eee; }
+        .eng-phrase { margin-bottom: 18px; border-bottom: 1px dashed #ccc; padding-bottom: 12px; }
         .eng-phrase:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        
-        /* 英文句型強化 */
-        .en { 
-            font-weight: 800; 
-            color: #000; /* 純黑英文 */
-            display: block; 
-            margin-bottom: 5px; 
-            font-size: 1.1rem; 
-            line-height: 1.4;
-        }
-        .cn { 
-            font-size: 1rem; 
-            color: #444; /* 深灰中文 */
-            font-weight: 500;
-        }
+        .en { font-weight: 800; color: #000; display: block; margin-bottom: 5px; font-size: 1.1rem; line-height: 1.4; }
+        .cn { font-size: 1rem; color: #444; font-weight: 500; }
         .note { font-size: 0.9rem; color: #a94442; font-weight: bold; margin-top: 5px; }
-
-        /* === 列表樣式 === */
         ul, ol { padding-left: 20px; margin: 0; }
         li { margin-bottom: 10px; color: var(--text); font-weight: 500; }
-        
-        strong { color: #000; font-weight: 800; } /* 粗體字改為純黑 */
-
-        .highlight-box {
-            background-color: #f0f4c3; /* 稍微亮一點的黃綠色背景 */
-            border: 2px solid #cddc39;
-            color: #33691e; /* 深綠色文字 */
-            padding: 18px;
-            border-radius: 8px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
+        strong { color: #000; font-weight: 800; }
+        .highlight-box { background-color: #f0f4c3; border: 2px solid #cddc39; color: #33691e; padding: 18px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
+            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+        </div>
+    </nav>
 
     <div class="container">
         <h1>🚗 歐洲自駕保命全攻略</h1>
@@ -331,6 +234,23 @@
         </div>
 
     </div>
+
+    <script>
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
+            else { link.classList.remove('active'); }
+        });
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 
 </body>
 </html>

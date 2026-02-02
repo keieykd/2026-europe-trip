@@ -6,122 +6,59 @@
     <title>歐洲生存補完手冊 (退稅/電壓)</title>
     <style>
         :root {
-            /* 莫蘭迪深色系配色 */
-            --primary: #5d6d7e;   /* 鋼鐵灰藍 */
-            --accent: #b03a2e;    /* 磚紅 (警告/重點) */
-            --highlight: #d4ac0d; /* 芥末黃 (金錢相關) */
-            --safe: #28b463;      /* 森林綠 (正確/通過) */
-            --bg: #f2f3f4;
-            --card-bg: #ffffff;
-            --text: #212f3d;
-            --text-light: #566573;
+            --primary: #5d6d7e; --accent: #b03a2e; --highlight: #d4ac0d; --safe: #28b463; --bg: #f2f3f4; --card-bg: #ffffff; --text: #212f3d; --text-light: #566573;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Helvetica Neue", sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 1.6;
+            background-color: var(--bg); color: var(--text); margin: 0; padding: 20px 15px; padding-top: 80px; line-height: 1.6;
         }
+        /* 導航樣式 */
+        .navbar { background-color: #263238; padding: 10px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; transition: transform 0.3s ease-in-out; }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 0 15px; }
+        @media (min-width: 768px) { .nav-container { justify-content: center; } }
+        .nav-item { color: rgba(255, 255, 255, 0.85); text-decoration: none; font-weight: bold; font-size: 0.95rem; padding: 8px 16px; margin: 0 4px; border-radius: 20px; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .nav-item:hover { background-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .nav-item.active { background-color: #f77f00; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .nav-icon { margin-right: 6px; }
+        .navbar::-webkit-scrollbar { display: none; }
 
         .container { max-width: 900px; margin: 0 auto; }
-
-        h1 {
-            text-align: center;
-            color: var(--text);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 35px;
-            font-size: 1rem;
-        }
-
-        /* === 卡片樣式 === */
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            border-left: 6px solid #ccc;
-        }
-
+        h1 { text-align: center; color: var(--text); font-size: 1.8rem; margin-bottom: 10px; font-weight: 800; }
+        .subtitle { text-align: center; color: var(--text-light); margin-bottom: 35px; font-size: 1rem; }
+        .card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 6px solid #ccc; }
         .card-money { border-left-color: var(--highlight); }
         .card-danger { border-left-color: var(--accent); }
         .card-info { border-left-color: var(--primary); }
-
-        .card-header {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            color: var(--text);
-        }
-
+        .card-header { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; color: var(--text); }
         .icon { font-size: 1.5rem; margin-right: 12px; }
-
-        /* === 標籤與列表 === */
         ul, ol { padding-left: 20px; margin: 0; }
         li { margin-bottom: 10px; font-weight: 500; }
-        
-        .tag {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: white;
-            margin-right: 5px;
-        }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; color: white; margin-right: 5px; }
         .tag-yes { background-color: var(--safe); }
         .tag-no { background-color: var(--accent); }
-
-        /* === 重點強調框 === */
-        .alert-box {
-            background-color: #fadbd8;
-            border: 1px solid #f5b7b1;
-            color: #7b241c;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .info-box {
-            background-color: #d6eaf8;
-            border: 1px solid #aed6f1;
-            color: #21618c;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-
-        /* === 表格樣式 === */
+        .alert-box { background-color: #fadbd8; border: 1px solid #f5b7b1; color: #7b241c; padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+        .info-box { background-color: #d6eaf8; border: 1px solid #aed6f1; color: #21618c; padding: 15px; border-radius: 8px; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f8f9f9; }
-
-        /* === 步驟流程 === */
-        .step {
-            margin-bottom: 15px;
-            padding-left: 15px;
-            border-left: 3px solid var(--highlight);
-        }
+        .step { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid var(--highlight); }
         .step-title { font-weight: 800; color: #000; display: block; margin-bottom: 5px; }
-
     </style>
 </head>
 <body>
+
+    <nav class="navbar" id="mainNav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
+            <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+            <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+            <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+            <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+        </div>
+    </nav>
 
     <div class="container">
         <h1>🛡️ 生存補完手冊</h1>
@@ -246,9 +183,22 @@
 
     </div>
 
-    <div style="text-align: center; margin-top: 30px; margin-bottom: 50px; color: #777; font-size: 0.9rem;">
-        存好這份攻略，購物退稅不吃虧，電器使用更安全！
-    </div>
+    <script>
+        const currentPage = window.location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (currentPage.includes(linkHref)) { link.classList.add('active'); } 
+            else { link.classList.remove('active'); }
+        });
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 50) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            lastScrollY = window.scrollY;
+        });
+    </script>
 
 </body>
 </html>
