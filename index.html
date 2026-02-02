@@ -10,6 +10,8 @@
             --secondary: #d62828; /* 警示紅 */
             --accent: #f77f00; /* 重點橘 */
             --bg-light: #fdf0d5; /* 柔和底色 */
+            --nav-bg: #263238; /* 導航列背景-深岩灰 */
+            --nav-active: #455a64; /* 導航列選取色 */
             --text-dark: #333;
         }
         body {
@@ -18,11 +20,78 @@
             color: var(--text-dark);
             background-color: #f4f4f4;
             margin: 0;
-            padding: 10px;
+            padding: 0; /* 為了讓導航列貼頂，這裡改為0 */
+            padding-bottom: 20px;
         }
-        .container {
+
+        /* === ✨ 新增：美型導航列樣式 === */
+        .navbar {
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+            position: sticky; /* 黏性定位 */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-x: auto; /* 手機版可左右滑動 */
+            white-space: nowrap; /* 不換行 */
+            -webkit-overflow-scrolling: touch; /* 讓滑動更順暢 */
+        }
+        
+        .nav-container {
             max-width: 1000px;
             margin: 0 auto;
+            display: flex;
+            justify-content: flex-start; /* 手機版靠左 */
+            padding: 0 15px;
+        }
+
+        /* 電腦版置中 */
+        @media (min-width: 768px) {
+            .nav-container {
+                justify-content: center;
+            }
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 20px; /* 膠囊形狀 */
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* 當前頁面的樣式 */
+        .nav-item.active {
+            background-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .nav-icon {
+            margin-right: 6px;
+            font-size: 1.1rem;
+        }
+
+        /* 隱藏捲軸但保留功能 */
+        .navbar::-webkit-scrollbar {
+            display: none; 
+        }
+
+        /* === 原有樣式 === */
+        .container {
+            max-width: 1000px;
+            margin: 20px auto; /* 上方加一點間距 */
             background: #fff;
             padding: 40px;
             border-radius: 12px;
@@ -42,7 +111,6 @@
             margin-bottom: 40px;
         }
         
-        /* === 專題區塊樣式 === */
         .section-header {
             background-color: var(--primary);
             color: white;
@@ -59,7 +127,6 @@
             margin-right: 10px;
         }
 
-        /* === 自駕與生存指南 === */
         .survival-guide {
             background-color: #e3f2fd;
             border: 2px solid #2196f3;
@@ -76,16 +143,9 @@
             border-bottom: 1px dashed #90caf9;
             padding-bottom: 10px;
         }
-        .guide-item {
-            margin-bottom: 15px;
-        }
-        .guide-item strong {
-            color: #d84315;
-            display: block;
-            margin-bottom: 5px;
-        }
+        .guide-item { margin-bottom: 15px; }
+        .guide-item strong { color: #d84315; display: block; margin-bottom: 5px; }
 
-        /* === 每日行程樣式 === */
         .day-box {
             border-left: 6px solid var(--accent);
             background: #fff;
@@ -99,10 +159,7 @@
             margin-bottom: 15px;
             padding-top: 10px;
         }
-        .timeline {
-            position: relative;
-            padding-left: 20px;
-        }
+        .timeline { position: relative; padding-left: 20px; }
         .timeline-item {
             position: relative;
             padding-bottom: 30px;
@@ -135,10 +192,7 @@
             font-size: 0.9rem;
             margin-top: 8px;
         }
-        .nanny-note::before {
-            content: "💡 保母叮嚀：";
-            font-weight: bold;
-        }
+        .nanny-note::before { content: "💡 保母叮嚀："; font-weight: bold; }
         .alert-note {
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
@@ -149,14 +203,23 @@
             margin-top: 8px;
             font-weight: bold;
         }
-        .alert-note::before {
-            content: "⛔ 絕對注意：";
-        }
-        
+        .alert-note::before { content: "⛔ 絕對注意："; }
         .price { color: #2e7d32; font-weight: bold; }
     </style>
 </head>
 <body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-item active"><span class="nav-icon">📅</span>行程</a>
+        <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
+        <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
+        <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
+        <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
+        <a href="survival.html" class="nav-item"><span class="nav-icon">🛡️</span>退稅</a>
+        <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+    </div>
+</nav>
 
 <div class="container">
     <h1>2026 荷比挪自駕：終極保姆級實戰手冊</h1>
