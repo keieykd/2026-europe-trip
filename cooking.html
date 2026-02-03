@@ -3,349 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>挪威超市大廚：20道自炊攻略</title>
+    <title>旅人御膳房：32道詳盡食材食譜</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* === 本頁專用樣式 === */
-        .grid-row { display: grid; gap: 20px; margin-bottom: 30px; }
-        .cols-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .cols-2 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-        .card { height: 100%; box-sizing: border-box; }
         
-        /* 字典表格 */
-        .dict-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .dict-table td { padding: 8px 5px; border-bottom: 1px dashed #eee; font-size: 0.95rem; }
-        .word-no { color: var(--secondary); font-weight: bold; }
-        .word-tw { color: #666; }
+        /* 1. 戰略物資區塊 */
+        .survival-section {
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .survival-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #d81b60;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+        }
+        .kit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            background: #fce4ec;
+            border-radius: 12px;
+            border: 1px solid #f8bbd0;
+            transition: transform 0.2s;
+        }
+        .kit-item:hover { transform: translateY(-3px); }
+        .kit-icon { font-size: 2rem; margin-bottom: 5px; }
+        .kit-name { font-size: 0.9rem; font-weight: bold; color: #880e4f; line-height: 1.2; }
+        .kit-sub { font-size: 0.75rem; color: #ad1457; margin-top: 3px; }
 
-        /* 食譜標籤 */
-        .tags { margin-bottom: 12px; }
-        .tag { display: inline-block; font-size: 0.85rem; padding: 3px 8px; border-radius: 4px; margin-right: 5px; font-weight: bold; }
-        .t-main { background-color: #e3f2fd; color: #0277bd; border: 1px solid #b3e5fc; } /* 主食材 */
-        .t-style { background-color: #fff3e0; color: #ef6c00; border: 1px solid #ffe0b2; } /* 風味 */
-        .t-time { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; } /* 時間 */
+        /* 2. 超市攻略區塊 */
+        .market-col {
+            border-left: 5px solid; 
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .market-header { 
+            font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; 
+            display: flex; align-items: center; 
+        }
+        .market-badge {
+            background: #2c3e50; color: #fff; padding: 4px 10px; border-radius: 4px; 
+            font-size: 0.85rem; font-weight: bold; display: inline-block; margin-bottom: 15px;
+        }
+        .sub-cat {
+            font-size: 1rem; font-weight: bold; color: #555; 
+            margin-top: 20px; margin-bottom: 8px; border-bottom: 2px solid #eee; padding-bottom: 3px;
+        }
+        .sub-cat:first-of-type { margin-top: 0; }
+        .market-list { padding-left: 0; list-style: none; margin: 0; }
+        .market-list li {
+            position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 0.95rem; color: #333;
+            line-height: 1.5;
+        }
+        .market-list li::before {
+            content: "🛒"; font-size: 0.8rem; position: absolute; left: 0; top: 3px;
+        }
+        .brand-name { color: #d35400; font-weight: 800; }
+        .desc-text { color: #666; font-size: 0.9rem; }
 
-        /* 步驟列表 */
-        .step-list ol { padding-left: 20px; margin: 0; }
-        .step-list li { margin-bottom: 8px; color: #444; }
+        /* 3. 食譜卡片設計 */
+        .cat-title {
+            font-size: 1.5rem; color: var(--primary); margin: 50px 0 20px 0;
+            display: flex; align-items: center; font-weight: 800;
+        }
+        .cat-title::before { content: ''; display: block; width: 6px; height: 24px; background: var(--accent); margin-right: 10px; border-radius: 3px; }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            align-items: start;
+        }
+
+        .recipe-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        .recipe-card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.12); transform: translateY(-2px); }
+
+        .recipe-card details { margin: 0; border: none; border-radius: 0; background: transparent; }
+        .recipe-card summary {
+            padding: 20px;
+            background: #fff;
+            display: block; 
+            position: relative;
+            cursor: pointer;
+        }
+        .recipe-card summary::-webkit-details-marker { display: none; }
         
-        /* 分類標題 */
-        .cat-title { 
-            font-size: 1.4rem; color: var(--primary); margin: 40px 0 20px 0; 
-            border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 5px;
+        .recipe-card summary::after {
+            content: '+';
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            background: #f5f5f5; border-radius: 50%; width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            color: #666; font-weight: bold; font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+        .recipe-card details[open] summary::after {
+            content: '-'; background: var(--accent); color: white;
+        }
+        
+        .rc-header { display: flex; align-items: center; gap: 15px; padding-right: 40px; }
+        .rc-icon { 
+            font-size: 2.2rem; background: #f0f2f5; width: 56px; height: 56px; 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 12px; flex-shrink: 0; 
+        }
+        .rc-info { flex: 1; }
+        .rc-title { font-size: 1.1rem; font-weight: 800; color: #2c3e50; margin: 0 0 6px 0; display: block; line-height: 1.3; }
+        .rc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag { font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; font-weight: 600; }
+        .t-time { background: #e8f5e9; color: #2e7d32; }
+        .t-ing { background: #e3f2fd; color: #1565c0; }
+        
+        /* 內容區塊 */
+        .rc-content {
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid #f0f0f0;
+            background: #fafafa;
+        }
+        .scenario-text { font-size: 0.9rem; color: #666; font-style: italic; margin: 15px 0; padding-left: 10px; border-left: 3px solid #ccc; }
+        
+        /* 新增：食材清單樣式 */
+        .ing-box {
+            background-color: #fff;
+            border: 1px dashed #b0bec5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .ing-title { font-size: 0.95rem; font-weight: 800; color: #e65100; margin-bottom: 8px; display: block; }
+        .ing-list { 
+            margin: 0; padding-left: 20px; 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 5px; /* 雙欄排列 */
+        }
+        .ing-list li { font-size: 0.9rem; color: #455a64; margin-bottom: 0; }
+
+        .step-title { font-size: 0.95rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; display: block; }
+        .step-list { margin: 0; padding-left: 20px; }
+        .step-list li { margin-bottom: 8px; color: #444; font-size: 0.95rem; line-height: 1.6; }
+
+        .cols-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+
+        @media (max-width: 600px) {
+            .kit-grid { grid-template-columns: repeat(3, 1fr); }
+            .cols-2 { grid-template-columns: 1fr; }
+            .ing-list { grid-template-columns: 1fr; } /* 手機改單欄 */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>👨‍🍳 挪威超市大廚</h1>
-        <div class="subtitle">20道究極食譜・省錢又美味的生存之道</div>
+        <h1>👨‍🍳 旅人御膳房</h1>
+        <div class="subtitle">台灣補給 ✕ 在地食材・32道生存食譜</div>
 
-        <h3 style="border-left: 5px solid var(--success); padding-left: 10px; color: var(--text);">🛒 Rema 1000 掃貨清單</h3>
-        <p style="margin-bottom: 20px; color: #666;">進超市直接找這些字，別買錯了！</p>
+        <div class="survival-section">
+            <div class="survival-header">🧳 台灣空運．戰略物資包</div>
+            <div class="kit-grid">
+                <div class="kit-item"><span class="kit-icon">🥣</span><span class="kit-name">康寶湯包</span><span class="kit-sub">玉米/海鮮</span></div>
+                <div class="kit-item"><span class="kit-icon">🥫</span><span class="kit-name">沙茶醬</span><span class="kit-sub">靈魂醬料</span></div>
+                <div class="kit-item"><span class="kit-icon">🍛</span><span class="kit-name">咖哩塊</span><span class="kit-sub">一盒搞定</span></div>
+                <div class="kit-item"><span class="kit-icon">🥢</span><span class="kit-name">免洗筷</span><span class="kit-sub">歐洲沒有</span></div>
+                <div class="kit-item"><span class="kit-icon">🏺</span><span class="kit-name">醬油/蠔油</span><span class="kit-sub">小瓶裝</span></div>
+                <div class="kit-item"><span class="kit-icon">🍜</span><span class="kit-name">快煮麵</span><span class="kit-sub">關廟麵佳</span></div>
+                <div class="kit-item"><span class="kit-icon">🧂</span><span class="kit-name">胡椒鹽</span><span class="kit-sub">鹽酥雞味</span></div>
+                <div class="kit-item"><span class="kit-icon">🥡</span><span class="kit-name">保鮮盒</span><span class="kit-sub">裝隔日午餐</span></div>
+            </div>
+        </div>
+
+        <div class="cat-title">🛒 雙國超市掃貨指南 (爆買清單)</div>
         
-        <div class="grid-row cols-3">
-            <div class="card">
-                <div class="card-header"><span class="icon">🐟</span>海鮮神物</div>
-                <table class="dict-table">
-                    <tr><td class="word-no">Laksefilet</td><td class="word-tw">鮭魚菲力 (無骨)</td></tr>
-                    <tr><td class="word-no">Torsk</td><td class="word-tw">鱈魚 (肉質Q彈)</td></tr>
-                    <tr><td class="word-no">Reker</td><td class="word-tw">北極甜蝦 (冷凍熟食)</td></tr>
-                    <tr><td class="word-no">Fiskekaker</td><td class="word-tw">魚餅 (像甜不辣)</td></tr>
-                </table>
+        <div class="cols-2">
+            <div class="market-col" style="border-left-color: #ef5350;">
+                <div class="market-header"><span class="icon">🇳🇴</span>挪威 (Rema 1000 / Kiwi)</div>
+                <span class="market-badge">特色：物價極高，專攻海鮮</span>
+                
+                <div class="sub-cat">🐟 必買正餐</div>
+                <ul class="market-list">
+                    <li><span class="brand-name">Reker (北極甜蝦)</span><br><span class="desc-text">冷凍區。極度鮮甜，退冰即食，CP值最高神物。</span></li>
+                    <li><span class="brand-name">Laksefilet (鮭魚菲力)</span><br><span class="desc-text">比台灣便宜且品質極好，買整條真空包裝最划算。</span></li>
+                    <li><span class="brand-name">Fiskekaker (魚餅)</span><br><span class="desc-text">口感像紮實的甜不辣，煎熱就好吃，含魚量高。</span></li>
+                    <li><span class="brand-name">Kjøttkaker (挪威肉丸)</span><br><span class="desc-text">比IKEA好吃，搭配棕色醬汁(Brun Saus)。</span></li>
+                </ul>
+
+                <div class="sub-cat">🥤 零食飲料 & 早餐</div>
+                <ul class="market-list">
+                    <li><span class="brand-name">Smash!</span><br><span class="desc-text">紅色包裝。鹹玉米角裹巧克力，超級好吃會上癮！</span></li>
+                    <li><span class="brand-name">Solo</span><br><span class="desc-text">挪威國民汽水 (橘子口味)，比芬達好喝。</span></li>
+                    <li><span class="brand-name">Tubost (牙膏起司)</span><br><span class="desc-text">Kavli 品牌。像牙膏一樣擠出來，推薦培根口味。</span></li>
+                    <li><span class="brand-name">Brunost (棕色起司)</span><br><span class="desc-text">焦糖牛奶味的起司，切薄片配吐司。</span></li>
+                </ul>
+
+                <div class="note note-alert" style="margin-top:15px;">
+                    ❌ <strong>別買水！</strong> 挪威水龍頭冷水是冰河水，比瓶裝水好喝。
+                </div>
             </div>
-            <div class="card">
-                <div class="card-header"><span class="icon">🥩</span>肉類主食</div>
-                <table class="dict-table">
-                    <tr><td class="word-no">Kjøttdeig</td><td class="word-tw">牛絞肉 (萬用!)</td></tr>
-                    <tr><td class="word-no">Kyllinglår</td><td class="word-tw">雞腿 (比雞胸便宜)</td></tr>
-                    <tr><td class="word-no">Bacon</td><td class="word-tw">培根 (提味神器)</td></tr>
-                    <tr><td class="word-no">Pølse</td><td class="word-tw">熱狗 (國民美食)</td></tr>
-                </table>
+
+            <div class="market-col" style="border-left-color: #ffa726;">
+                <div class="market-header"><span class="icon">🇳🇱</span>荷蘭 (Albert Heijn / Jumbo)</div>
+                <span class="market-badge">特色：乳製品天堂，選擇多</span>
+                
+                <div class="sub-cat">🍪 必吃零食甜點</div>
+                <ul class="market-list">
+                    <li><span class="brand-name">Stroopwafel (焦糖煎餅)</span><br><span class="desc-text">買一袋當路上的血糖補給站，蓋在熱茶上軟化更好吃。</span></li>
+                    <li><span class="brand-name">Hagelslag (巧克力米)</span><br><span class="desc-text">荷蘭人早餐都撒這個在吐司上吃。</span></li>
+                    <li><span class="brand-name">Tony's Chocolonely</span><br><span class="desc-text">荷蘭知名巧克力，厚實好吃，口味超多。</span></li>
+                </ul>
+
+                <div class="sub-cat">🥛 飲料與正餐</div>
+                <ul class="market-list">
+                    <li><span class="brand-name">Chocomel</span><br><span class="desc-text">黃色罐裝巧克力牛奶，濃郁好喝。</span></li>
+                    <li><span class="brand-name">Vla (荷蘭卡士達)</span><br><span class="desc-text">像液體布丁，超市冰櫃都有，口味超多。</span></li>
+                    <li><span class="brand-name">Roerbakgroente</span><br><span class="desc-text">切好的一大包綜合炒菜用蔬菜，懶人救星。</span></li>
+                    <li><span class="brand-name">Kip (雞肉)</span><br><span class="desc-text">比牛肉豬肉便宜很多，品質不錯。</span></li>
+                </ul>
+
+                <div class="note note-tip" style="margin-top:15px;">
+                    💡 <strong>省錢密技：</strong> 晚上去 AH 超市，尋找貼有 <strong>"35% Korting"</strong> (打65折) 的藍色貼紙商品。
+                </div>
             </div>
-            <div class="card">
-                <div class="card-header"><span class="icon">🥛</span>蔬菜與其他</div>
-                <table class="dict-table">
-                    <tr><td class="word-no">Poteter</td><td class="word-tw">馬鈴薯 (散裝便宜)</td></tr>
-                    <tr><td class="word-no">Egg</td><td class="word-tw">雞蛋 (補充蛋白質)</td></tr>
-                    <tr><td class="word-no">Matfløte</td><td class="word-tw">鮮奶油 (煮濃湯用)</td></tr>
-                    <tr><td class="word-no">Lompe</td><td class="word-tw">馬鈴薯軟餅 (包熱狗)</td></tr>
-                </table>
+        </div>
+
+        <div class="cat-title">🍜 亞洲胃救贖 (8道)</div>
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍲</div><div class="rc-info"><span class="rc-title">豪華海鮮雜燴粥</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">極光夜宵</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">極光下凍僵時的救命神藥。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>康寶濃湯包(海鮮/玉米)</li><li>冷凍北極甜蝦</li><li>白飯 (剩飯)</li><li>魚餅 (切塊)</li><li>雞蛋 1顆</li><li>白胡椒粉</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>水滾後加入濃湯包攪拌均勻。</li><li>放入冷飯煮散。</li><li>豪邁丟入甜蝦、魚餅塊。</li><li>起鍋前打蛋花，灑胡椒粉。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍝</div><div class="rc-info"><span class="rc-title">沙茶鮭魚乾拌麵</span><div class="rc-tags"><span class="tag t-time">15分</span><span class="tag t-ing">台式重口味</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">吃膩馬鈴薯時的救贖。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>乾麵條 (關廟麵/義麵)</li><li>鮭魚菲力 (切塊)</li><li>沙茶醬</li><li>醬油</li><li>蔥花 (選配)</li><li>油</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>鮭魚切塊，平底鍋煎至表面焦黃(恰恰)。</li><li>另一鍋煮好麵條。</li><li>碗中拌入沙茶醬+醬油+少許煮麵水乳化。</li><li>麵條拌勻，鋪上鮭魚，灑點蔥花。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍗</div><div class="rc-info"><span class="rc-title">可樂滷雞腿</span><div class="rc-tags"><span class="tag t-time">30分</span><span class="tag t-ing">零失敗</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">荷蘭/挪威通用大菜。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>帶骨雞腿 (Kyllinglår)</li><li>可樂 (1罐)</li><li>醬油</li><li>蒜頭 (選配)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>雞腿表面煎上色。</li><li>倒入可樂(淹過雞肉一半) + 3-4匙醬油。</li><li>大火煮滾，轉小火燉 20 分鐘。</li><li>最後開大火收汁，醬汁濃稠像糖醋。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍛</div><div class="rc-info"><span class="rc-title">咖哩蔬菜魚丸鍋</span><div class="rc-tags"><span class="tag t-time">20分</span><span class="tag t-ing">清冰箱</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">隔天微波更好吃。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>佛蒙特咖哩塊</li><li>魚餅 (Fiskekaker)</li><li>洋蔥、紅蘿蔔</li><li>馬鈴薯</li><li>白飯</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>洋蔥炒軟，加入剩餘蔬菜切塊。</li><li>加水煮滾至蔬菜變軟，關火放入咖哩塊融化。</li><li>丟入魚餅切塊代替肉。</li><li>淋在白飯上。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥚</div><div class="rc-info"><span class="rc-title">黃金培根蛋炒飯</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">快速</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">最快解決一餐的方法。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>冷飯 (白飯)</li><li>雞蛋 2顆</li><li>培根 (切丁)</li><li>鹽、黑胡椒</li><li>油</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>培根切丁下鍋逼出油脂。</li><li>放入冷飯炒散、炒熱。</li><li>蛋液打散淋在飯上快速拌炒。</li><li>鹽巴胡椒調味。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🧅</div><div class="rc-info"><span class="rc-title">洋蔥燒肉蓋飯</span><div class="rc-tags"><span class="tag t-time">15分</span><span class="tag t-ing">日式風味</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">簡易版壽喜燒。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>牛絞肉 (Kjøttdeig)</li><li>洋蔥 (1顆)</li><li>醬油</li><li>糖 (或可樂少許)</li><li>白飯</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>洋蔥切絲炒軟。</li><li>加入牛絞肉炒熟。</li><li>加入醬油、糖、少許水燉煮5分鐘入味。</li><li>淋在飯上，可加顆半熟蛋。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍅</div><div class="rc-info"><span class="rc-title">番茄雞蛋湯麵</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">清爽</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">適合宿醉或早餐的暖胃湯。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>番茄 (2顆)</li><li>雞蛋 (1顆)</li><li>麵條</li><li>鹽、油</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>番茄切塊，用油炒出紅汁。</li><li>加水煮滾，放入麵條煮熟。</li><li>打入蛋花，加鹽調味即可。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🦐</div><div class="rc-info"><span class="rc-title">蒜香奶油胡椒蝦</span><div class="rc-tags"><span class="tag t-time">8分</span><span class="tag t-ing">下酒菜</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">超級下酒菜，配白酒絕讚。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>北極甜蝦 (去殼)</li><li>奶油 (Smør)</li><li>蒜末 (多一點)</li><li>胡椒鹽</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>甜蝦先去殼。</li><li>鍋中放入大量奶油爆香蒜末。</li><li>放入甜蝦快速翻炒 (已熟不要炒久)。</li><li>灑上大量胡椒鹽起鍋。</li></ol></div>
+                </details>
             </div>
         </div>
 
-        <div class="cat-title">🌊 挪威海鮮系列 (必吃)</div>
-        <div class="grid-row cols-2">
-            <details>
-                <summary>1. 香煎檸檬奶油鮭魚</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">鮭魚</span><span class="tag t-style">經典</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>鮭魚擦乾，撒鹽和黑胡椒。</li>
-                        <li>熱鍋融化奶油(Smør)，魚皮朝下放入。</li>
-                        <li><strong>中火煎 4 分鐘</strong>至皮酥脆，翻面再煎 2 分鐘。</li>
-                        <li>起鍋前擠入檸檬汁，撒點香料。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>2. 北極甜蝦開放三明治</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">甜蝦</span><span class="tag t-style">免煮</span><span class="tag t-time">5分</span></div>
-                    <ol class="step-list">
-                        <li>甜蝦(Reker)沖水解凍，自己剝殼 (這是樂趣)。</li>
-                        <li>吐司稍微烤過，塗上一層厚厚的奶油或美乃滋。</li>
-                        <li>鋪滿剝好的蝦子 (要堆得跟山一樣高)。</li>
-                        <li>擠檸檬汁，配白酒，這是最道地的挪威吃法。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>3. 奶香鮭魚燉飯 (一鍋到底)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">鮭魚/生米</span><span class="tag t-style">濃郁</span><span class="tag t-time">25分</span></div>
-                    <ol class="step-list">
-                        <li>洋蔥碎炒香，加入生米拌炒。</li>
-                        <li>分次加入水，邊煮邊攪拌約 15 分鐘。</li>
-                        <li>米心微硬時，倒入半杯牛奶或鮮奶油(Fløte)。</li>
-                        <li>鋪上切塊的鮭魚，蓋蓋子悶熟 5 分鐘。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>4. 挪威魚湯 (Fiskesuppe)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">魚湯包/鱈魚</span><span class="tag t-style">暖胃</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>超市買 "Lofoten Fiskesuppe" 湯包 (粉狀或液體)。</li>
-                        <li>煮滾湯底，加入切塊的鱈魚、紅蘿蔔丁。</li>
-                        <li>起鍋前加入一點鮮奶油和剝好的甜蝦。</li>
-                        <li>配麵包沾著吃，極圈救命神湯。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>5. 蒜香奶油煎鱈魚</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">鱈魚</span><span class="tag t-style">下酒</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>鱈魚肉質嫩易碎，不要太常翻動。</li>
-                        <li>奶油爆香蒜末 (如有帶蒜頭)，放入鱈魚。</li>
-                        <li>兩面煎金黃，淋上一點醬油提鮮。</li>
-                        <li>非常適合配白飯。</li>
-                    </ol>
-                </div>
-            </details>
+        <div class="cat-title">🐟 在地饗宴 (8道)</div>
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍋</div><div class="rc-info"><span class="rc-title">香煎檸檬奶油鮭魚</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">經典</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">慶祝大餐，食材夠好隨便煮都像米其林。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>鮭魚菲力 (帶皮)</li><li>奶油 (Smør)</li><li>檸檬 (1顆)</li><li>鹽、黑胡椒</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>鮭魚擦乾，兩面灑鹽和黑胡椒。</li><li>熱鍋融化大量奶油。</li><li><strong>魚皮朝下</strong>放入，中火煎 4 分鐘不要動它 (皮才會脆)。</li><li>翻面再煎 2 分鐘。擠上檸檬汁。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍤</div><div class="rc-info"><span class="rc-title">北極甜蝦山</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">免開火</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">累到不想開火，只想配白酒時。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>北極甜蝦 (帶殼)</li><li>吐司 (或法棍)</li><li>美乃滋 (Majones)</li><li>檸檬</li><li>蒔蘿 (Dill, 選配)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>甜蝦沖水解凍，自己剝殼。</li><li>吐司烤過，塗上厚厚的美乃滋。</li><li>把蝦子堆得像山一樣高。</li><li>擠檸檬汁，灑點蒔蘿。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥘</div><div class="rc-info"><span class="rc-title">懶人烤箱時蔬</span><div class="rc-tags"><span class="tag t-time">40分</span><span class="tag t-ing">烤箱限定</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">住宿有烤箱時，丟進去先去洗澡。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>蔬菜包 (Roerbakgroente)</li><li>雞腿 或 鮭魚</li><li>橄欖油</li><li>鹽、胡椒</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>烤盤鋪上烘焙紙。</li><li>倒入蔬菜包，放上肉類。</li><li>淋橄欖油、灑大量的鹽和胡椒。</li><li>200度烤 40 分鐘。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍖</div><div class="rc-info"><span class="rc-title">挪威肉丸佐棕醬</span><div class="rc-tags"><span class="tag t-time">15分</span><span class="tag t-ing">國民晚餐</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">比 IKEA 還好吃的道地口味。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>肉丸 (Kjøttkaker)</li><li>棕醬粉 (Brun Saus)</li><li>馬鈴薯</li><li>越橘醬 (Tyttebær, 選配)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>馬鈴薯水煮至熟軟。</li><li>棕醬粉加水煮開，放入肉丸燉煮5-10分鐘。</li><li>盛盤，搭配馬鈴薯和果醬吃。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍝</div><div class="rc-info"><span class="rc-title">奶油培根義大利麵</span><div class="rc-tags"><span class="tag t-time">15分</span><span class="tag t-ing">濃郁</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">熱量滿滿，適合滑雪後吃。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>義大利麵</li><li>培根 (Bacon)</li><li>鮮奶油 (Matfløte)</li><li>蛋黃 (1顆)</li><li>黑胡椒</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>煮義大利麵。</li><li>平底鍋炒香培根，倒入鮮奶油煮滾。</li><li>放入麵條拌勻。</li><li>關火，拌入蛋黃(增加濃稠度)，撒黑胡椒。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🐟</div><div class="rc-info"><span class="rc-title">乾煎魚餅佐雷莫拉</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">快速午餐</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">挪威人最愛的快速料理。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>魚餅 (Fiskekaker)</li><li>雷莫拉醬 (Remulade)</li><li>生菜或麵包</li><li>油</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>平底鍋少油，煎熱魚餅至兩面金黃。</li><li>擠上 Remulade (一種酸黃瓜蛋黃醬)。</li><li>直接吃或夾麵包。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍳</div><div class="rc-info"><span class="rc-title">煙燻鮭魚炒滑蛋</span><div class="rc-tags"><span class="tag t-time">8分</span><span class="tag t-ing">高級早餐</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">超市煙燻鮭魚很便宜，奢華一下。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>煙燻鮭魚片 (Røkt Laks)</li><li>雞蛋 (3顆)</li><li>牛奶 (少許)</li><li>黑胡椒</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>蛋液加牛奶打散。</li><li>小火炒至半熟，加入撕碎的燻鮭魚。</li><li>稍微拌一下即可起鍋 (蛋要嫩)。</li><li>灑上黑胡椒。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍄</div><div class="rc-info"><span class="rc-title">奶油蘑菇濃湯</span><div class="rc-tags"><span class="tag t-time">15分</span><span class="tag t-ing">暖胃</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">荷蘭蘑菇很便宜，適合天冷時。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>蘑菇 (切片)</li><li>康寶濃湯粉(蘑菇/玉米)</li><li>鮮奶油 (可選)</li><li>奶油</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>用奶油炒軟蘑菇片。</li><li>加水煮滾，倒入康寶濃湯粉。</li><li>起鍋前加鮮奶油更香濃。</li></ol></div>
+                </details>
+            </div>
         </div>
 
-        <div class="cat-title">🍖 肉食動物系列</div>
-        <div class="grid-row cols-2">
-            <details>
-                <summary>6. 挪威肉丸佐馬鈴薯 (Kjøttkaker)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">現成肉丸</span><span class="tag t-style">國民菜</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>超市買冷藏區的 "Kjøttkaker" (大肉丸)。</li>
-                        <li>買一包 "Brun Saus" (棕色醬汁粉) 加水煮開。</li>
-                        <li>放入肉丸燉煮 5-10 分鐘。</li>
-                        <li>旁邊水煮馬鈴薯搭配吃，要有越橘醬(Tyttebær)更完美。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>7. 可樂滷雞腿</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">雞腿</span><span class="tag t-style">台式</span><span class="tag t-time">30分</span></div>
-                    <ol class="step-list">
-                        <li>雞腿煎至表面金黃上色。</li>
-                        <li>倒入可樂 (淹過雞肉一半) + 3 匙醬油。</li>
-                        <li>大火煮滾，轉小火燉 20 分鐘。</li>
-                        <li>最後開大火收汁，醬汁會變得很濃稠像糖醋。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>8. 簡易肉醬義大利麵</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">牛絞肉</span><span class="tag t-style">西式</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>煮一鍋水煮義大利麵。</li>
-                        <li>平底鍋炒香洋蔥和牛絞肉(Kjøttdeig)。</li>
-                        <li>倒入一罐義大利麵醬 (Pasta Sauce)。</li>
-                        <li>把煮好的麵拌進去即可。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>9. 培根炒高麗菜</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">培根/高麗菜</span><span class="tag t-style">家常</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>熱鍋不放油，直接下培根片逼出油脂。</li>
-                        <li>放入手剝的高麗菜 (挪威高麗菜較硬)。</li>
-                        <li>加一點水蓋蓋子悶 2 分鐘。</li>
-                        <li>加鹽或蠔油調味。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>10. 週末塔可夜 (Taco Fredag)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">牛絞肉/餅皮</span><span class="tag t-style">挪威傳統</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>週五去超市買 Taco Kit (包含餅皮、調味粉、莎莎醬)。</li>
-                        <li>炒熟牛絞肉，加入調味粉和水。</li>
-                        <li>切點生菜、番茄、小黃瓜、玉米粒。</li>
-                        <li>自己包著吃，這是挪威人的週五儀式感。</li>
-                    </ol>
-                </div>
-            </details>
+        <div class="cat-title">🎒 趕路便當 (8道)</div>
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥪</div><div class="rc-info"><span class="rc-title">鮪魚玉米三明治</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">E10公路必備</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">開車單手也能吃。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>吐司</li><li>鮪魚罐頭</li><li>玉米粒罐頭</li><li>雞蛋 (水煮)</li><li>美乃滋</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>水煮蛋切碎。</li><li>拌入鮪魚、玉米、美乃滋、黑胡椒。</li><li>夾入吐司，包保鮮膜。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🌭</div><div class="rc-info"><span class="rc-title">挪威熱狗捲</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">省錢</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">比加油站便宜70%。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>熱狗 (Grillpølse)</li><li>軟餅 (Lompe)</li><li>炸洋蔥酥 (Sprøstekt løk)</li><li>番茄醬/芥末</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>熱狗水煮加熱。</li><li>拿一張 Lompe 軟餅。</li><li>捲起熱狗，擠醬，灑炸洋蔥。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥐</div><div class="rc-info"><span class="rc-title">火腿起司可頌</span><div class="rc-tags"><span class="tag t-time">3分</span><span class="tag t-ing">免煮</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">荷蘭超市買大包裝可頌最划算。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>大可頌</li><li>生火腿片</li><li>起司片</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>可頌橫切不切斷。</li><li>夾入生火腿片和起司片。</li><li>可放入烤箱回烤2分鐘更酥。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥔</div><div class="rc-info"><span class="rc-title">馬鈴薯蛋沙拉</span><div class="rc-tags"><span class="tag t-time">20分</span><span class="tag t-ing">飽足感</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">前一晚做好放保鮮盒。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>馬鈴薯</li><li>雞蛋</li><li>小黃瓜 (選配)</li><li>美乃滋</li><li>鹽</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>馬鈴薯去皮水煮至軟爛壓泥。</li><li>水煮蛋切碎。</li><li>全部拌在一起，加美乃滋和鹽調味。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥑</div><div class="rc-info"><span class="rc-title">酪梨燻鮭魚捲餅</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">健康</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">清爽不油膩，適合野餐。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>捲餅皮 (Tortilla/Lompe)</li><li>燻鮭魚</li><li>酪梨</li><li>生菜</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>餅皮攤開。</li><li>鋪上生菜、酪梨片和燻鮭魚。</li><li>捲起來，中間斜切對半。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥚</div><div class="rc-info"><span class="rc-title">簡單水煮蛋</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">蛋白質</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">最簡單的能量補充，登山必備。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>雞蛋 (一盒)</li><li>鹽</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>冷水放入雞蛋。</li><li>水滾後煮10分鐘(全熟)。</li><li>沖冷水剝殼，撒點鹽放入保鮮盒。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍌</div><div class="rc-info"><span class="rc-title">香蕉花生醬吐司</span><div class="rc-tags"><span class="tag t-time">3分</span><span class="tag t-ing">熱量補充</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">爬山前的熱量炸彈。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>吐司</li><li>花生醬</li><li>香蕉</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>吐司塗滿花生醬。</li><li>香蕉切片鋪滿。</li><li>蓋上另一片吐司。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍙</div><div class="rc-info"><span class="rc-title">簡易飯糰</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">冷飯利用</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">有剩飯時最好用。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>熱飯</li><li>鮪魚罐頭 或 肉鬆</li><li>鹽</li><li>保鮮膜</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>熱飯拌入鹽。</li><li>撕一張保鮮膜，鋪上飯。</li><li>中間包入鮪魚。</li><li>用保鮮膜捏緊成圓形或三角形。</li></ol></div>
+                </details>
+            </div>
         </div>
 
-        <div class="cat-title">🍜 亞洲胃救贖系列 (清冰箱)</div>
-        <div class="grid-row cols-2">
-            <details>
-                <summary>11. 海鮮雜燴粥</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">剩飯/魚餅</span><span class="tag t-style">暖胃</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>水滾後加入康寶湯包 (從台灣帶)。</li>
-                        <li>放入切塊的魚餅、冷凍蔬菜、剩飯。</li>
-                        <li>煮到濃稠後，打個蛋花。</li>
-                        <li>關火前放入甜蝦 (蝦煮久會縮)。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>12. 沙茶肉燥乾麵</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">絞肉/麵條</span><span class="tag t-style">台式</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>洋蔥碎炒牛絞肉至焦香。</li>
-                        <li>加入 2 匙沙茶醬、2 匙醬油、少許水。</li>
-                        <li>小火燉 5 分鐘入味。</li>
-                        <li>淋在煮好的麵條上，加一顆荷包蛋。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>13. 黃金蛋炒飯</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">冷飯/蛋</span><span class="tag t-style">快速</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>蛋液打散，先下鍋炒半熟撈起。</li>
-                        <li>爆香培根或火腿丁，放入冷飯炒散。</li>
-                        <li>倒回雞蛋，加入鹽、黑胡椒。</li>
-                        <li>如果有蔥花或生菜絲，起鍋前加入。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>14. 醬燒魚排蓋飯</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">任何魚排</span><span class="tag t-style">日式</span><span class="tag t-time">15分</span></div>
-                    <ol class="step-list">
-                        <li>洋蔥切絲，鋪在平底鍋底。</li>
-                        <li>放上魚排，淋上醬汁 (醬油2:糖1:水3)。</li>
-                        <li>蓋蓋子中小火「蒸煮」8 分鐘。</li>
-                        <li>連湯汁一起淋在白飯上，超下飯。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>15. 簡易部隊鍋</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">泡麵/熱狗</span><span class="tag t-style">韓式</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>用辛拉麵當底。</li>
-                        <li>加入切片熱狗 (Pølse)、魚餅、起司片、蔬菜。</li>
-                        <li>全部煮成一鍋，冷天吃超爽。</li>
-                    </ol>
-                </div>
-            </details>
+        <div class="cat-title">🌙 早餐與宵夜 (8道)</div>
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍫</div><div class="rc-info"><span class="rc-title">熱可可棉花糖</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">暖心</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">等極光時的必備飲料。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>Chocomel 巧克力奶</li><li>棉花糖 (Marshmallows)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>Chocomel 倒入鍋中加熱(不要煮沸)。</li><li>倒入杯中。</li><li>丟入幾顆棉花糖融化。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🧇</div><div class="rc-info"><span class="rc-title">熱融焦糖煎餅</span><div class="rc-tags"><span class="tag t-time">1分</span><span class="tag t-ing">荷蘭吃法</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">Stroopwafel 的正確吃法。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>焦糖煎餅 (Stroopwafel)</li><li>熱茶 或 熱咖啡</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>泡一杯熱茶或咖啡。</li><li>把煎餅像蓋子一樣蓋在杯口。</li><li>蒸1分鐘，中間焦糖融化超好吃。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍞</div><div class="rc-info"><span class="rc-title">法式吐司</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">消耗乾麵包</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">吐司放久變乾了就這樣吃。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>吐司</li><li>雞蛋</li><li>牛奶</li><li>奶油</li><li>糖</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>蛋液加牛奶打散。</li><li>吐司浸泡蛋液吸飽。</li><li>奶油熱鍋，中小火煎至兩面金黃。</li><li>灑上糖粉。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥘</div><div class="rc-info"><span class="rc-title">簡易部隊鍋</span><div class="rc-tags"><span class="tag t-time">10分</span><span class="tag t-ing">邪惡宵夜</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">深夜肚子餓的豪華版泡麵。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>辛拉麵 (或其他泡麵)</li><li>熱狗 (切片)</li><li>起司片</li><li>雞蛋</li><li>魚餅</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>煮滾泡麵。</li><li>加入熱狗、魚餅。</li><li>打顆蛋。</li><li>起鍋前鋪上起司片。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍓</div><div class="rc-info"><span class="rc-title">莓果優格杯</span><div class="rc-tags"><span class="tag t-time">3分</span><span class="tag t-ing">健康早餐</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">挪威莓果很好吃。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>原味優格</li><li>藍莓/覆盆莓</li><li>麥片 (Granola)</li><li>蜂蜜 (選配)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>優格倒入杯中。</li><li>加入洗淨的莓果。</li><li>灑點麥片增加口感。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🧈</div><div class="rc-info"><span class="rc-title">奶油煎吐司</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">簡單粗暴</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">沒有烤麵包機時的作法。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>吐司</li><li>奶油</li><li>糖 (選配)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>平底鍋融化奶油。</li><li>吐司下去煎到兩面焦脆。</li><li>灑點糖粉更好吃。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🍜</div><div class="rc-info"><span class="rc-title">起司泡麵</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">濃郁</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">任何泡麵加片起司都升級。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>泡麵</li><li>切達起司片 (Cheddar)</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>泡麵煮好。</li><li>趁熱鋪上一片切達起司。</li><li>攪拌均勻，湯頭會變得很濃郁。</li></ol></div>
+                </details>
+            </div>
+            <div class="recipe-card">
+                <details><summary><div class="rc-header"><div class="rc-icon">🥣</div><div class="rc-info"><span class="rc-title">熱燕麥粥</span><div class="rc-tags"><span class="tag t-time">5分</span><span class="tag t-ing">挪威傳統</span></div></div></div></summary>
+                    <div class="rc-content"><div class="scenario-text">挪威人最常見的早餐 Havregryn。</div>
+                        <div class="ing-box"><span class="ing-title">🛒 準備食材：</span><ul class="ing-list"><li>燕麥片</li><li>牛奶</li><li>果醬 或 肉桂粉</li></ul></div>
+                        <span class="step-title">👨‍🍳 料理步驟：</span><ol class="step-list"><li>燕麥片加牛奶(或水)煮軟。</li><li>依個人口味加入果醬或肉桂粉。</li><li>可加一點堅果。</li></ol></div>
+                </details>
+            </div>
         </div>
 
-        <div class="cat-title">🍳 早餐與輕食系列</div>
-        <div class="grid-row cols-2">
-            <details>
-                <summary>16. 挪威熱狗捲 (Pølse i Lompe)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">熱狗/軟餅</span><span class="tag t-style">經典</span><span class="tag t-time">5分</span></div>
-                    <ol class="step-list">
-                        <li>熱狗用水煮熱 (挪威人通常水煮)。</li>
-                        <li>拿一張 Lompe (馬鈴薯軟餅)。</li>
-                        <li>捲起熱狗，擠上番茄醬和芥末醬。</li>
-                        <li>一定要灑上炸洋蔥酥 (Sprøstekt løk)！</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>17. 培根烘蛋 (Omelet)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">蛋/培根</span><span class="tag t-style">早餐</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>培根煎脆，加入蔬菜丁炒軟。</li>
-                        <li>倒入打散的蛋液 (可加一點牛奶更嫩)。</li>
-                        <li>小火慢煎至底部凝固，對折起鍋。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>18. 馬鈴薯肉末濃湯</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">馬鈴薯/絞肉</span><span class="tag t-style">西式</span><span class="tag t-time">20分</span></div>
-                    <ol class="step-list">
-                        <li>洋蔥和絞肉炒香，加入馬鈴薯小丁。</li>
-                        <li>加水煮到馬鈴薯化開 (用湯匙壓泥增加濃稠度)。</li>
-                        <li>加入牛奶煮滾，鹽巴黑胡椒調味。</li>
-                        <li>沾麵包吃就是一餐。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>19. 烤箱時蔬雞腿 (懶人版)</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">雞腿/根莖類</span><span class="tag t-style">烤箱</span><span class="tag t-time">40分</span></div>
-                    <ol class="step-list">
-                        <li>如果住宿有烤箱。</li>
-                        <li>烤盤鋪上馬鈴薯塊、紅蘿蔔塊、洋蔥塊。</li>
-                        <li>放上雞腿，全部淋油、撒鹽和香料。</li>
-                        <li>200度烤 40 分鐘，中間翻面一次。完全不用顧火。</li>
-                    </ol>
-                </div>
-            </details>
-
-            <details>
-                <summary>20. 鮪魚玉米蛋沙拉</summary>
-                <div class="details-content">
-                    <div class="tags"><span class="tag t-main">鮪魚罐頭</span><span class="tag t-style">便當</span><span class="tag t-time">10分</span></div>
-                    <ol class="step-list">
-                        <li>水煮蛋切碎。</li>
-                        <li>拌入鮪魚罐頭、玉米粒、美乃滋、黑胡椒。</li>
-                        <li>夾在土司裡，是明天開車路上最好的午餐。</li>
-                    </ol>
-                </div>
-            </details>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px; color: #888;">
-            <p>👨‍🍳 <strong>大廚叮嚀：</strong> 記得帶幾雙免洗筷和保鮮盒(裝午餐)去喔！</p>
+        <div style="text-align: center; margin-top: 40px; color: #888; background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p>♻️ <strong>環保提醒：</strong> 挪威/荷蘭寶特瓶都有押金 (Pant)，喝完別丟，拿回超市機器回收可以換錢！</p>
         </div>
 
     </div>
