@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 荷比挪極光自駕 17日</title>
-	
-    <link rel="stylesheet" href="style.css">
-	
+    <title>2026 荷比挪極光自駕 17日大冒險 (終極完整優化版)</title>
     <style>
         :root {
-            --primary-color: #005f73; /* 深藍綠 */
+            --primary-color: #005f73; /* 深藍綠 - 北歐極光感 */
             --accent-color: #0a9396; /* 亮藍綠 */
             --text-color: #333;
             --bg-color: #f4f6f8;
@@ -20,11 +17,17 @@
             --tip-bg: #d1ecf1;
             --tip-border: #bee5eb;
             --tip-text: #0c5460;
+            --upgrade-bg: #e2e3e5; /* 優化建議底色 */
+            --upgrade-border: #d6d8db;
+            --upgrade-text: #383d41;
+            --highlight-bg: #e8f5e9; /* 綠色高亮 */
+            --highlight-border: #c8e6c9;
+            --highlight-text: #2e7d32;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7; /* 增加行距以利閱讀長文 */
+            line-height: 1.7;
             color: var(--text-color);
             background-color: var(--bg-color);
             margin: 0;
@@ -63,15 +66,19 @@
             margin-top: 35px;
             margin-bottom: 20px;
             font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* 每日行程區塊 */
+        /* 每日行程摺疊 */
         details {
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             background: #fff;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         details[open] {
@@ -111,7 +118,7 @@
             border-top: 1px solid #eee;
         }
 
-        /* 時間軸樣式 */
+        /* 時間軸與內容 */
         .time-block {
             position: relative;
             padding-left: 20px;
@@ -141,15 +148,10 @@
             margin-left: 10px;
         }
 
-        /* 內文樣式 */
         .content-text {
-            margin-top: 5px;
+            margin-top: 8px;
         }
         
-        .content-text p {
-            margin-bottom: 8px;
-        }
-
         .content-text ul, .content-text ol {
             margin-top: 5px;
             margin-bottom: 10px;
@@ -160,7 +162,7 @@
             margin-bottom: 6px;
         }
 
-        /* 連結樣式 */
+        /* 連結 */
         .location-link {
             color: var(--accent-color);
             text-decoration: none;
@@ -177,7 +179,7 @@
             font-size: 0.8em;
         }
 
-        /* 警告與提示框 */
+        /* 提示框 */
         .alert {
             padding: 15px;
             margin: 15px 0;
@@ -193,8 +195,29 @@
 
         .alert-tip {
             background-color: var(--tip-bg);
-            border-left: 5px solid var(--tip-text);
+            border-left: 5px solid #17a2b8;
             color: var(--tip-text);
+        }
+        
+        /* 升級建議框 (本次重點) */
+        .alert-upgrade {
+            background-color: var(--highlight-bg); 
+            border-left: 5px solid var(--highlight-text);
+            color: #1b5e20; 
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .alert-upgrade::before {
+            content: "✨ 行程優化 / 專家建議：";
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--highlight-text);
+            font-size: 1rem;
         }
 
         .info-header {
@@ -206,7 +229,7 @@
             font-weight: 500;
         }
 
-        /* 表格樣式 */
+        /* 表格與APP Grid */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -223,7 +246,6 @@
             color: var(--primary-color);
         }
 
-        /* APP Grid */
         .app-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -249,72 +271,26 @@
             summary { padding: 15px; font-size: 1rem; }
             .day-content { padding: 15px; }
         }
-		
-        /* === 首頁專用樣式 === */
-        .app-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .app-card { background-color: #fff; border: 1px solid #e9ecef; border-left: 4px solid var(--info); padding: 15px; border-radius: 8px; transition: transform 0.2s; }
-        .app-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .app-name { font-weight: bold; color: var(--info); display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        .app-desc { font-size: 0.9rem; color: #666; }
-        
-        .budget-info { background-color: #e8f6f3; border: 1px solid #a2d9ce; padding: 15px; border-radius: 8px; margin-bottom: 30px; color: #16a085; font-size: 0.95rem; }
-        
-        .section-header { background-color: var(--primary); color: white; padding: 12px 20px; border-radius: 8px; margin-top: 40px; font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; }
-        .section-header::before { content: "📍"; margin-right: 10px; }
-        
-        .day-box { border-left: 5px solid var(--accent); background: #fff; margin-bottom: 30px; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .day-title { font-size: 1.3rem; font-weight: bold; color: var(--primary); margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
-        
-        .timeline-item { position: relative; padding-bottom: 30px; border-left: 2px solid #eee; padding-left: 20px; margin-left: 10px; }
-        .timeline-item:last-child { border-left: none; }
-        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
-        .time { font-weight: bold; color: var(--primary); font-size: 1.1rem; display: block; margin-bottom: 5px; }
-        
-        .cost-tag { display: inline-block; background-color: #fce4ec; color: #c2185b; border: 1px solid #f8bbd0; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-left: 8px; vertical-align: middle; }
-        
-        .spot-options { background-color: #fff8e1; border: 1px dashed #ffc107; padding: 15px; border-radius: 8px; margin-top: 10px; }
-        .spot-title { color: #d35400; font-weight: bold; display: block; margin-bottom: 8px; }
-        .spot-list { margin: 0; padding-left: 20px; list-style-type: disc; }
-        .spot-list li { margin-bottom: 5px; color: #555; }
-
-        .hotel-tag { font-size: 0.9rem; color: #555; background: #eee; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 10px; border-left: 3px solid #795548; }
-
-        /* 🔥 Google Maps 連結專用樣式 */
-        .map-link {
-            color: var(--primary);
-            text-decoration: none;
-            border-bottom: 1px dashed #999;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .map-link:hover {
-            color: var(--info);
-            border-bottom: 1px solid var(--info);
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-        .map-link::after {
-            content: ' ↗';
-            font-size: 0.8em;
-            color: #999;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>2026 荷比挪極光自駕 17日</h1>
+    <h1>2026 荷比挪極光自駕 17日大冒險 (完整詳盡版)</h1>
     <p class="subtitle">📅 2026/03/12 - 2026/03/28</p>
+
+    <div class="alert alert-tip">
+        <strong>💰 費用估算標準：</strong> 1 歐元 ≈ 35 台幣 / 1 挪威克朗 ≈ 3 台幣。標籤為單人預估花費。
+    </div>
 
     <h2>📱 出發前必備 APP</h2>
     <div class="app-grid">
+        <div class="app-card"><span class="app-name">🗺️ Google Maps</span><small>羅浮敦山區訊號差，務必先下載離線地圖。</small></div>
         <div class="app-card"><span class="app-name">🅿️ EasyPark</span><small>歐洲停車神器，綁信用卡自動扣款，免找零錢。</small></div>
         <div class="app-card"><span class="app-name">🌌 Aurora Forecast</span><small>追極光必備，看 KP 值與雲層覆蓋率。</small></div>
         <div class="app-card"><span class="app-name">🌥️ YR.no</span><small>挪威官方氣象，比 Google 準，決定纜車行程用。</small></div>
         <div class="app-card"><span class="app-name">🚆 NS International</span><small>荷蘭火車時刻與購票，可直接秀 QR Code 進站。</small></div>
-    </div>
-
-    <div class="alert alert-tip">
-        <strong>💰 費用估算標準：</strong> 1 歐元 ≈ 35 台幣 / 1 挪威克朗 ≈ 3 台幣。標籤為單人預估花費。
+        <div class="app-card"><span class="app-name">📷 Google Translate</span><small>下載離線包，相機對準菜單即時翻譯。</small></div>
     </div>
 
     <h2>✈️ 航班明細</h2>
@@ -371,8 +347,8 @@
                     <p><strong>車種選擇：</strong>建議搭乘 IC (Intercity Brussels) 列車。雖然 Thalys (大力士) 比較快，但需要強制訂位且較貴，IC 比較彈性，錯過一班搭下一班即可。</p>
                     <p><strong>路線：</strong>通常需要在 Antwerpen-Centraal (安特衛普中央車站) 轉車。</p>
                     <ul>
-                        <li>搭乘往 Brussels 方向的 IC 火車，在 Antwerpen-Centraal 下車。</li>
-                        <li>轉乘比利時國鐵 (NMBS) 往 Gent-Sint-Pieters (通常是往 Oostende 或 Kortrijk 方向) 的 IC 火車。</li>
+                        <li>搭乘往 Brussels 方向的 IC 火車，在 <a href="https://www.google.com/maps/search/?api=1&query=Antwerpen-Centraal" class="location-link" target="_blank">Antwerpen-Centraal</a> 下車。</li>
+                        <li>轉乘比利時國鐵 (NMBS) 往 <strong>Gent-Sint-Pieters</strong> (通常是往 Oostende 或 Kortrijk 方向) 的 IC 火車。</li>
                     </ul>
                     <p><strong>車程：</strong>含轉車約需 2 小時 15 分鐘，預計下午 15:30 - 16:00 左右抵達根特。</p>
                 </div>
@@ -381,7 +357,7 @@
             <div class="time-block">
                 <span class="time-label">16:00</span><span class="time-title">抵達根特與前往飯店</span>
                 <div class="content-text">
-                    <p><strong>抵達車站：</strong>您會抵達 Gent-Sint-Pieters 車站（這是根特的主車站，離市區有一點距離，約 2.5 公里）。</p>
+                    <p><strong>抵達車站：</strong>您會抵達 <a href="https://www.google.com/maps/search/?api=1&query=Gent-Sint-Pieters" class="location-link" target="_blank">Gent-Sint-Pieters</a> 車站（這是根特的主車站，離市區有一點距離，約 2.5 公里）。</p>
                     <p><strong>前往飯店 (NH Collection Gent)：</strong></p>
                     <ul>
                         <li><strong>搭電車 (Tram)：</strong>走出車站，搭乘 電車 T1 (往 Gent Flanders Expo - Gentbrugge 方向) 或 T3，在 "Gent Vogelmarkt" 或 "Gent Korenmarkt" 站下車。飯店就在附近，步行約 3-5 分鐘即可抵達。</li>
@@ -396,8 +372,8 @@
                 <div class="content-text">
                     <p>路線：從飯店走出來就是市中心。</p>
                     <ul>
-                        <li><strong>St Michael's Bridge (聖米歇爾橋)：</strong>這是根特最重要的攝影點。站在橋上，您可以同時看到根特的「三塔連線」（聖尼可拉斯教堂、鐘樓、聖巴夫主教座堂）。</li>
-                        <li><strong>香草河岸 (Graslei)：</strong>橋下就是香草河岸，兩旁是保存完好的中世紀公會建築。此時接近日落（3月日落約在 18:30），您可以欣賞從黃昏到亮燈的景色。</li>
+                        <li><strong><a href="https://www.google.com/maps/search/?api=1&query=St+Michael's+Bridge+Gent" class="location-link" target="_blank">St Michael's Bridge (聖米歇爾橋)</a>：</strong>這是根特最重要的攝影點。站在橋上，您可以同時看到根特的「三塔連線」（聖尼可拉斯教堂、鐘樓、聖巴夫主教座堂）。</li>
+                        <li><strong><a href="https://www.google.com/maps/search/?api=1&query=Graslei+Gent" class="location-link" target="_blank">香草河岸 (Graslei)</a>：</strong>橋下就是香草河岸，兩旁是保存完好的中世紀公會建築。此時接近日落（3月日落約在 18:30），您可以欣賞從黃昏到亮燈的景色。</li>
                     </ul>
                 </div>
             </div>
@@ -406,7 +382,7 @@
                 <span class="time-label">18:00</span><span class="time-title">晚餐：Amadeus (肋排吃到飽)</span>
                 <div class="content-text">
                     <p><strong>餐廳特色：</strong>以「肋排吃到飽 (All-you-can-eat ribs)」聞名，搭配烤馬鈴薯 (Filled potato)。內部裝潢通常走復古圖書館或酒館風，氣氛熱鬧。</p>
-                    <p><strong>分店選擇：</strong>根特有幾家分店，離您飯店最近的可能是 Amadeus Gent 2 (Belfort) (地址：Goudenleeuwplein 7) 或 Amadeus Gent 1 (Patershol) (位於古老的 Patershol 區，地址：Plotersgracht 8)。兩家都很棒，看您當下想走多遠。</p>
+                    <p><strong>分店選擇：</strong>根特有幾家分店，離您飯店最近的可能是 <a href="https://www.google.com/maps/search/?api=1&query=Amadeus+Gent+2" class="location-link" target="_blank">Amadeus Gent 2 (Belfort)</a> (地址：Goudenleeuwplein 7) 或 Amadeus Gent 1 (Patershol) (位於古老的 Patershol 區，地址：Plotersgracht 8)。兩家都很棒，看您當下想走多遠。</p>
                     <div class="alert alert-warning">⚠️ 重要建議：這家店非常熱門，強烈建議您提前在官網預訂座位，以免現場排隊過久。</div>
                 </div>
             </div>
@@ -414,7 +390,7 @@
             <div class="time-block">
                 <span class="time-label">20:00</span><span class="time-title">伯爵城堡 (Gravensteen) 夜拍</span>
                 <div class="content-text">
-                    <p><strong>散步路線：</strong>吃飽後，沿著河岸散步到 Gravensteen 城堡。</p>
+                    <p><strong>散步路線：</strong>吃飽後，沿著河岸散步到 <a href="https://www.google.com/maps/search/?api=1&query=Gravensteen+Gent" class="location-link" target="_blank">Gravensteen 城堡</a>。</p>
                     <p><strong>看點：</strong>晚上城堡內部通常不開放，但外部夜景非常迷人。護城河的水面倒映著打燈的城堡，氣氛神秘且莊嚴，非常適合夜拍。</p>
                     <p><strong>結束：</strong>散步回飯店休息（NH Collection 就在步行距離內），調整時差，準備隔天的行程。</p>
                 </div>
@@ -452,7 +428,7 @@
             <div class="time-block">
                 <span class="time-label">10:30</span><span class="time-title">藝術朝聖：聖巴夫主教座堂 (St Bavo's Cathedral)</span>
                 <div class="content-text">
-                    <p>📍 地點：從市集步行約 5-8 分鐘。</p>
+                    <p>📍 地點：<a href="https://www.google.com/maps/search/?api=1&query=St+Bavo's+Cathedral+Gent" class="location-link" target="_blank">St Bavo's Cathedral</a> (從市集步行約 5-8 分鐘)。</p>
                     <p>💡 亮點說明：這座教堂是根特的地標，內部宏偉肅穆。</p>
                     <p><strong>鎮館之寶：</strong>凡·艾克兄弟 (Van Eyck) 繪製的祭壇畫<strong>《神秘羔羊之愛》(The Adoration of the Mystic Lamb)</strong>。這是北方文藝復興的巔峰之作，細節精緻到令人起雞皮疙瘩。這幅畫曾被盜多次（包括拿破崙和希特勒都搶過），充滿傳奇色彩。</p>
                     <div class="alert alert-warning">
@@ -485,7 +461,7 @@
                     <p><strong>交通路線 (IC 火車)：</strong></p>
                     <ol>
                         <li><strong>前往車站：</strong>從飯店搭計程車或電車 (Tram 1/3) 前往 Gent-Sint-Pieters 車站。</li>
-                        <li><strong>第一段火車：</strong>搭乘比利時國鐵 (NMBS) 往 Antwerpen-Centraal (安特衛普中央車站)。<br><em>小撇步：安特衛普車站號稱「鐵路大教堂」，轉車時有時間可以去大廳拍張照，非常壯觀。</em></li>
+                        <li><strong>第一段火車：</strong>搭乘比利時國鐵 (NMBS) 往 <a href="https://www.google.com/maps/search/?api=1&query=Antwerpen-Centraal" class="location-link" target="_blank">Antwerpen-Centraal (安特衛普中央車站)</a>。<br><em>小撇步：安特衛普車站號稱「鐵路大教堂」，轉車時有時間可以去大廳拍張照，非常壯觀。</em></li>
                         <li><strong>第二段火車：</strong>在安特衛普轉乘 Intercity (IC) Brussels 列車（往 Amsterdam Centraal 方向），在 Schiphol Airport 站下車。</li>
                     </ol>
                     <p><strong>總車程：</strong>約 2 小時 15 分 ～ 2 小時 30 分。預計 17:00 - 17:30 抵達史基浦機場。</p>
@@ -550,6 +526,11 @@
             <div class="time-block">
                 <span class="time-label">16:00</span><span class="time-title">自駕長征：E10 公路 (約 170 公里)</span>
                 <div class="content-text">
+                    <div class="alert alert-upgrade">
+                        🚗 <strong>餓肚子風險與對策：</strong>
+                        <p>您 15:20 抵達，取完車出發可能快 16:00，開到 Svolvær 要 3 小時（雪地更久）。若直奔 Svolvær 才吃飯，您會在又黑、又餓、路況不熟的狀態下駕駛，非常危險。</p>
+                        <p><strong>建議：在 EVE 機場附近的 Circle K Evenes (加油站) 先買個熱狗或漢堡墊肚子。</strong>或者在開車 1 小時後的 Bogen 或 Bjerkvik 小鎮稍作停留。</p>
+                    </div>
                     <p>從機場拿到車出發約 16:00，開到 Svolvær 至少需 2.5 - 3 小時，抵達時約 18:30 - 19:00。</p>
                     <p><strong>路況預警：</strong></p>
                     <ul>
@@ -563,7 +544,7 @@
             <div class="time-block">
                 <span class="time-label">19:00</span><span class="time-title">關鍵任務：Rema 1000 採買 (Svolvær)</span>
                 <div class="content-text">
-                    <p>📍 地點：抵達 Svolvær 後，先別急著進飯店，直奔 Rema 1000 Svolvær (或旁邊的 Extra)。這家 Rema 1000 週六通常營業到 23:00，所以時間很充裕。</p>
+                    <p>📍 地點：抵達 Svolvær 後，先別急著進飯店，直奔 <a href="https://www.google.com/maps/search/?api=1&query=Rema+1000+Svolvær" class="location-link" target="_blank">Rema 1000 Svolvær</a> (或旁邊的 Extra)。這家 Rema 1000 週六通常營業到 23:00，所以時間很充裕。</p>
                     <div class="alert alert-warning">
                         🚨 <strong>紅色警報 (週日公休)：明天 (3/15 週日) 挪威 99% 的超市都不開門！</strong><br>
                         請務必在今天買齊：
@@ -677,6 +658,10 @@
                 <div class="content-text">
                     <p>路線：沿著 E10 往南開，經過 Leknes 後，注意路標右轉進入 Fv807 公路。</p>
                     <p><strong>路況提醒：</strong>Fv807 這段路風景極美但也較為狹窄蜿蜒，若遇上下雪請減速慢行。</p>
+                    <div class="alert alert-upgrade">
+                        ✨ <strong>行程新增建議：Haukland Beach</strong><br>
+                        您的行程經過了 Leknes 附近，如果有 1 小時空檔，強烈建議繞去 <strong>Haukland Beach</strong> (歐洲最美海灘之一)。那裡就在 E10 轉個彎約 15 分鐘車程處。山脈直接插入海中，沙灘非常廣闊，比 Ramberg 更壯觀。
+                    </div>
                     <p><strong>景點：Nusfjord (努斯峽灣漁村)：</strong>這是羅浮敦保存最完整、最古老的漁村之一，被群山環抱的峽灣地形非常隱蔽。門票：進入村莊通常需要購票 (約 NOK 100/人)。</p>
                     <p><strong>必逛：</strong>Landhandel (古老雜貨店)、麵包店 (Bakeri)、碼頭散步。</p>
                 </div>
@@ -1077,6 +1062,9 @@
             <div class="time-block">
                 <span class="time-label">19:00</span><span class="time-title">啤酒朝聖：Ølhallen (或替代方案)</span>
                 <div class="content-text">
+                    <div class="alert alert-upgrade">
+                        ✨ <strong>行程優化建議：</strong>Day 11 是週日，市區很冷清。如果當天博物館逛累了，或者天氣不好不想待在室外，可以把 Day 12 的 <strong>Pust Floating Sauna (漂浮桑拿)</strong> 移到這天下午或晚上。桑拿週日有開，而且在週日晚上蒸桑拿、看著安靜的港口，是非常棒的收尾。這樣 Day 12 狗拉雪橇完就可以專心逛街買紀念品。
+                    </div>
                     <div class="alert alert-warning">
                         🚨 <strong>週日公休警報：</strong>Ølhallen (Mack 啤酒廠酒吧) 是北極圈最古老的酒吧，非常有氣氛。但是！它通常週日是公休的 (或營業時間極短)。請務必先用 Google Maps 確認當天是否營業。
                     </div>
@@ -1224,14 +1212,26 @@
                 <div class="content-text">
                     <p>交通：從機場開車到庫肯霍夫約 20-30 分鐘。</p>
                     <p><strong>停車 (重要)：</strong>務必提前上網買停車票（約 €6-10），現場排隊繳費浪費時間。</p>
-                    <p><strong>早春賞花策略：</strong>戶外花田可能還只有綠葉。請主攻 <strong>Willem-Alexander Pavilion</strong>（最大的室內展館），這裡透過溫室控溫，鬱金香保證盛開，品種最齊全。</p>
+                    <div class="alert alert-upgrade">
+                        🌷 <strong>花況優化建議：</strong><br>
+                        3/25 是花季初期，戶外花田可能 80% 還是綠色的。建議：<br>
+                        1. <strong>出發前檢查：</strong>每天查看 <a href="https://www.bloemenradar.nl/" target="_blank">Bloemenradar (花田雷達)</a>。<br>
+                        2. <strong>B 計畫：</strong>如果園區內戶外沒花，請不要在園區待太久。主攻 <strong>Willem-Alexander Pavilion</strong> (室內展館)。然後把時間拿去<strong>租腳踏車</strong>（大門口有），騎去附近的 Lisse 鄉間小路找農夫花田或風信子 (Hyacinths)，它們比鬱金香早開。
+                    </div>
                 </div>
             </div>
 
             <div class="time-block">
                 <span class="time-label">16:00</span><span class="time-title">移動：前往羊角村 (Giethoorn)</span>
                 <div class="content-text">
-                    <p>路線：A4 -> A10 -> A1 -> A6。全程約 1.5 - 2 小時。避開尖峰：荷蘭下午 16:00 - 18:00 是下班尖峰，環阿姆斯特丹公路容易塞車。</p>
+                    <div class="alert alert-warning">
+                        ⚠️ <strong>塞車地獄預警：</strong><br>
+                        您預計 16:00 從庫肯霍夫開往羊角村。這剛好會撞上 A4 和 A10 (阿姆斯特丹環狀線) 的<strong>下班超級尖峰</strong>。<br>
+                        <strong>流程調整建議：</strong><br>
+                        方案 A (早走)：<strong>15:00</strong> 就離開庫肯霍夫。<br>
+                        方案 B (晚走)：在庫肯霍夫附近（如 Lisse 鎮上）悠閒吃個晚餐，等到 <strong>18:30 後</strong>再開車。雖然羊角村餐廳會關，但您吃飽了，只要入住就好。這樣開車會順暢很多。
+                    </div>
+                    <p>路線：A4 -> A10 -> A1 -> A6。全程約 1.5 - 2 小時。</p>
                 </div>
             </div>
 
@@ -1247,8 +1247,8 @@
             <div class="alert alert-warning">
                 <strong>⚠️ 今日特別注意事項：</strong><br>
                 1. <strong>庫肯霍夫門票：</strong>務必提前上網預訂！包含特定時段入場。<br>
-                2. <strong>荷蘭測速：</strong>高速公路速限通常是 100 km/h (白天 06-19)，且有區間測速 (Trajectcontrole)。<br>
-                3. <strong>導航設定：</strong>去羊角村時，建議導航設定 "Hotel de Harmonie"，不要只設 "Giethoorn"，不然可能會被帶到步行區。
+                2. <strong>荷蘭測速：</strong>高速公路速限通常是 100 km/h (白天 06-19)，且有許多區間測速 (Trajectcontrole)。<br>
+                3. <strong>導航設定：</strong>去羊角村時，建議導航設定 "Hotel de Harmonie"，不要只設 "Giethoorn"，不然導航可能會把您帶到村中心的步行區，車子會進退兩難。
             </div>
         </div>
     </details>
@@ -1328,6 +1328,12 @@
                 <span class="time-label">13:00</span><span class="time-title">文青散策：喬達安 (Jordaan) & 九條街</span>
                 <div class="content-text">
                     <p>喬達安區：阿姆斯特丹最美的運河區。必吃甜點：<strong>Winkel 43</strong> 的蘋果派 (Appeltaart)。</p>
+                    <div class="alert alert-upgrade">
+                        🍪 <strong>排隊美食體驗升級：</strong><br>
+                        既然去了阿姆斯特丹，除了蘋果派，還有兩樣東西現在非常紅：<br>
+                        1. <strong>Fabel Friet (薯條)：</strong>在九條街附近。比尿尿小童薯條更受好評，必加巴馬乾酪松露醬 (Parmesan Truffle)。<br>
+                        2. <strong>Van Stapele Koekmakerij (巧克力餅乾)：</strong>在 Spui 附近。這家店只賣一種餅乾（黑巧克力包白巧克力），被譽為世界最好吃。注意：這家餅乾通常下午就賣光，建議早上去買，或者一早先上網預訂下午去拿。
+                    </div>
                     <p>九條街 (De 9 Straatjes)：充滿設計選物店、古著店。</p>
                 </div>
             </div>
@@ -1404,6 +1410,6 @@
     </details>
 
 </div>
-<script src="navbar.js"></script>
+
 </body>
 </html>
