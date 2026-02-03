@@ -6,15 +6,82 @@
     <title>歐洲自駕保命全攻略</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* 保留原本的樣式邏輯，並進行擴充 */
+        :root {
+            --primary: #2c3e50;
+            --accent: #2980b9;
+            --danger: #c0392b;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --info: #0288d1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        h1 { text-align: center; color: var(--primary); margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: bold; }
+
+        /* Hero Card */
         .hero-card { background: linear-gradient(135deg, #607d8b, #455a64); color: #fff; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(69, 90, 100, 0.3); }
         .hero-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; }
-        .highlight-box { background-color: #f0f4c3; border: 2px solid #cddc39; color: #33691e; padding: 18px; border-radius: 8px; margin: 15px 0; font-weight: bold; }
-        .eng-box { padding: 15px; background: #fff; border-top: 1px solid #eee; }
+
+        /* General Card */
+        .card { background: #fff; padding: 25px; border-radius: 10px; margin-bottom: 25px; border-left: 6px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .card-header { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .icon { font-size: 1.5rem; margin-right: 12px; }
+
+        /* Alert Boxes */
+        .alert { padding: 15px; border-radius: 6px; margin: 15px 0; font-weight: 500; border-left: 4px solid; font-size: 0.95rem; }
+        .alert-danger { background: #ffebee; color: var(--danger); border-color: #ef5350; }
+        .alert-info { background: #e3f2fd; color: #0277bd; border-color: #4fc3f7; }
+        .alert-tip { background: #e8f5e9; color: var(--success); border-color: #66bb6a; }
+        .alert-fuel { background: #fff3e0; color: #e65100; border-color: #ffb74d; }
+
+        /* English Phrases */
+        details { background: #fafafa; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; }
+        summary { padding: 15px; cursor: pointer; font-weight: bold; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: '+'; font-size: 1.2rem; color: #999; }
+        details[open] summary::after { content: '-'; color: var(--accent); }
+        .eng-box { padding: 15px; border-top: 1px solid #eee; background: #fff; }
         .eng-phrase { margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px; }
-        .eng-phrase:last-child { border: none; }
-        .en { font-weight: 800; display: block; margin-bottom: 5px; font-size: 1.1rem; }
-        .cn { color: #555; }
-        .note { font-size: 0.9rem; color: #c0392b; font-weight: bold; margin-top: 5px; }
+        .eng-phrase:last-child { border: none; margin-bottom: 0; }
+        .en { font-weight: 800; display: block; margin-bottom: 5px; font-size: 1.1rem; color: #2c3e50; }
+        .cn { color: #555; display: block; }
+        .note { font-size: 0.9rem; color: var(--danger); font-weight: bold; margin-top: 5px; display: block; }
+
+        /* Step List */
+        .step-list { counter-reset: step; list-style: none; padding: 0; }
+        .step-list li { position: relative; padding-left: 40px; margin-bottom: 15px; }
+        .step-list li::before { content: counter(step); counter-increment: step; position: absolute; left: 0; top: 0; width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; }
+        .step-highlight { color: #d35400; font-weight: bold; text-decoration: underline; }
+
+        /* Fuel Badges */
+        .fuel-type { display: flex; gap: 10px; margin-top: 10px; }
+        .fuel-badge { padding: 8px 15px; border-radius: 6px; color: white; font-weight: bold; flex: 1; text-align: center; }
+        .fuel-gas { background-color: #27ae60; }
+        .fuel-diesel { background-color: #2c3e50; }
+
+        /* Sign Grid */
+        .sign-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .sign-item { border: 1px solid #eee; padding: 10px; border-radius: 8px; background: #fafafa; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .sign-icon { font-size: 2rem; margin-bottom: 5px; }
+        .sign-text strong { display: block; color: #333; margin-bottom: 3px; }
+        .sign-text small { color: #666; font-size: 0.85rem; line-height: 1.4; }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            .hero-title { font-size: 1.4rem; }
+            .fuel-type { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -24,39 +91,126 @@
 
         <div class="hero-card">
             <div class="hero-title">✅ 免驚！跟台灣一模一樣</div>
-            <div>🇳🇴 挪威 🇳🇱 荷蘭 🇧🇪 比利時<br>全部都是 <strong>左駕車 (駕駛座在左邊)</strong><br>全部都是 <strong>靠右行駛</strong></div>
+            <div>🇳🇴 挪威 🇳🇱 荷蘭 🇧🇪 比利時<br>全部都是 <strong>左駕車 (駕駛座在左邊)</strong><br>全部都是 <strong>靠右行駛</strong><br>完全不用適應，放慢開就好！</div>
         </div>
 
-        <div class="card" style="border-left-color: var(--info);">
-            <div class="card-header"><span class="icon">🗣️</span>租車櫃台英文攻略 (點擊展開)</div>
+        <div class="card" style="border-left-color: var(--warning);">
+            <div class="card-header"><span class="icon">🗣️</span>Step 1: 租車櫃台生存戰</div>
+            <div class="alert alert-danger">
+                <strong>新手最怕：</strong> 櫃台人員說你的保險不夠，一直推銷。<br>
+                <strong>對策：</strong> 堅定拒絕。除非你想現場買「0 自負額」求心安，否則直接說 No。
+            </div>
             <details><summary>1. 取車與核對訂單</summary><div class="eng-box"><div class="eng-phrase"><span class="en">Hi, I have a booking with Trip.com.</span><span class="cn">嗨，我有用 Trip.com 訂車。</span></div></div></details>
-            <details><summary>2. 拒絕推銷 (最重要！)</summary><div class="eng-box"><div class="eng-phrase"><span class="en">No extra insurance, thanks. I have full coverage.</span><span class="cn">不用額外保險，謝謝。我已經有全險了。</span><div class="note">*請堅定拒絕。</div></div><div class="eng-phrase"><span class="en">I don't need an upgrade.</span><span class="cn">我不需要升級車款。</span></div></div></details>
-            <details><summary>3. 確認燃油與輪胎</summary><div class="eng-box"><div class="eng-phrase"><span class="en">Is this Petrol or Diesel?</span><span class="cn">這是汽油還是柴油？</span></div><div class="eng-phrase"><span class="en">Does it have winter tires?</span><span class="cn">有裝冬季胎嗎？(挪威必備)</span></div></div></details>
+            <details><summary>2. 拒絕推銷 (最重要！)</summary><div class="eng-box"><div class="eng-phrase"><span class="en">No extra insurance, thanks. I have full coverage.</span><span class="cn">不用額外保險，謝謝。我已經有全險了。</span><div class="note">*請堅定拒絕，不要動搖。</div></div></div></details>
+            <details><summary>3. 確認燃油與輪胎</summary><div class="eng-box"><div class="eng-phrase"><span class="en">Is this Petrol or Diesel?</span><span class="cn">這是汽油還是柴油？</span></div><div class="eng-phrase"><span class="en">Does it have winter tires?</span><span class="cn">有裝冬季胎嗎？(挪威冬天必備)</span></div></div></details>
             <details><summary>4. 檢查車況</summary><div class="eng-box"><div class="eng-phrase"><span class="en">There is a scratch here. Please mark it.</span><span class="cn">這裡有刮痕，請註記。</span></div></div></details>
         </div>
 
-        <div class="card" style="border-left-color: var(--secondary);">
-            <div class="card-header"><span class="icon">❄️</span>挪威雪地・保命規則</div>
-            <div class="highlight-box">💡 24小時開大燈：挪威規定引擎發動就要開大燈 (Low beam)。</div>
+        <div class="card" style="border-left-color: var(--success);">
+            <div class="card-header"><span class="icon">🕹️</span>Step 2: 上車後的黃金 5 分鐘</div>
+            <p>拿到鑰匙不要急著開走！請先在停車場做完這些事：</p>
+            <ol class="step-list">
+                <li><strong>設定導航：</strong> 先連上 Apple CarPlay / Android Auto。<strong>絕對不要邊開邊設。</strong></li>
+                <li><strong>開啟大燈：</strong> 找到大燈旋鈕，轉到 <strong>"AUTO"</strong> 或 <strong>"近光燈"</strong>。挪威規定全天候都要開燈！</li>
+                <li><strong>確認倒車檔：</strong> 歐洲車倒車檔有時要「往下壓再排」或有「拉環」，先試打一次確認。</li>
+                <li><strong>確認油孔位置：</strong> 看儀表板加油圖示旁的箭頭 ▶，箭頭指哪邊，油孔就在哪邊。</li>
+            </ol>
+        </div>
+
+        <div class="card" style="border-left-color: #e74c3c;">
+            <div class="card-header"><span class="icon">⛽</span>Step 3: 自助加油 (拔卡是關鍵)</div>
+            
+            <div class="alert alert-danger">
+                <strong>💳 信用卡在哪裡？</strong>
+                請記住順序：<strong>插卡 &rarr; 輸入PIN &rarr; 驗證 &rarr; <span class="step-highlight">拔出卡片</span> &rarr; 才能拿油槍加油</strong>。<br>
+                卡片驗證完就收回錢包，不要插在機器裡！
+            </div>
+
+            <div class="alert alert-fuel">
+                <strong>💰 預授權簡訊？</strong>
+                插卡後若收到高額扣款簡訊(如 1500 NOK) 別慌！那是<strong>「押金(預授權)」</strong>。加完油掛槍後，會依照實際金額扣款，原本的押金會自動取消。
+            </div>
+
+            <h4>🎨 認顏色加對油 (加錯賠十萬)：</h4>
+            <div class="fuel-type">
+                <div class="fuel-badge fuel-gas">🟢 95 Bensin (汽油)<br>E10 / Blyfri</div>
+                <div class="fuel-badge fuel-diesel">⚫ Diesel (柴油)<br>通常是黑色油槍</div>
+            </div>
+
+            <h4 style="margin-top:15px;">⛽ 操作流程：</h4>
+            <ol class="step-list">
+                <li><strong>停車熄火</strong>，記住柱子上的 <strong>幫浦號碼 (Pump Number)</strong>。</li>
+                <li>走到機器，選英文，插入信用卡，輸入 PIN 碼 (預借現金碼)。</li>
+                <li>螢幕顯示 "Card Accepted" 或 "Remove Card" 後，<strong>拔出信用卡</strong>。</li>
+                <li>拿起油槍，插入油孔，按壓把手加油。</li>
+                <li>跳停後掛回油槍，若需要收據依螢幕指示操作。</li>
+            </ol>
+        </div>
+
+        <div class="card" style="border-left-color: var(--info);">
+            <div class="card-header"><span class="icon">❄️</span>Step 4: 挪威雪地・保命規則</div>
+            <div class="alert alert-info">
+                <strong>核心觀念：</strong> 一切動作都要<strong>「慢」</strong>。慢踩油門、慢踩煞車、慢轉方向盤。
+            </div>
             <ul>
-                <li><strong>黑冰 (Black Ice)：</strong> 路面看起來濕濕的其實是冰。請勿急煞。</li>
-                <li><strong>酒測值：</strong> 挪威 0.02% 極嚴格，喝一杯啤酒就會超標。</li>
-                <li><strong>渡輪：</strong> 跟著前車排隊，工作人員會來收費或自動扣款。</li>
+                <li><strong>黑冰 (Black Ice)：</strong> 路面看起來黑黑亮亮的其實是冰！千萬不要急煞車，放開油門滑行減速。</li>
+                <li><strong>起步打滑：</strong> 不要重踩油門。輕踩，若動不了可嘗試前後「嚕」一下車子。</li>
+                <li><strong>路肩陷阱：</strong> 羅浮敦路窄，<strong>不要開得太靠路邊</strong>，因為雪可能蓋住水溝，開太旁邊會陷下去。</li>
+                <li><strong>酒測值：</strong> 挪威 0.02% 極嚴格，喝一杯啤酒就會超標，絕對禁止酒駕。</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-left-color: #8e44ad;">
+            <div class="card-header"><span class="icon">🛑</span>Step 5: 看懂路標與潛規則</div>
+            
+            <div class="alert alert-danger">
+                <strong>⚠️ 最重要的規則：右側先行 (Priority to the Right)</strong><br>
+                在沒有紅綠燈、沒有標誌的路口(通常在住宅區/鄉下)：<strong>右邊來的車擁有絕對優先權！</strong><br>
+                就算你的路看起來比較直比較寬，只要右邊有車出來，你就要煞車讓他。
+            </div>
+
+            <h4>🚦 關鍵路標圖解：</h4>
+            <div class="sign-grid">
+                <div class="sign-item">
+                    <div class="sign-icon">🔶</div>
+                    <div class="sign-text"><strong>黃色鑽石</strong><small>優先路權！你是老大，支線車要讓你，不用減速。</small></div>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-icon">🔻</div>
+                    <div class="sign-text"><strong>倒三角形</strong><small>讓！你必須減速，確認左右無車才能過。</small></div>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-icon">⭕</div>
+                    <div class="sign-text"><strong>圓環 (Roundabout)</strong><small>圓環內的車最大。進圓環前先看左邊，沒車才能進。</small></div>
+                </div>
+            </div>
+
+            <h4 style="margin-top:15px;">🛣️ 高速公路潛規則：</h4>
+            <ul>
+                <li><strong>內側是超車道：</strong> 左邊車道<strong>只能用來超車</strong>。超完車必須立刻切回右邊。絕對不能一直佔用左道 (會被罰)。</li>
+                <li><strong>荷蘭區間測速：</strong> 荷蘭高速公路常有 "Trajectcontrole" (區間測速)，請嚴格遵守速限。</li>
+                <li><strong>紅燈不能右轉：</strong> 除非有綠色箭頭，否則紅燈一律禁止右轉。</li>
             </ul>
         </div>
 
         <div class="card" style="border-left-color: var(--accent);">
-            <div class="card-header"><span class="icon">🚲</span>荷蘭・自行車是老大</div>
+            <div class="card-header"><span class="icon">🚲</span>Step 6: 荷蘭自行車是老大</div>
             <ul>
-                <li><strong>轉彎死角：</strong> 右轉時務必回頭看有無自行車直行。撞到汽車全責。</li>
-                <li><strong>電車 (Tram)：</strong> 阿姆斯特丹電車有絕對路權。</li>
+                <li><strong>轉彎死角：</strong> 荷蘭自行車路權極大。右轉時，務必<strong>回頭看右後方</strong>有無自行車直行。撞到汽車全責。</li>
+                <li><strong>電車 (Tram)：</strong> 阿姆斯特丹電車有絕對路權，請勿搶快。</li>
             </ul>
         </div>
 
-        <div class="card" style="border-left-color: var(--secondary);">
-            <div class="card-header"><span class="icon">🆘</span>萬一出事了</div>
+        <div class="card" style="border-left-color: #607d8b;">
+            <div class="card-header"><span class="icon">🆘</span>Step 7: 萬一出事了</div>
             <details><summary>拋錨/事故英文</summary><div class="eng-box"><div class="eng-phrase"><span class="en">My car broke down. / I have a flat tire.</span><span class="cn">車拋錨了 / 爆胎了。</span></div><div class="eng-phrase"><span class="en">Please call the police (112).</span><span class="cn">請幫忙報警。</span></div></div></details>
+            <ul>
+                <li><strong>緊急電話：</strong> 全歐洲通用 <strong>112</strong>。</li>
+                <li><strong>穿反光背心：</strong> 若在路邊拋錨下車，法律規定必須穿上車內的螢光反光背心。</li>
+                <li><strong>三角架：</strong> 放置在車後方 50-100 公尺處警示後車。</li>
+            </ul>
         </div>
+
         <div style="text-align: center; color: #777; margin-top: 30px;">請放心，慢慢開，遵守規則，您一定沒問題！</div>
     </div>
     <script src="navbar.js"></script>

@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 荷比挪極光自駕 17日大冒險 (Google Maps 導航版)</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script> 
+
     <style>
+        /* === 3. 保留您原本的配色與特殊排版 === */
         :root {
             --primary-color: #005f73;
             --accent-color: #0a9396;
@@ -23,6 +29,9 @@
             --highlight-bg: #e8f5e9;
             --highlight-border: #c8e6c9;
             --highlight-text: #2e7d32;
+
+            /* 強制覆蓋 style.css 的導航列顏色，讓它配合這一頁的色系 */
+            --nav-bg: #005f73; 
         }
 
         body {
@@ -31,9 +40,13 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             margin: 0;
+            
+            /* 重要：預留空間給 Topbar (根據 style.css 的設定) */
             padding: 15px;
+            padding-top: 100px; 
         }
 
+        /* === 內容容器 === */
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -71,6 +84,7 @@
             gap: 10px;
         }
 
+        /* === 折疊區塊 (保留您的特殊樣式) === */
         details {
             margin-bottom: 15px;
             border: 1px solid #ddd;
@@ -112,6 +126,7 @@
             content: '-';
         }
 
+        /* === 行程時間軸樣式 === */
         .day-content {
             padding: 25px;
             border-top: 1px solid #eee;
@@ -160,7 +175,7 @@
             margin-bottom: 6px;
         }
 
-        /* 導航連結樣式 - 設為藍色並加粗 */
+        /* 導航連結樣式 */
         a.map-link {
             color: #007bff;
             text-decoration: none;
@@ -179,6 +194,7 @@
             margin-left: 3px;
         }
 
+        /* === 提示框樣式 === */
         .alert {
             padding: 15px;
             margin: 15px 0;

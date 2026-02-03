@@ -13,11 +13,10 @@
             <a href="index.html" class="nav-item"><span class="nav-icon">📅</span>行程</a>
             <a href="driving.html" class="nav-item"><span class="nav-icon">🚗</span>自駕</a>
             <a href="cooking.html" class="nav-item"><span class="nav-icon">🍳</span>下廚</a>
-            <a href="refuel.html" class="nav-item"><span class="nav-icon">⛽</span>加油</a>
             <a href="lifestyle.html" class="nav-item"><span class="nav-icon">🏠</span>生活</a>
             <a href="photo.html" class="nav-item"><span class="nav-icon">📷</span>攝影</a>
             <a href="checklist.html" class="nav-item"><span class="nav-icon">📋</span>清單</a>
-            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>救命</a>
+            <a href="communication.html" class="nav-item" style="color: #ffccbc;"><span class="nav-icon">🆘</span>英文</a>
         </div>
     </nav>
     `;
