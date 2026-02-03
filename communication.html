@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手指英文・旅行萬用大全 (完整版)</title>
+    <title>手指英文・旅行萬用字典 (發音版)</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* === 本頁專用樣式 === */
@@ -11,7 +11,7 @@
         /* 頂部快速導航 (Sticky) */
         .quick-nav-wrapper {
             background: #f8f9fa;
-            padding: 10px 0;
+            padding: 12px 0;
             position: sticky;
             top: 50px; /* 避開 navbar */
             z-index: 90;
@@ -20,29 +20,31 @@
             overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         
         .quick-nav {
             display: inline-flex;
             padding: 0 15px;
-            gap: 8px;
+            gap: 10px;
         }
 
         .nav-pill {
             background: #fff;
             border: 1px solid #cfd8dc;
-            color: var(--text-dark);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            color: #455a64;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.95rem;
             text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-weight: 700;
             transition: all 0.2s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            gap: 5px;
         }
-        .nav-pill:active, .nav-pill:hover { 
+        
+        .nav-pill:hover, .nav-pill:active { 
             background: var(--primary); 
             color: #fff; 
             border-color: var(--primary); 
@@ -50,188 +52,208 @@
         }
 
         /* 卡片系統 */
-        .card { scroll-margin-top: 140px; border-left-width: 6px; padding: 20px 15px; }
+        .card { scroll-margin-top: 140px; border-left-width: 6px; padding: 25px 20px; }
         
+        .border-airport { border-left-color: #1976d2; }
+        .border-car { border-left-color: #d32f2f; }
+        .border-hotel { border-left-color: #795548; }
+        .border-food { border-left-color: #fbc02d; }
+        .border-shop { border-left-color: #8e24aa; }
+        .border-sos { border-left-color: #333; }
         .border-basic { border-left-color: #607d8b; }
-        .border-airport { border-left-color: #1976d2; } /* 藍 */
-        .border-transport { border-left-color: #0097a7; } /* 青 */
-        .border-car { border-left-color: #d32f2f; }      /* 紅 */
-        .border-hotel { border-left-color: #795548; }    /* 棕 */
-        .border-food { border-left-color: #fbc02d; }     /* 黃 */
-        .border-shop { border-left-color: #8e24aa; }     /* 紫 */
-        .border-sos { border-left-color: #333; }         /* 黑 */
+        .border-trans { border-left-color: #009688; }
 
-        /* 分類標題 */
+        /* 分類小標 */
         .sub-cat {
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-top: 25px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-            display: flex;
-            align-items: center;
+            font-size: 1.1rem; font-weight: 800; color: var(--primary);
+            margin: 35px 0 15px 0; border-bottom: 2px solid #eee;
+            padding-bottom: 8px; display: flex; align-items: center;
         }
         .sub-cat:first-of-type { margin-top: 0; }
         .sub-cat::before {
-            content: ''; display: block; width: 6px; height: 6px; 
-            background: var(--accent); border-radius: 50%; margin-right: 8px;
+            content: ''; display: block; width: 8px; height: 8px; 
+            background: var(--accent); border-radius: 50%; margin-right: 10px;
         }
 
-        /* 句子列表 */
-        .phrase-list {
-            display: grid;
-            gap: 8px;
-        }
-
-        .phrase-item {
-            background: #fff;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            transition: background 0.2s;
-        }
-        .phrase-item:hover { background: #fafafa; border-color: #ddd; }
-
-        .en {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #2c3e50;
-            line-height: 1.3;
-            margin-bottom: 4px;
-        }
-        .cn {
-            font-size: 0.9rem;
-            color: #78909c;
-        }
+        /* 句子列表 (高密度) */
+        .phrase-list { display: grid; gap: 8px; }
         
-        /* 重點標記 */
-        .tag-imp {
-            display: inline-block; font-size: 0.75rem; color: #c62828; 
-            background: #ffebee; padding: 2px 6px; border-radius: 4px; 
-            margin-left: 8px; font-weight: bold; vertical-align: middle;
-        }
-
-        /* 對話框樣式 (模擬 A/B 對話) */
-        .dialogue-box {
-            background-color: #f1f8e9;
-            border-left: 4px solid #8bc34a;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-        .role { font-weight: bold; font-size: 0.85rem; padding: 2px 6px; border-radius: 4px; color: #fff; margin-right: 5px; }
-        .role-staff { background: #78909c; }
-        .role-me { background: #29b6f6; }
-        .d-row { margin-bottom: 8px; }
-        .d-row:last-child { margin-bottom: 0; }
-
         @media (min-width: 768px) {
             .phrase-list { grid-template-columns: 1fr 1fr; }
             .quick-nav-wrapper { justify-content: center; display: flex; }
         }
+
+        .phrase-item {
+            background: #fff;
+            border: 1px solid #eceff1;
+            border-radius: 8px;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .phrase-item:hover { 
+            background: #fafafa; 
+            border-color: #b0bec5; 
+            transform: translateX(5px);
+        }
+
+        /* 英文與發音按鈕的容器 (Flexbox) */
+        .en-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .en {
+            font-size: 1.1rem; font-weight: 700; color: #263238;
+            line-height: 1.3; margin-right: 10px;
+        }
+        .cn { font-size: 0.9rem; color: #78909c; }
+        
+        /* 發音按鈕樣式 */
+        .speak-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            opacity: 0.6;
+            transition: transform 0.1s, opacity 0.1s;
+            flex-shrink: 0; /* 防止按鈕被擠壓 */
+        }
+        .speak-btn:active { transform: scale(0.9); }
+        .speak-btn:hover { opacity: 1; transform: scale(1.1); }
+
+        /* 標籤 */
+        .tag {
+            display: inline-block; font-size: 0.75rem; padding: 1px 6px; 
+            border-radius: 4px; margin-left: 8px; font-weight: bold; 
+            vertical-align: middle; text-transform: uppercase;
+        }
+        .tag-red { color: #c62828; background: #ffebee; }
+        .tag-blue { color: #1565c0; background: #e3f2fd; }
+
+        /* 對話模擬框 */
+        .dialogue-box {
+            background-color: #f1f8e9; border-left: 4px solid #8bc34a;
+            padding: 15px; border-radius: 6px; margin-bottom: 15px;
+        }
+        .d-row { margin-bottom: 8px; font-size: 0.95rem; display: flex; align-items: center; }
+        .d-row:last-child { margin-bottom: 0; }
+        .role { 
+            font-weight: bold; font-size: 0.8rem; padding: 3px 8px; 
+            border-radius: 4px; color: #fff; margin-right: 10px; height: fit-content; flex-shrink: 0;
+        }
+        .r-staff { background: #78909c; }
+        .r-me { background: #039be5; }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🗣️ 旅行萬用英文大全</h1>
-        <div class="subtitle">200+ 實用短句・分類速查</div>
+        <h1>🗣️ 旅行萬用字典</h1>
+        <div class="subtitle">250+ 實用短句・點擊喇叭發音</div>
     </div>
 
     <div class="quick-nav-wrapper">
         <div class="quick-nav">
-            <a href="#basic" class="nav-pill">👋 社交求助</a>
-            <a href="#airport" class="nav-pill">✈️ 機場通關</a>
-            <a href="#transport" class="nav-pill">🚆 交通移動</a>
-            <a href="#car" class="nav-pill" style="border-color: #d32f2f; color: #d32f2f;">🚗 租車自駕</a>
-            <a href="#hotel" class="nav-pill">🏨 住宿飯店</a>
-            <a href="#food" class="nav-pill">🍔 餐廳點餐</a>
-            <a href="#shop" class="nav-pill">🛍️ 購物退稅</a>
-            <a href="#sos" class="nav-pill" style="border-color: #333; color: #333;">🆘 緊急醫療</a>
+            <a href="#basic" class="nav-pill">👋 社交/問路</a>
+            <a href="#airport" class="nav-pill" style="border-color:#1976d2; color:#1976d2;">✈️ 機場/直掛</a>
+            <a href="#trans" class="nav-pill">🚆 交通/買票</a>
+            <a href="#car" class="nav-pill" style="border-color:#d32f2f; color:#d32f2f;">🚗 自駕/車況</a>
+            <a href="#hotel" class="nav-pill">🏨 住宿/問題</a>
+            <a href="#food" class="nav-pill">🍔 點餐/客訴</a>
+            <a href="#shop" class="nav-pill">🛍️ 購物/退稅</a>
+            <a href="#sos" class="nav-pill" style="border-color:#333; color:#333;">🆘 緊急/生病</a>
         </div>
     </div>
 
     <div class="container">
 
         <div class="card border-basic" id="basic">
-            <div class="card-header"><span class="icon">👋</span>社交與求助 (Social & Help)</div>
+            <div class="card-header"><span class="icon">👋</span>社交與問路 (Social)</div>
             
-            <div class="sub-cat">禮貌詢問</div>
+            <div class="sub-cat">禮貌與溝通</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">Excuse me, could you help me?</span><span class="cn">不好意思，可以幫我個忙嗎？</span></div>
                 <div class="phrase-item"><span class="en">Do you speak English?</span><span class="cn">你會說英文嗎？</span></div>
                 <div class="phrase-item"><span class="en">Sorry, I don't understand.</span><span class="cn">抱歉，我聽不懂。</span></div>
                 <div class="phrase-item"><span class="en">Could you speak slower, please?</span><span class="cn">可以請你說慢一點嗎？</span></div>
+                <div class="phrase-item"><span class="en">Could you write it down?</span><span class="cn">可以請你寫下來嗎？</span></div>
                 <div class="phrase-item"><span class="en">Is there free Wi-Fi here?</span><span class="cn">這裡有免費 Wi-Fi 嗎？</span></div>
-                <div class="phrase-item"><span class="en">Can I charge my phone here?</span><span class="cn">這理可以讓我充手機嗎？</span></div>
+                <div class="phrase-item"><span class="en">I'm from Taiwan.</span><span class="cn">我來自台灣。</span></div>
             </div>
 
-            <div class="sub-cat">問路與方向</div>
+            <div class="sub-cat">找路與方向</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Where is the toilet / restroom?</span><span class="cn">廁所在哪裡？<span class="tag-imp">最重要</span></span></div>
+                <div class="phrase-item"><span class="en">Where is the toilet / restroom?</span><span class="cn">廁所在哪裡？<span class="tag tag-blue">最重要</span></span></div>
                 <div class="phrase-item"><span class="en">How do I get to the station?</span><span class="cn">我要怎麼去車站？</span></div>
                 <div class="phrase-item"><span class="en">Is it far from here?</span><span class="cn">離這裡遠嗎？</span></div>
                 <div class="phrase-item"><span class="en">Can you show me on the map?</span><span class="cn">可以指地圖給我看嗎？</span></div>
                 <div class="phrase-item"><span class="en">I am lost.</span><span class="cn">我迷路了。</span></div>
+                <div class="phrase-item"><span class="en">Is this the right way to the museum?</span><span class="cn">去博物館是走這條路嗎？</span></div>
+                <div class="phrase-item"><span class="en">Where is the nearest ATM?</span><span class="cn">最近的提款機在哪裡？</span></div>
             </div>
 
-            <div class="sub-cat">請人拍照</div>
+            <div class="sub-cat">拍照請求</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">Could you take a photo for us?</span><span class="cn">可以幫我們拍張照嗎？</span></div>
                 <div class="phrase-item"><span class="en">Just press this button.</span><span class="cn">按這個按鈕就好。</span></div>
+                <div class="phrase-item"><span class="en">Can we take a photo together?</span><span class="cn">我們可以合照一張嗎？</span></div>
                 <div class="phrase-item"><span class="en">One more, please.</span><span class="cn">請再拍一張。</span></div>
             </div>
         </div>
 
         <div class="card border-airport" id="airport">
-            <div class="card-header"><span class="icon">✈️</span>機場與入境 (Airport)</div>
+            <div class="card-header"><span class="icon">✈️</span>機場與行李 (Airport)</div>
 
-            <div class="sub-cat">報到與行李</div>
-            <div class="phrase-list">
-                <div class="phrase-item"><span class="en">I would like to check in.</span><span class="cn">我要辦理登機。</span></div>
-                <div class="phrase-item"><span class="en">Can I have a window / aisle seat?</span><span class="cn">我可以要 靠窗 / 靠走道 的位子嗎？</span></div>
-                <div class="phrase-item"><span class="en">Do I need to pick up my luggage at transfer?</span><span class="cn">轉機時我需要把行李領出來嗎？<span class="tag-imp">奧斯陸必問</span></span></div>
-                <div class="phrase-item"><span class="en">Is my luggage checked through to Taipei?</span><span class="cn">我的行李是直掛到台北嗎？</span></div>
-                <div class="phrase-item"><span class="en">This is fragile.</span><span class="cn">這是易碎品。</span></div>
-            </div>
-
-            <div class="sub-cat">海關問答 (Immigration)</div>
+            <div class="sub-cat">行李直掛攻防戰 (奧斯陸必用)</div>
             <div class="dialogue-box">
-                <div class="d-row"><span class="role role-staff">官</span> What is the purpose of your visit? (來做什麼？)</div>
-                <div class="d-row"><span class="role role-me">我</span> <strong>Sightseeing / Tourism.</strong> (觀光。)</div>
-                <div class="d-row"><span class="role role-staff">官</span> How long will you stay? (待多久？)</div>
-                <div class="d-row"><span class="role role-me">我</span> <strong>17 days.</strong> (17天。)</div>
-                <div class="d-row"><span class="role role-me">我</span> <strong>Here is my return ticket.</strong> (這是回程機票。)</div>
+                <div class="d-row"><span class="role r-me">我</span> <strong>Is my luggage checked through to [Destination]?</strong></div>
+                <div class="d-row"><span class="role r-me">我</span> <strong>Do I need to pick up my bags at Oslo?</strong></div>
+                <div class="d-row"><span class="role r-staff">官</span> No, it goes straight to the final destination.</div>
+                <div class="d-row"><span class="role r-staff">官</span> Yes, you must pick it up and re-check.</div>
+                <div class="d-row"><span class="role r-me">我</span> <strong>Is this a "Domestic Transfer"?</strong></div>
             </div>
 
-            <div class="sub-cat">突發狀況</div>
+            <div class="sub-cat">報到與座位</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">My luggage is missing.</span><span class="cn">我的行李不見了。</span></div>
-                <div class="phrase-item"><span class="en">Where is the baggage claim?</span><span class="cn">行李轉盤在哪裡？</span></div>
-                <div class="phrase-item"><span class="en">I missed my connecting flight.</span><span class="cn">我錯過了轉機班機。</span></div>
+                <div class="phrase-item"><span class="en">Can I have a window / aisle seat?</span><span class="cn">可以給我 靠窗 / 靠走道 的位子嗎？</span></div>
+                <div class="phrase-item"><span class="en">Can we sit together?</span><span class="cn">我們可以坐在一起嗎？</span></div>
+                <div class="phrase-item"><span class="en">I have fragile items inside.</span><span class="cn">裡面有易碎品。</span></div>
+                <div class="phrase-item"><span class="en">Is the flight on time?</span><span class="cn">班機準時嗎？</span></div>
                 <div class="phrase-item"><span class="en">Where is the tax refund counter?</span><span class="cn">退稅櫃台在哪裡？</span></div>
+                <div class="phrase-item"><span class="en">Where is the oversized baggage drop?</span><span class="cn">超大行李(如滑雪板)託運在哪？</span></div>
+            </div>
+
+            <div class="sub-cat">機上與轉機</div>
+            <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Is there overhead bin space?</span><span class="cn">上面置物櫃還有位子嗎？</span></div>
+                <div class="phrase-item"><span class="en">Can I have a blanket / pillow?</span><span class="cn">可以給我毛毯 / 枕頭嗎？</span></div>
+                <div class="phrase-item"><span class="en">My screen is not working.</span><span class="cn">我的螢幕壞了。</span></div>
+                <div class="phrase-item"><span class="en">I missed my connecting flight.</span><span class="cn">我錯過了轉機班機。</span></div>
+                <div class="phrase-item"><span class="en">My luggage is damaged / missing.</span><span class="cn">我的行李壞了 / 不見了。</span></div>
             </div>
         </div>
 
-        <div class="card border-transport" id="transport">
-            <div class="card-header"><span class="icon">🚆</span>交通移動 (Transport)</div>
+        <div class="card border-trans" id="trans">
+            <div class="card-header"><span class="icon">🚆</span>交通與移動 (Transport)</div>
 
             <div class="sub-cat">火車與巴士</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Where is the ticket office?</span><span class="cn">售票處在哪裡？</span></div>
                 <div class="phrase-item"><span class="en">Two tickets to Amsterdam, please.</span><span class="cn">兩張去阿姆斯特丹的票。</span></div>
                 <div class="phrase-item"><span class="en">One way / Round trip?</span><span class="cn">單程 / 來回？</span></div>
-                <div class="phrase-item"><span class="en">Which platform is it?</span><span class="cn">在第幾月台？</span></div>
-                <div class="phrase-item"><span class="en">Is this seat taken?</span><span class="cn">這裡有人坐嗎？</span></div>
                 <div class="phrase-item"><span class="en">Does this bus stop at the airport?</span><span class="cn">這班車有停機場嗎？</span></div>
-                <div class="phrase-item"><span class="en">When is the next bus?</span><span class="cn">下一班車幾點？</span></div>
+                <div class="phrase-item"><span class="en">When is the next bus/train?</span><span class="cn">下一班車幾點？</span></div>
+                <div class="phrase-item"><span class="en">Is this seat taken?</span><span class="cn">這裡有人坐嗎？</span></div>
+                <div class="phrase-item"><span class="en">Can I tap my credit card?</span><span class="cn">可以直接刷信用卡進站嗎？(OV-pay)</span></div>
             </div>
 
-            <div class="sub-cat">計程車</div>
+            <div class="sub-cat">計程車/Uber</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">Please take me to this address.</span><span class="cn">請載我到這個地址 (秀手機)。</span></div>
                 <div class="phrase-item"><span class="en">How much will it cost?</span><span class="cn">大概多少錢？</span></div>
@@ -242,160 +264,211 @@
         </div>
 
         <div class="card border-car" id="car">
-            <div class="card-header"><span class="icon">🚗</span>租車自駕 (Car Rental)</div>
+            <div class="card-header"><span class="icon">🚗</span>自駕與車況 (Driving)</div>
 
-            <div class="sub-cat">取車櫃台</div>
+            <div class="sub-cat">取車櫃台 (攻防戰)</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">I have a booking. Here is my voucher.</span><span class="cn">我有預訂，這是憑證。</span></div>
-                <div class="phrase-item"><span class="en">Here is my international driving license.</span><span class="cn">這是我的國際駕照。</span></div>
-                <div class="phrase-item"><span class="en">No extra insurance, thanks. I have full coverage.</span><span class="cn">不用加購保險，謝謝，我已經買全險了。<span class="tag-imp">拒絕推銷</span></span></div>
-                <div class="phrase-item"><span class="en">Is this car Petrol (Gasoline) or Diesel?</span><span class="cn">這台車加汽油還是柴油？<span class="tag-imp">必問</span></span></div>
-                <div class="phrase-item"><span class="en">Does it have studded tires (piggdekk)?</span><span class="cn">有裝金屬釘胎嗎？(挪威必備)</span></div>
-                <div class="phrase-item"><span class="en">Is the AutoPass tag included?</span><span class="cn">有含電子過路費標籤嗎？</span></div>
+                <div class="phrase-item"><span class="en">Is this car Petrol or Diesel?</span><span class="cn">這台車加汽油還是柴油？<span class="tag tag-red">賠十萬</span></span></div>
+                <div class="phrase-item"><span class="en">Does it have studded tires (piggdekk)?</span><span class="cn">有裝金屬釘胎嗎？(羅浮敦建議)</span></div>
+                <div class="phrase-item"><span class="en">No extra insurance, thanks. I have full coverage.</span><span class="cn">不用加保險，我有全險了。<span class="tag tag-blue">省錢</span></span></div>
+                <div class="phrase-item"><span class="en">Is the AutoPass tag active?</span><span class="cn">電子過路費標籤是啟用的嗎？</span></div>
+                <div class="phrase-item"><span class="en">Does it have heated seats/steering wheel?</span><span class="cn">有座椅/方向盤加熱功能嗎？</span></div>
             </div>
 
-            <div class="sub-cat">車況檢查</div>
+            <div class="sub-cat">車況檢查與故障</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">There is a scratch here.</span><span class="cn">這裡有刮痕。</span></div>
-                <div class="phrase-item"><span class="en">Please mark it on the contract.</span><span class="cn">請在合約上註記。</span></div>
-                <div class="phrase-item"><span class="en">Where is the reverse gear?</span><span class="cn">倒車檔怎麼打？</span></div>
-                <div class="phrase-item"><span class="en">How do I open the fuel cap?</span><span class="cn">油箱蓋怎麼開？</span></div>
-            </div>
-
-            <div class="sub-cat">加油站 & 停車</div>
-            <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Full to Full?</span><span class="cn">是滿油還車嗎？</span></div>
-                <div class="phrase-item"><span class="en">Pump number 5, please.</span><span class="cn">我是 5 號油槍 (櫃台付錢用)。</span></div>
-                <div class="phrase-item"><span class="en">The machine didn't give me a receipt.</span><span class="cn">機器沒有給我收據。</span></div>
-                <div class="phrase-item"><span class="en">How do I pay for parking?</span><span class="cn">停車費怎麼繳？</span></div>
-                <div class="phrase-item"><span class="en">Do I need a Blue Parking Disc here?</span><span class="cn">這裡需要放藍色停車盤嗎？(荷蘭)</span></div>
-            </div>
-
-            <div class="sub-cat">故障與事故</div>
-            <div class="phrase-list">
-                <div class="phrase-item"><span class="en">My car broke down.</span><span class="cn">我的車拋錨了。</span></div>
-                <div class="phrase-item"><span class="en">I have a flat tire.</span><span class="cn">我爆胎了。</span></div>
-                <div class="phrase-item"><span class="en">The battery is dead.</span><span class="cn">電瓶沒電了。</span></div>
+                <div class="phrase-item"><span class="en">There is a scratch here.</span><span class="cn">這裡有刮痕 (指)。</span></div>
+                <div class="phrase-item"><span class="en">Please mark it on the contract.</span><span class="cn">請在合約上註記。<span class="tag tag-red">重要</span></span></div>
+                <div class="phrase-item"><span class="en">Where is the ice scraper?</span><span class="cn">除雪刷在哪裡？(通常在後車廂)</span></div>
+                <div class="phrase-item"><span class="en">The windshield washer fluid is frozen/empty.</span><span class="cn">雨刷水凍住了 / 噴不出來。</span></div>
                 <div class="phrase-item"><span class="en">My car is stuck in the snow.</span><span class="cn">我的車卡在雪裡了。</span></div>
-                <div class="phrase-item"><span class="en">I had an accident.</span><span class="cn">我發生車禍了。</span></div>
-                <div class="phrase-item"><span class="en">Please call the police (112).</span><span class="cn">請幫忙報警。</span></div>
-                <div class="phrase-item"><span class="en">The engine light is on.</span><span class="cn">引擎警示燈亮了。</span></div>
+                <div class="phrase-item"><span class="en">The battery is dead. Can you jump-start me?</span><span class="cn">沒電了，可以幫我接電發動嗎？</span></div>
+                <div class="phrase-item"><span class="en">I have a flat tire.</span><span class="cn">我爆胎了。</span></div>
+                <div class="phrase-item"><span class="en">The check engine light is on.</span><span class="cn">引擎警示燈亮了。</span></div>
+            </div>
+
+            <div class="sub-cat">加油與停車</div>
+            <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Pump number 5, please.</span><span class="cn">我是 5 號油槍 (櫃台付錢用)。</span></div>
+                <div class="phrase-item"><span class="en">Full to full?</span><span class="cn">是滿油還車嗎？</span></div>
+                <div class="phrase-item"><span class="en">The machine didn't give me a receipt.</span><span class="cn">機器沒有吐收據。</span></div>
+                <div class="phrase-item"><span class="en">Do I need a Blue Parking Disc here?</span><span class="cn">這裡需要放藍色停車盤嗎？(荷蘭)</span></div>
+                <div class="phrase-item"><span class="en">How do I pay? App or Machine?</span><span class="cn">怎麼付錢？用 App 還是機器？</span></div>
+                <div class="phrase-item"><span class="en">Is parking free after 6 PM?</span><span class="cn">晚上六點後停車免費嗎？</span></div>
             </div>
         </div>
 
         <div class="card border-hotel" id="hotel">
-            <div class="card-header"><span class="icon">🏨</span>住宿與漁屋 (Accommodation)</div>
+            <div class="card-header"><span class="icon">🏨</span>住宿與漁屋 (Hotel)</div>
 
             <div class="sub-cat">入住與退房</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Check-in, please.</span><span class="cn">我要辦理入住。</span></div>
-                <div class="phrase-item"><span class="en">We will arrive late, around 10 PM.</span><span class="cn">我們會晚到，大約晚上10點。</span></div>
+                <div class="phrase-item"><span class="en">We will arrive late, around 10 PM.</span><span class="cn">我們會晚到，大約晚上10點。<span class="tag tag-red">必講</span></span></div>
+                <div class="phrase-item"><span class="en">Is there a key box? What is the code?</span><span class="cn">有鑰匙盒嗎？密碼多少？</span></div>
                 <div class="phrase-item"><span class="en">Can I leave my luggage here?</span><span class="cn">我可以寄放行李嗎？</span></div>
                 <div class="phrase-item"><span class="en">What is the Wi-Fi password?</span><span class="cn">Wi-Fi 密碼是多少？</span></div>
-                <div class="phrase-item"><span class="en">When is breakfast served?</span><span class="cn">早餐幾點開始？</span></div>
-                <div class="phrase-item"><span class="en">Check-out, please.</span><span class="cn">我要退房。</span></div>
+                <div class="phrase-item"><span class="en">Where can I park my car?</span><span class="cn">我的車可以停哪？(有些漁屋車位指定)</span></div>
+                <div class="phrase-item"><span class="en">Is bed linen included?</span><span class="cn">有包含床單被套嗎？(部分漁屋要收費)</span></div>
             </div>
 
-            <div class="sub-cat">房間問題</div>
+            <div class="sub-cat">房間問題 (生存相關)</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">The heater is not working.</span><span class="cn">暖氣壞了 (很冷！)。</span></div>
-                <div class="phrase-item"><span class="en">There is no hot water.</span><span class="cn">沒有熱水。</span></div>
-                <div class="phrase-item"><span class="en">The room is not clean.</span><span class="cn">房間不乾淨。</span></div>
-                <div class="phrase-item"><span class="en">Too noisy.</span><span class="cn">太吵了。</span></div>
-                <div class="phrase-item"><span class="en">We need extra towels / toilet paper.</span><span class="cn">我們需要多一點毛巾 / 衛生紙。</span></div>
+                <div class="phrase-item"><span class="en">The heater is not warm enough.</span><span class="cn">暖氣不夠暖 (極地這很要命)。</span></div>
+                <div class="phrase-item"><span class="en">There is no hot water.</span><span class="cn">沒有熱水了。</span></div>
+                <div class="phrase-item"><span class="en">The room is too noisy.</span><span class="cn">房間太吵了。</span></div>
                 <div class="phrase-item"><span class="en">Is there a shared kitchen?</span><span class="cn">有共用廚房嗎？</span></div>
-            </div>
-
-            <div class="sub-cat">羅浮敦/極光專用</div>
-            <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Where can I park my car?</span><span class="cn">我的車可以停哪？</span></div>
-                <div class="phrase-item"><span class="en">Where can I throw the trash/rubbish?</span><span class="cn">垃圾要丟哪裡？(分類嚴格)</span></div>
-                <div class="phrase-item"><span class="en">Could you call us if the Aurora appears?</span><span class="cn">如果極光出現，可以打電話叫醒我們嗎？</span></div>
+                <div class="phrase-item"><span class="en">Where is the rubbish bin?</span><span class="cn">垃圾桶/垃圾場在哪裡？</span></div>
+                <div class="phrase-item"><span class="en">We need extra towels / toilet paper.</span><span class="cn">我們需要多一點毛巾 / 衛生紙。</span></div>
+                <div class="phrase-item"><span class="en">The drain is clogged.</span><span class="cn">排水管堵塞了。</span></div>
             </div>
         </div>
 
         <div class="card border-food" id="food">
-            <div class="card-header"><span class="icon">🍔</span>餐廳點餐 (Dining)</div>
+            <div class="card-header"><span class="icon">🍔</span>餐廳與美食 (Dining)</div>
 
-            <div class="sub-cat">入座</div>
+            <div class="sub-cat">入座與點餐</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">Table for two, please.</span><span class="cn">兩位，謝謝。</span></div>
                 <div class="phrase-item"><span class="en">Do you have an English menu?</span><span class="cn">有英文菜單嗎？</span></div>
-                <div class="phrase-item"><span class="en">Do we need a reservation?</span><span class="cn">需要預約嗎？</span></div>
-            </div>
-
-            <div class="sub-cat">點餐</div>
-            <div class="phrase-list">
-                <div class="phrase-item"><span class="en">We are ready to order.</span><span class="cn">我們可以點餐了。</span></div>
                 <div class="phrase-item"><span class="en">What do you recommend?</span><span class="cn">你有推薦的嗎？</span></div>
                 <div class="phrase-item"><span class="en">I'll have this one.</span><span class="cn">我要點這個 (指圖片)。</span></div>
-                <div class="phrase-item"><span class="en">Tap water is fine.</span><span class="cn">給我自來水就好 (免費)。</span></div>
-                <div class="phrase-item"><span class="en">Still water / Sparkling water.</span><span class="cn">礦泉水 / 氣泡水。</span></div>
+                <div class="phrase-item"><span class="en">Can we share this dish?</span><span class="cn">我們可以分食這道菜嗎？</span></div>
+                <div class="phrase-item"><span class="en">Tap water, please.</span><span class="cn">請給我自來水 (免費)。</span></div>
             </div>
 
-            <div class="sub-cat">客製化與禁忌</div>
+            <div class="sub-cat">客製化與催餐</div>
             <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Less salt, please.</span><span class="cn">請少鹽。</span></div>
                 <div class="phrase-item"><span class="en">No ice, please.</span><span class="cn">去冰。</span></div>
-                <div class="phrase-item"><span class="en">Less salt, please.</span><span class="cn">少鹽。</span></div>
-                <div class="phrase-item"><span class="en">Does this contain pork?</span><span class="cn">這有含豬肉嗎？</span></div>
                 <div class="phrase-item"><span class="en">I am allergic to shrimp / nuts.</span><span class="cn">我對 蝦子 / 堅果 過敏。</span></div>
-                <div class="phrase-item"><span class="en">Steak: Medium-rare.</span><span class="cn">牛排：三分熟。</span></div>
+                <div class="phrase-item"><span class="en">We ordered 20 minutes ago.</span><span class="cn">我們20分鐘前就點餐了。</span></div>
+                <div class="phrase-item"><span class="en">This is not what I ordered.</span><span class="cn">這不是我點的。</span></div>
             </div>
 
-            <div class="sub-cat">結帳</div>
+            <div class="sub-cat">結帳與打包</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">Check, please. (The bill)</span><span class="cn">我要買單。</span></div>
                 <div class="phrase-item"><span class="en">Can we pay separately?</span><span class="cn">可以分開付嗎？</span></div>
+                <div class="phrase-item"><span class="en">Can I take this to go? (Doggy bag)</span><span class="cn">我可以打包這個嗎？</span></div>
                 <div class="phrase-item"><span class="en">Is service charge included?</span><span class="cn">服務費包含在內了嗎？</span></div>
-                <div class="phrase-item"><span class="en">Take away / To go.</span><span class="cn">我要外帶。</span></div>
+                <div class="phrase-item"><span class="en">Is it too late to buy beer?</span><span class="cn">現在買啤酒太晚了嗎？(超市限制)</span></div>
             </div>
         </div>
 
         <div class="card border-shop" id="shop">
             <div class="card-header"><span class="icon">🛒</span>購物與退稅 (Shopping)</div>
 
-            <div class="sub-cat">尋找商品</div>
+            <div class="sub-cat">退稅 (Tax Free)</div>
+            <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Can I get a Tax Free form? (Global Blue)</span><span class="cn">請給我退稅單。<span class="tag tag-red">必說</span></span></div>
+                <div class="phrase-item"><span class="en">Please staple the receipt.</span><span class="cn">請把收據訂在退稅單上。</span></div>
+                <div class="phrase-item"><span class="en">Where do I get the customs stamp?</span><span class="cn">我要去哪裡蓋海關章？</span></div>
+            </div>
+
+            <div class="sub-cat">商品詢問</div>
             <div class="phrase-list">
                 <div class="phrase-item"><span class="en">How much is this?</span><span class="cn">這個多少錢？</span></div>
                 <div class="phrase-item"><span class="en">Can I try this on?</span><span class="cn">我可以試穿嗎？</span></div>
-                <div class="phrase-item"><span class="en">Do you have a larger / smaller size?</span><span class="cn">有大一點 / 小一點的嗎？</span></div>
+                <div class="phrase-item"><span class="en">Do you have a larger / smaller size?</span><span class="cn">有 大一點 / 小一點 的尺寸嗎？</span></div>
                 <div class="phrase-item"><span class="en">Do you have a new one?</span><span class="cn">有新的嗎？(不要展示品)</span></div>
-                <div class="phrase-item"><span class="en">What time do you close?</span><span class="cn">你們幾點打烊？</span></div>
+                <div class="phrase-item"><span class="en">Can you give me a discount?</span><span class="cn">可以算便宜一點嗎？</span></div>
             </div>
 
-            <div class="sub-cat">結帳與退稅</div>
+            <div class="sub-cat">超市與結帳</div>
             <div class="phrase-list">
-                <div class="phrase-item"><span class="en">Can I pay by credit card?</span><span class="cn">可以刷卡嗎？</span></div>
-                <div class="phrase-item"><span class="en">Can I get a Tax Refund form? (Global Blue)</span><span class="cn">請給我退稅單。<span class="tag-imp">必說</span></span></div>
-                <div class="phrase-item"><span class="en">Please staple the receipt.</span><span class="cn">請把收據訂在一起。</span></div>
-                <div class="phrase-item"><span class="en">I don't need a bag.</span><span class="cn">我不用袋子。</span></div>
+                <div class="phrase-item"><span class="en">I need a plastic bag.</span><span class="cn">我需要塑膠袋 (要錢)。</span></div>
                 <div class="phrase-item"><span class="en">Where is the bottle return machine (Pant)?</span><span class="cn">寶特瓶回收機在哪裡？</span></div>
+                <div class="phrase-item"><span class="en">Card only? Or cash okay?</span><span class="cn">只能刷卡嗎？還是可以付現？</span></div>
+                <div class="phrase-item"><span class="en">What time do you close?</span><span class="cn">你們幾點打烊？</span></div>
+            </div>
+        </div>
+
+        <div class="card border-aurora" id="aurora">
+            <div class="card-header"><span class="icon">🌌</span>極光與活動 (Activity)</div>
+
+            <div class="sub-cat">極光團 / 攝影</div>
+            <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Can you help me with camera settings?</span><span class="cn">可以教我設定相機參數嗎？</span></div>
+                <div class="phrase-item"><span class="en">Can I rent a tripod?</span><span class="cn">我可以租腳架嗎？</span></div>
+                <div class="phrase-item"><span class="en">What is the KP index tonight?</span><span class="cn">今晚的 KP 值(極光指數)多少？</span></div>
+                <div class="phrase-item"><span class="en">Could you call us if Aurora appears?</span><span class="cn">如果極光出現，可以打電話叫我們嗎？</span></div>
+                <div class="phrase-item"><span class="en">Is the tour cancelled due to weather?</span><span class="cn">行程會因為天氣取消嗎？</span></div>
+            </div>
+
+            <div class="sub-cat">狗拉雪橇 / 戶外</div>
+            <div class="phrase-list">
+                <div class="phrase-item"><span class="en">Do you provide thermal suits?</span><span class="cn">你們有提供保暖連身衣嗎？</span></div>
+                <div class="phrase-item"><span class="en">I can't feel my toes.</span><span class="cn">我的腳趾沒知覺了 (凍傷前兆)。</span></div>
+                <div class="phrase-item"><span class="en">Where is the meeting point?</span><span class="cn">集合地點在哪裡？</span></div>
+                <div class="phrase-item"><span class="en">Is the ice safe to walk on?</span><span class="cn">這冰面走上去安全嗎？</span></div>
             </div>
         </div>
 
         <div class="card border-sos" id="sos">
             <div class="card-header"><span class="icon">🆘</span>緊急與醫療 (Emergency)</div>
 
-            <div class="sub-cat">藥局買藥 (Pharmacy)</div>
+            <div class="sub-cat">身體不適</div>
             <div class="phrase-list">
+                <div class="phrase-item"><span class="en">I feel dizzy / carsick.</span><span class="cn">我頭暈 / 暈車。</span></div>
                 <div class="phrase-item"><span class="en">I have a fever / sore throat.</span><span class="cn">我發燒 / 喉嚨痛。</span></div>
                 <div class="phrase-item"><span class="en">I have a stomach ache / diarrhea.</span><span class="cn">我胃痛 / 拉肚子。</span></div>
-                <div class="phrase-item"><span class="en">I feel dizzy / carsick.</span><span class="cn">我頭暈 / 暈車。</span></div>
                 <div class="phrase-item"><span class="en">I need painkillers.</span><span class="cn">我需要止痛藥。</span></div>
-                <div class="phrase-item"><span class="en">I have a cut. Band-aids?</span><span class="cn">我受傷了，有OK繃嗎？</span></div>
                 <div class="phrase-item"><span class="en">Do you have nasal spray?</span><span class="cn">有鼻噴劑嗎？(乾燥流鼻血用)</span></div>
             </div>
 
-            <div class="sub-cat">嚴重求救</div>
+            <div class="sub-cat">受傷與意外</div>
             <div class="phrase-list">
+                <div class="phrase-item"><span class="en">I slipped on the ice.</span><span class="cn">我在冰上滑倒了。</span></div>
+                <div class="phrase-item"><span class="en">My ankle hurts.</span><span class="cn">我的腳踝很痛。</span></div>
+                <div class="phrase-item"><span class="en">I have a cut. Band-aids?</span><span class="cn">我受傷了，有OK繃嗎？</span></div>
                 <div class="phrase-item"><span class="en">I lost my passport / wallet.</span><span class="cn">我的護照 / 錢包不見了。</span></div>
                 <div class="phrase-item"><span class="en">Where is the police station?</span><span class="cn">警察局在哪裡？</span></div>
-                <div class="phrase-item"><span class="en">Please call an ambulance.</span><span class="cn">請幫我叫救護車。</span></div>
-                <div class="phrase-item"><span class="en">I slipped on the ice. My ankle hurts.</span><span class="cn">我在冰上滑倒了，腳踝很痛。</span></div>
+                <div class="phrase-item"><span class="en">Please call an ambulance (112).</span><span class="cn">請幫我叫救護車。</span></div>
             </div>
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const phraseItems = document.querySelectorAll('.phrase-item');
+            phraseItems.forEach(item => {
+                const enSpan = item.querySelector('.en');
+                if (!enSpan) return;
+
+                // 建立 flex 容器
+                const wrapper = document.createElement('div');
+                wrapper.className = 'en-row';
+
+                // 複製英文 span
+                wrapper.appendChild(enSpan.cloneNode(true));
+
+                // 建立發音按鈕
+                const btn = document.createElement('button');
+                btn.className = 'speak-btn';
+                btn.innerHTML = '🔊';
+                btn.title = '點擊發音';
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    speak(enSpan.innerText);
+                };
+
+                wrapper.appendChild(btn);
+
+                // 替換
+                item.replaceChild(wrapper, enSpan);
+            });
+        });
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
 
     <script src="navbar.js"></script>
 </body>
