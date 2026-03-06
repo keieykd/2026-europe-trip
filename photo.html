@@ -1,168 +1,575 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhone 15 Pro Max 攝影攻略</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* === iPhone 專用樣式 === */
-        .ios-badge {
-            background: #000; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; vertical-align: middle; margin-right: 5px;
-        }
-        .param-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
-        .param-box { background: #f5f5f7; padding: 10px; border-radius: 8px; border: 1px solid #e1e1e1; }
-        .p-label { display: block; font-size: 0.85rem; color: #86868b; font-weight: 600; }
-        .p-value { display: block; font-size: 1.1rem; font-weight: bold; color: #1d1d1f; margin-top: 2px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A6700 終極完全體：極光特化與歐洲全場景指揮官手冊</title>
+<style>
+    :root {
+        /* Core Colors */
+        --sony-orange: #ff4d00;
+        --deep-space: #1a1a2e;
+        --text-main: #2f3640;
+        --bg-color: #f1f2f6;
         
-        .setup-step { margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
-        .setup-step:last-child { border-bottom: none; }
+        /* Tactical Colors */
+        --aurora-green: #2ecc71;
+        --aurora-red: #e74c3c;
+        --snow-blue: #48dbfb;
+        --vlog-pink: #ff9ff3;
+        --city-night: #34495e;
+        --time-purple: #8e44ad;
         
-        .mode-card { border-left-width: 6px; }
-        .mode-aurora { border-left-color: #00e676; } /* 極光綠 */
-        .mode-view { border-left-color: #2979ff; }   /* 風景藍 */
-        .mode-food { border-left-color: #ff9100; }   /* 美食橘 */
-    </style>
+        /* Alert Colors */
+        --alert-red-bg: #ffcccc;
+        --alert-red-border: #ff4d4d;
+        --alert-red-text: #990000;
+        --alert-warn-bg: #fff3cd;
+        --alert-warn-border: #ffc107;
+        --alert-warn-text: #856404;
+    }
+    
+    body {
+        font-family: "Microsoft JhengHei", "Heiti TC", "Segoe UI", sans-serif;
+        line-height: 1.8;
+        color: var(--text-main);
+        background-color: var(--bg-color);
+        margin: 0;
+        padding: 40px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        padding: 60px;
+        border-radius: 16px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--deep-space);
+        font-size: 2.6rem;
+        margin-bottom: 10px;
+        font-weight: 900;
+    }
+
+    .version-tag {
+        display: block;
+        text-align: center;
+        background: linear-gradient(90deg, var(--sony-orange), #ff793f);
+        color: white;
+        width: fit-content;
+        margin: 0 auto 50px auto;
+        padding: 6px 25px;
+        border-radius: 25px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 77, 0, 0.3);
+    }
+
+    h2 {
+        background: var(--deep-space);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        margin-top: 70px;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    h2::before {
+        content: "◈";
+        color: var(--sony-orange);
+        margin-right: 15px;
+    }
+
+    h3 {
+        color: var(--sony-orange);
+        font-size: 1.3rem;
+        margin-top: 40px;
+        border-left: 6px solid var(--sony-orange);
+        padding-left: 20px;
+    }
+
+    .tactic-header {
+        color: white;
+        padding: 20px 30px;
+        border-radius: 12px;
+        margin-top: 40px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    .tactic-icon {
+        font-size: 2rem;
+        margin-right: 20px;
+        background: rgba(255,255,255,0.2);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .mission-box, .practice-box {
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        border: 3px solid;
+    }
+
+    .mission-box {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+        border-color: #d63031;
+    }
+
+    .practice-box {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border-color: #2196f3;
+        margin-top: 20px;
+    }
+
+    .warning-box {
+        background: var(--alert-warn-bg);
+        border-left: 6px solid var(--alert-warn-border);
+        color: var(--alert-warn-text);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .alert-red {
+        background: var(--alert-red-bg);
+        border-left: 6px solid var(--alert-red-border);
+        color: var(--alert-red-text);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+
+    .gear-card {
+        background: #f1f2f6;
+        border: 1px solid #dcdcdc;
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .param-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 15px;
+        margin: 25px 0;
+    }
+
+    .param-box {
+        background: white;
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .param-label {
+        font-size: 0.8rem;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .param-value {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--deep-space);
+    }
+
+    .step-list {
+        counter-reset: step;
+        list-style: none;
+        padding: 0;
+    }
+
+    .step-item {
+        position: relative;
+        padding-left: 55px;
+        margin-bottom: 25px;
+        background: #fafafa;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 20px;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    .step-item::before {
+        counter-increment: step;
+        content: counter(step);
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        width: 32px;
+        height: 32px;
+        background: var(--deep-space);
+        color: white;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .step-title {
+        font-weight: bold;
+        font-size: 1.15rem;
+        color: #e17055;
+        display: block;
+        margin-bottom: 8px;
+    }
+    
+    .highlight-text {
+        background: #ffeaa7;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #d63031;
+        font-weight: bold;
+    }
+    
+    .sub-step {
+        margin-top: 8px;
+        padding-left: 15px;
+        border-left: 3px solid #dfe6e9;
+        font-size: 0.95rem;
+    }
+
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>📷 iPhone 攝影大師攻略</h1>
-        <div class="subtitle">iPhone 15 Pro Max 專屬參數・情境模組</div>
+<div class="container">
 
-        <div class="card" style="border-left-color: #5e5ce6;">
-            <div class="card-header"><span class="icon">⚙️</span>第一步：打造「類模組化」設定</div>
-            <p>iPhone 預設會重置設定。為了讓您在雪地不用一直調參數，請先這樣設定：</p>
-            
-            <div class="setup-step">
-                <strong>1. 開啟「保留設定」 (重要！)</strong><br>
-                <span style="font-size:0.9rem; color:#666;">設定 > 相機 > 保留設定</span>
-                <ul style="margin-top:5px;">
-                    <li>✅ <strong>曝光調整：</strong>開啟 (這樣調暗一次，下次開啟還是暗的，適合拍雪地)</li>
-                    <li>✅ <strong>夜間模式：</strong>開啟 (不用每次都等它自動判斷)</li>
-                    <li>✅ <strong>Apple ProRAW：</strong>開啟 (為了後期修圖)</li>
-                </ul>
-            </div>
+    <h1>A6700 終極完全體：指揮官手冊</h1>
+    <span class="version-tag">挪威極光特化 + 記憶模式 + 歐洲全場景</span>
 
-            <div class="setup-step">
-                <strong>2. 設定「動作按鈕 (Action Button)」</strong><br>
-                <span style="font-size:0.9rem; color:#666;">設定 > 動作按鈕</span>
-                <ul>
-                    <li>將側邊按鈕設為<strong>「相機」</strong>。</li>
-                    <li>這讓您戴著手套也能一秒叫出相機抓拍。</li>
-                </ul>
-            </div>
-        </div>
+    <h2>第一章：行前防護與「偽星空」對焦特訓</h2>
+    <p>極光現場極暗、極冷、手抖。在台灣先練好星空對焦，是唯一的救命法寶！</p>
 
-        <div class="card mode-aurora">
-            <div class="card-header"><span class="icon">🌌</span>情境 A：極光與星空 (Aurora)</div>
-            <div class="note note-tip">💡 關鍵：必須讓手機感測到「絕對靜止」，才能觸發 30秒 長曝光。</div>
-            
-            <div class="param-grid">
-                <div class="param-box">
-                    <span class="p-label">格式 (Format)</span>
-                    <span class="p-value">RAW Max</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">夜間模式 (Night)</span>
-                    <span class="p-value">10s - 30s</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">曝光 (Exposure)</span>
-                    <span class="p-value">0.0</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">鏡頭 (Lens)</span>
-                    <span class="p-value">1x (主鏡頭)</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 15px;">
-                <strong>📸 操作步驟：</strong>
-                <ol>
-                    <li>一定要上<strong>腳架</strong> (或靠在車頂/石頭)。</li>
-                    <li>點擊左上角黃色月亮圖示 🌙。</li>
-                    <li>滑動下方轉盤，如果手機夠穩，你會看到 <strong>30s</strong> 選項出現 (手持只有 10s)。</li>
-                    <li>按下快門，<strong>不要碰手機</strong>直到倒數結束。</li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="card mode-view">
-            <div class="card-header"><span class="icon">🏔️</span>情境 B：雪地與大景 (Landscape)</div>
-            <div class="note note-alert">⚠️ 雪地反光太強，照片容易過曝(太亮)，需要手動減光。</div>
-
-            <div class="param-grid">
-                <div class="param-box">
-                    <span class="p-label">格式 (Format)</span>
-                    <span class="p-value">HEIF Max</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">曝光 (Exposure)</span>
-                    <span class="p-value">-0.3 或 -0.7</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">風格 (Style)</span>
-                    <span class="p-value">豐富對比</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">鏡頭 (Lens)</span>
-                    <span class="p-value">0.5x / 1x</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 15px;">
-                <strong>📸 操作步驟：</strong>
-                <ol>
-                    <li>在畫面上往上滑，點選「+/-」符號。</li>
-                    <li>將數值往左拉到 <strong>-0.3</strong> 或 <strong>-0.7</strong> (保留雪的細節)。</li>
-                    <li>因為我們有開「保留設定」，下次打開相機它會記住這個亮度，不用一直調。</li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="card mode-food">
-            <div class="card-header"><span class="icon">🥘</span>情境 C：餐廳美食 (Food)</div>
-            <div class="note note-tip">💡 15 Pro Max 的近拍慧差(邊緣模糊)較嚴重，<strong>請退後一點，用 2x 變焦拍</strong>。</div>
-
-            <div class="param-grid">
-                <div class="param-box">
-                    <span class="p-label">模式 (Mode)</span>
-                    <span class="p-value">人像 (Portrait)</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">光圈 (f-stop)</span>
-                    <span class="p-value">f/4.0 - f/5.6</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">焦段 (Zoom)</span>
-                    <span class="p-value">2x 或 5x</span>
-                </div>
-                <div class="param-box">
-                    <span class="p-label">光線</span>
-                    <span class="p-value">自然光</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 15px;">
-                <strong>📸 操作步驟：</strong>
-                <ol>
-                    <li>切換到「人像模式」。</li>
-                    <li>點選左下角 <strong>2x</strong> (這會調用主鏡頭裁切，畫質最好且變形最少)。</li>
-                    <li>點選右上角「f」圖示，滑動光圈到 <strong>f/4.5</strong> (預設 f/2.8 景深太淺，食物會只有一點點清楚，其他糊掉)。</li>
-                    <li>手機拿遠一點，用長焦壓縮感來拍食物特寫。</li>
-                </ol>
-            </div>
-        </div>
-
-        <div class="card" style="border-left-color: #d32f2f;">
-            <div class="card-header"><span class="icon">⚠️</span>器材保命守則</div>
-            <p><strong>進室內前注意！</strong></p>
-            <p>在室外拍久了手機會變冰棒。<strong>進溫暖室內前，請先把手機放入外套內袋或密封袋。</strong>等 10-20 分鐘回溫後再拿出來。否則鏡頭內部會「起霧結露」，照片會糊掉甚至受潮。</p>
-        </div>
-
+    <div class="practice-box">
+        <strong>🎯 今晚就練！30 樓頂樓「多雲氣候」替代特訓方案：</strong><br>
+        在 11mm 超廣角鏡頭下，只要發光目標距離超過 <strong>500 公尺以上</strong>，物理上就等同於「無限遠（∞）」。<br>
+        如果雲層太厚看不到星星，請站在頂樓尋找：<strong>遠方大樓的航空障礙紅燈</strong>、<strong>遠處山稜線的微弱電塔燈光</strong>，或是<strong>極遠處的單一路燈</strong>。把它們當作星星來練習以下步驟！
     </div>
 
-    <script src="navbar.js"></script>
+    <h3>手動對焦 (MF) 7 步驟 SOP</h3>
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">裝備淨空</span>
+            A6700 + Sony 11mm F1.8 上腳架。<span class="highlight-text">拔掉 UV 保護鏡！</span>（否則極光會有同心圓光斑）。
+        </li>
+        <li class="step-item">
+            <span class="step-title">切換手動對焦 (MF)</span>
+            將 11mm 鏡頭側邊的開關從 AF 切換到 <strong>MF</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">基礎參數設定 (實體轉盤盲操教學)</span>
+            這一步必須練到肌肉記憶，零下低溫沒時間找螢幕：<br>
+            <div class="sub-step"><strong>1. 切換 M 模式：</strong>按住機頂大轉盤中間的解鎖鈕，將 <strong>M</strong> 對準白線。</div>
+            <div class="sub-step"><strong>2. 調光圈 (F1.8)：</strong>用右手食指撥動快門下方的<strong>「前轉盤」</strong>，往左(逆時針)撥到底，直到畫面顯示 F1.8。</div>
+            <div class="sub-step"><strong>3. 調快門 (15秒)：</strong>用右手大拇指撥動右上角的<strong>「後轉盤」</strong>，往左(逆時針)轉，直到顯示 <strong>15"</strong> (注意要有代表秒的雙引號)。</div>
+            <div class="sub-step"><strong>4. 調 ISO (3200)：</strong>按下機背圓形滾輪的<strong>「右側邊緣 (印有 ISO)」</strong>，轉動滾輪選到 3200，按下中央圓形確認鍵。</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">尋找目標</span>
+            將相機對準天上的星星，或是剛才找到的「遠方 500 公尺外的微弱燈光」。
+        </li>
+        <li class="step-item">
+            <span class="step-title">啟動對焦放大鏡 (最關鍵)</span>
+            輕輕轉動鏡頭對焦環，螢幕通常會<strong>自動放大</strong>。<br>
+            <div class="sub-step"><strong>如果沒有自動放大怎麼辦？完整設定路徑：</strong><br>
+            按 MENU → 選擇紫紅色的 <strong>[對焦]</strong> → 進入 <strong>[對焦輔助]</strong> → 將 <strong>[對焦放大鏡時間]</strong> 設為 <strong>無限制</strong>。<br>
+            然後在畫面上雙擊螢幕中央，畫面就會瞬間放大到最大倍率！</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">捏出極致光點</span>
+            微調對焦環，把那顆星/燈光從「模糊的大光球」轉到「<span class="highlight-text">最小、最尖、最實心的亮點</span>」。當光點收到最小的瞬間，無限遠對焦就成功了！
+        </li>
+        <li class="step-item">
+            <span class="step-title">物理鎖死</span>
+            拿一小段紙膠帶，把對焦環黏死固定。整晚都不要再碰它！
+        </li>
+    </ul>
+
+    <h2>第二章：極地生存抗寒戰術 (除霧帶與配重)</h2>
+
+    <div class="alert-red">
+        <strong>⚠️ 物理學警告：-1°C 到 1°C 的氣溫最危險！</strong><br>
+        這個溫度區間濕度極高。長曝光時鏡頭朝上產生「輻射冷卻」，玻璃溫度會低於氣溫並跌破「露點 (Dew Point)」，導致鏡頭瞬間起霧結薄冰。只要結霜，後面 30 分鐘的照片全數報廢。<br>
+        <strong>解法：無論氣溫是正還是負，出門前 20 分鐘必須綁上鏡頭除霧加熱帶！</strong>
+    </div>
+
+    <h3>超重行動電源的 3 種掛載戰術</h3>
+        <ul>
+        <li><strong>戰術一（最強烈推薦）：腳架中軸掛鉤法。</strong> 把行動電源裝進小束口袋，掛在腳架中央底部的掛鉤上。這會變成完美的「配重錘」，讓 A6700 在挪威海風中穩如泰山。</li>
+        <li><strong>戰術二：腳架腿綁定法。</strong> 用寬版魔鬼氈將電源緊緊綁在腳架最粗的腿上，嚴禁晃動。</li>
+        <li><strong>保命絕招：</strong> 戶外零下低溫會讓行動電源「假性掉電」罷工。請在裝行動電源的袋子裡，<strong>塞進一顆搓熱的暖暖包</strong>緊貼著它！</li>
+    </ul>
+
+    <h2>第三章：極光現場單張捕捉 (紅/綠通殺)</h2>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #130f40, var(--aurora-green));">
+        <div class="tactic-icon">🌌</div>
+        場景 A：活躍綠光 (肉眼可見明顯跳動)
+    </div>
+    <div class="param-grid">
+        <div class="param-box"><span class="param-label">模式</span><span class="param-value">M</span></div>
+        <div class="param-box"><span class="param-label">光圈</span><span class="param-value">F1.8</span></div>
+        <div class="param-box"><span class="param-label">快門</span><span class="param-value">2 ~ 4 秒</span></div>
+        <div class="param-box"><span class="param-label">ISO</span><span class="param-value">1600 ~ 3200</span></div>
+        <div class="param-box"><span class="param-label">白平衡</span><span class="param-value">AWB / 4000K</span></div>
+    </div>
+    <p>心法：極光舞動越快，快門就要用大拇指後轉盤調越短（1~2秒），否則極光會糊成發光的雲。</p>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #2c3e50, var(--aurora-red));">
+        <div class="tactic-icon">🔴</div>
+        場景 B：深空紅光/紫光 (高階技巧)
+    </div>
+    <p>紅光極弱（肉眼看是灰白色），相機必須強制鎖定白平衡，否則會自作聰明把紅色修正掉！</p>
+    <div class="param-grid">
+        <div class="param-box"><span class="param-label">模式</span><span class="param-value">M</span></div>
+        <div class="param-box"><span class="param-label">光圈</span><span class="param-value">F1.8</span></div>
+        <div class="param-box"><span class="param-label">快門</span><span class="param-value">8 ~ 15 秒</span></div>
+        <div class="param-box"><span class="param-label">ISO</span><span class="param-value">3200 ~ 6400</span></div>
+        <div class="param-box"><span class="param-label" style="color:#d63031;">白平衡</span><span class="param-value">3500K (固定)</span></div>
+    </div>
+    
+    <p><strong>白平衡完整手把手設定路徑：</strong></p>
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：開啟快捷選單</span>
+            按下相機背面的 <strong>Fn</strong> 鍵。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：進入白平衡清單</span>
+            用方向鍵或滾輪，在畫面上找到 <strong>[白平衡]</strong> 選項（預設通常寫著 AWB 或有太陽/燈泡圖示），按下滾輪中央的圓形確認鍵進入。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：切換到「K (色溫)」模式</span>
+            在白平衡的清單中，一直往下（或往右）尋找，直到選中寫著 <strong>[K (色溫/彩色濾鏡)]</strong> 的圖示。<br>
+            ⚠️注意：這時候先不要按確認鍵！
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 4：精準撥定 3500K</span>
+            停在「K」圖示上時，<strong>按下方向鍵的「右」</strong>（或是直接轉動相機前方的轉盤），畫面側邊會跳出具體的 K 值數字（例如 5500K）。<br>
+            接著轉動轉盤，把數字一路降到 <strong>3500K</strong>。最後，按下滾輪中央的確認鍵，徹底鎖死！
+        </li>
+    </ul>
+
+    <h2>第四章：MR 記憶模式 (一秒切換極光戰鬥狀態)</h2>
+    <p>極光瞬息萬變，在零下低溫中重新調整 M 模式的參數太浪費時間了！A6700 頂部的模式轉盤有 <strong>1、2、3</strong> 三個實體自訂記憶位置，讓我們把剛才的極光參數直接「存」進去，實現一秒無縫切換！</p>
+
+    <div class="mission-box" style="border-color: var(--time-purple); background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
+        <h3 style="margin-top:0; color: var(--time-purple); border-left-color: var(--time-purple); padding-left: 10px;">💾 建議記憶配置方案</h3>
+        <ul style="margin-bottom:0; font-size: 1.05rem;">
+            <li><strong>轉盤 1 (活躍綠光)：</strong> M 模式 / 快門 4秒 / F1.8 / ISO 3200 / 白平衡 AWB</li>
+            <li><strong>轉盤 2 (深空紅光)：</strong> M 模式 / 快門 10秒 / F1.8 / ISO 6400 / 白平衡 3500K</li>
+            <li><strong>轉盤 3 (對焦尋標)：</strong> M 模式 / 快門 15秒 / F1.8 / ISO 3200</li>
+        </ul>
+    </div>
+
+    <h3>手把手設定教學 (以存入「轉盤 1」為例)</h3>
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：在 M 模式下設定好所有參數</span>
+            先把機頂大轉盤轉到 <strong>M</strong>。<br>
+            用前轉盤調到 F1.8，後轉盤調到 4" (4秒)，按 ISO 鍵調到 3200，白平衡設為 AWB。這就是我們想要的「活躍綠光」狀態。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：進入相機記憶選單</span>
+            按相機左上角的 <strong>MENU</strong> 鍵。<br>
+            選擇左側紅色的 <strong>[拍攝]</strong> (相機圖示) → 往右選擇 <strong>[拍攝模式/過片]</strong> → 點選 <strong>[相機設定記憶]</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：選擇存檔位置</span>
+            進入後，螢幕上方會顯示 1、2、3 (代表機頂實體轉盤的位置)。請利用方向鍵或滾輪選擇最左邊的 <strong>1</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 4：確認存檔</span>
+            按下滾輪正中央的圓形確認鍵。螢幕會顯示「已註冊到記憶」，這樣就大功告成了！
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 5：重複存入 2 與 3</span>
+            退回拍攝畫面，把快門改成 10"，ISO 改成 6400，白平衡改 3500K。<br>
+            再次進入 MENU → 拍攝 → 拍攝模式/過片 → [相機設定記憶]，這次選擇存到 <strong>2</strong>。<br>
+            依此類推，把快門 15" 的尋標參數存到 <strong>3</strong>。
+        </li>
+    </ul>
+
+    <div class="warning-box" style="background: #e8f4f8; border-color: #3498db; color: #2980b9;">
+        <strong>💡 實戰怎麼用？</strong><br>
+        下週在挪威極光現場，你只要把機頂的模式轉盤轉到 <strong>1</strong>，相機會一秒載入綠光參數。如果現場極光變亮，你可以隨時轉動轉盤把快門調快 (例如調到 2秒)。<br>
+        <span style="color:red; font-weight:bold;">記住：如果把轉盤切到 2 再切回 1，快門會自動「恢復」成原先記憶的 4 秒！這是一個非常棒的防呆機制！</span>
+    </div>
+
+    <h2>第五章：極光裙襬縮時攝影 (機內直出 4K 影片)</h2>
+    
+    <div class="warning-box" style="background: #ffeaa7; border-color: #fdcb6e; color: #d63031;">
+        <strong>⚠️ 嚴格技術警告：拍極光縮時【絕對不可】使用 S&Q 模式！</strong><br>
+        S&Q 模式最慢的幀率是 1 fps，快門強制被限制在 1 秒內，無法進行極光需要的長曝光。極光縮時請乖乖使用以下的「時間間隔拍攝」。
+    </div>
+
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：啟動縮時拍攝與 4K 影片合成設定</span>
+            <div class="sub-step">1. 按 MENU → 選擇左側紅色的 <strong>[拍攝]</strong>。</div>
+            <div class="sub-step">2. 往右選到 <strong>[拍攝模式/過片]</strong> → 進入 <strong>[時間間隔拍攝功能]</strong>。</div>
+            <div class="sub-step">3. 將最上方的 <strong>[時間間隔拍攝]</strong> 設為 <strong>[開啟]</strong>。</div>
+            <div class="sub-step">4. 往下捲動找到 <strong>[縮時影片]</strong> 設為 <strong>[開啟]</strong>。</div>
+            <div class="sub-step">5. 進入 <strong>[錄製設定]</strong>，選擇 <strong>[4K 30p 50M]</strong>（確保直出最高畫質）。</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：設定「AE 追蹤靈敏度」防閃爍</span>
+            在同一個時間間隔拍攝選單內，往下滑找到 <strong>[AE追蹤靈敏度]</strong> → 選擇 <strong>[低]</strong> → 按確認。這能防止相機因為極光突然閃爍而讓影片忽亮忽暗。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：決定單張曝光參數</span>
+            退回拍攝畫面，用 M 模式試拍一張決定參數（或直接把實體轉盤切到剛才設定好的 <strong>1</strong> 或 <strong>2</strong>）。假設你試拍後決定用：<strong>快門 4 秒、ISO 3200、F1.8</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 4：設定「拍攝間隔」的黃金公式</span>
+            <span class="highlight-text">拍攝間隔時間 = 你的快門速度 + 2 秒。</span><br>
+            回到 MENU 的 [時間間隔拍攝功能] 頁面。如果快門是 4 秒，那麼你的 <strong>[拍攝間隔]</strong> 必須設定為 <strong>6 秒</strong>。<br>多出來的 2 秒是給相機處理存檔，若間隔短於快門，相機會當機！
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 5：拍攝 300 張 (等待 30 分鐘)</span>
+            一段 10 秒鐘的 30fps 影片需要 300 張照片。在選單將 <strong>[拍攝次數]</strong> 設為 300。<br>
+            按下相機快門！300 張 × 間隔 6 秒 = 1800 秒 = <strong>等待 30 分鐘</strong>。雙手插口袋，等記憶卡自動生成 4K 裙襬大片！
+        </li>
+    </ul>
+
+    <h2>第六章：其他旅途場景切換（完整手把手操作）</h2>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #dff9fb, #535c68); color:#333;">
+        <div class="tactic-icon">🏂</div>
+        慢動作 & 白天縮時 (S&Q 模式完全設定)
+    </div>
+    <p>A6700 有雙層轉盤設計。這兩個場景必須使用到相機的 S&Q (Slow & Quick) 專屬模式。</p>
+    
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：物理轉盤切換</span>
+            機頂右側找到<strong>下層撥桿</strong>，將它從相機圖示撥到最右邊的 <strong>S&Q</strong>。<br>
+            接著將<strong>上層的大轉盤</strong>轉到 <strong>M</strong> (手動) 或 <strong>A</strong> (光圈優先)。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：進入 S&Q 專屬選單</span>
+            按 MENU → 拍攝 (紅色) → 影像畫質/錄影 → <strong>S&Q 設定</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：設定「滑雪慢動作」參數 (120fps)</span>
+            <div class="sub-step">1. 在 <strong>[S&Q設定]</strong> 內，點擊 <strong>[錄影畫格率]</strong>，選擇 <strong>[30p]</strong>（這代表影片播放時的正常速度）。</div>
+            <div class="sub-step">2. 點擊下方的 <strong>[畫格率]</strong>，選擇最高的 <strong>[120fps]</strong>。</div>
+            <div class="sub-step">3. 退回主畫面，按下機頂紅色的錄影鍵，即可拍出滑雪濺起雪花的超美慢動作。</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 4：設定「阿姆斯特丹運河快轉縮時」參數 (1fps)</span>
+            <div class="sub-step">1. 同樣在 <strong>[S&Q設定]</strong> 內，將 <strong>[畫格率]</strong> 降到最低的 <strong>[1fps]</strong>。</div>
+            <div class="sub-step">2. 架上腳架錄個 5 分鐘，相機會自動幫你濃縮成幾秒鐘的快速流動影片。</div>
+        </li>
+    </ul>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #ff9ff3, #feca57); color:#333;">
+        <div class="tactic-icon">🤳</div>
+        發發專屬：甜蜜旅程 Vlog 模式
+    </div>
+    <div class="gear-card">裝備：Sony 11mm F1.8 (超廣角自拍最瘦)</div>
+    
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：切換至錄影模式</span>
+            將<strong>下層撥桿</strong>撥到中間的<strong>底片圖示 (Movie)</strong>。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：開啟「積極防手震」 (邊走邊拍必備)</span>
+            <div class="sub-step">1. 按相機背面的 <strong>Fn</strong> 鍵。</div>
+            <div class="sub-step">2. 找到有手掌圖示的 <strong>[防手震 SteadyShot]</strong>。</div>
+            <div class="sub-step">3. 選擇 <strong>[積極 (Active)]</strong> 並確認。畫面會稍微裁切，但走起路來超級穩！</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：設定光圈與視線</span>
+            轉動前轉盤將光圈縮到 <strong>F2.8 或 F4</strong>，這樣才能確保你跟發發的臉都在景深範圍內，不會一個人清楚一個人模糊。<br>
+            <span class="highlight-text">最重要的一點：</span>把螢幕翻轉出來後，眼睛要看著「圓圓的實體鏡頭」，千萬不要盯著螢幕裡的自己看，不然影片裡的眼神會像是在發呆！
+        </li>
+    </ul>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #2c3e50, #bdc3c7);">
+        <div class="tactic-icon">🏙️</div>
+        城市夜遊 (阿姆斯特丹運河倒影)
+    </div>
+    <div class="gear-card">裝備：Sigma 18-50mm F2.8 (隨走隨拍最靈活)</div>
+    
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：切換至 A 模式 (光圈優先)</span>
+            將<strong>下層撥桿</strong>撥到最左邊的<strong>相機圖示 (Still)</strong>。<br>
+            將<strong>上層大轉盤</strong>轉到 <strong>A</strong>。相機會自動幫你算快門，你只要管光圈就好。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：設定參數</span>
+            轉動前轉盤，把光圈開到最大的 <strong>F2.8</strong>。漫步在阿姆斯特丹運河畔時，光線較暗，光圈全開能保證畫質。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：套用電影感濾鏡 (FL)</span>
+            <div class="sub-step">1. 按 <strong>Fn</strong> 鍵。</div>
+            <div class="sub-step">2. 尋找 <strong>[創意外觀 Creative Look]</strong> (通常在 Fn 選單最下面一排)，按下確認。</div>
+            <div class="sub-step">3. 往右滾動選單，直到選中 <strong>[FL]</strong>。這會為歐洲街道加上一層低對比、偏青綠色的文青膠片感。</div>
+        </li>
+    </ul>
+
+    <div class="tactic-header" style="background: linear-gradient(135deg, #ff6b6b, #feca57); color:#333;">
+        <div class="tactic-icon">🐱</div>
+        糯米寫真 (曼赤肯特化視角)
+    </div>
+    <div class="gear-card">裝備：Sony 11mm (大頭狗) / Sigma 18-50mm (平視)</div>
+    
+    <ul class="step-list">
+        <li class="step-item">
+            <span class="step-title">步驟 1：開啟「動物眼部追焦」</span>
+            幫糯米拍寫真時，對焦是關鍵！<br>
+            <div class="sub-step">1. 按 <strong>Fn</strong> 鍵。</div>
+            <div class="sub-step">2. 找到 <strong>[辨識目標]</strong> (通常是一個臉孔或方框圖示)。</div>
+            <div class="sub-step">3. 將目標從「人類」更改為 <strong>[動物/鳥類]</strong>。相機就會自動死死咬住糯米的眼睛。</div>
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 2：視角決定論 (趴下！)</span>
+            曼赤肯最可愛的就是短腿。<strong>絕對不要站著往下拍</strong>，那樣腿會看起來更短、身體更胖！請把相機放在地板上，將 A6700 的翻轉螢幕往上折 90 度，你只要低頭看螢幕，就能以「貓咪的平視視角」拍攝。
+        </li>
+        <li class="step-item">
+            <span class="step-title">步驟 3：大頭狗效果 (僅限 11mm 鏡頭)</span>
+            裝上 11mm 廣角鏡，拿著逗貓棒吸引糯米注意，把鏡頭逼近到距離糯米鼻子只有 10~15 公分的地方按下快門，就能拍出鼻子超大、身體縮小的超萌變形大頭照！
+        </li>
+    </ul>
+
+    <h2>第七章：極地收操保命指南 (預防主機板燒毀)</h2>
+    <div class="warning-box">
+        <strong>❄️ 極地進屋 SOP：</strong><br>
+        從零下的戶外進入溫暖的室內（車內、飯店）前：<br>
+        1. 在外面先拔出記憶卡 (方便回房間立刻讀照片)。<br>
+        2. 將相機與鏡頭放入<strong>密封袋 (Ziploc)</strong> 並把空氣擠出、徹底封死。<br>
+        3. 帶進室內，放置 <strong>2 小時</strong> 等相機慢慢回溫。<br>
+        4. <strong>絕對不可直接拿進室內！</strong> 否則熱空氣會在冰冷的相機內部瞬間結露生水，主機板會當場燒毀。
+    </div>
+
+</div>
+<script src="navbar.js"></script>
 </body>
 </html>
